@@ -20,7 +20,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/common.css') }}" rel="stylesheet"> 
     <link href="{{ asset('css/default.css') }}" rel="stylesheet"> 
-    <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+    <link href="{{ asset('css/userRelated.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
