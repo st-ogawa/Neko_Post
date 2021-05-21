@@ -1,3 +1,5 @@
+@charset "utf-8";
+
 #app{
     background: rgb(226, 224, 224);
     margin: 0 auto;
@@ -73,47 +75,7 @@
     user-select: none;
 }
 
-.UserAuth{
-    width: 100%;
-    margin: 0 auto;
-}
 
-
-.auth-card{
-    text-align: center;
-    background:#fafafa;
-    border-radius:16px;
-    width:380px;
-    height: 480px;
-    margin: 0 auto;
-    margin-top: 100px;
-    box-shadow: 7px 7px 7px 5px rgba(0,0,0,.1);
-}
-.Login{
-    margin: 0 auto;
-    padding-top: 40px;
-}
-.Register{
-    margin: 0 auto;
-    padding-top: 60px;
-}
-#login-button{
-  padding: 50px 0;
-}
-#login-button > .SubmitButton{
-    padding: 0.3em 6em;
-    color: rgb(19, 19, 19);
-    font-size: 16px;
-    font-weight: bold;
-}
-.login-form :focus {
-    outline: none;
-}
-
-.login-form{
-    padding: 1.5em 4em;
-    font-size: 17px;
-}
 
 .CommentForm{
     width: 230px;
@@ -131,48 +93,5 @@
     
 }
 
-.unvisible{
-    background: url(../icon/eye-slash.svg);
-    background-repeat: no-repeat;
-    width: 22px;
-    height: 22px;
-    background-size: 19px;
-    margin: 0 0 -25px 227px ;
-    position: relative;
-}
-.visible{
-    background: url(../icon/eye.svg);
-    background-repeat: no-repeat;
-    width: 22px;
-    height: 22px;
-    background-size: 19px;
-    margin: 0 0 -25px 227px ;
-    position: relative;
-}
 
-.swith-tab{
-    display: flex;
-    margin: 0px 0px;
-    height: 50px;
-    position: relative;
-}
-
-.swith-tab > li{
-    width: 100%;
-    
-}
-
-.swith-tab a{
-    padding-top: 15px;
-    height: 20px;
-}
-
-.leftTab{
-    background:#cacaca;
-    border-top-left-radius: 16px;
-}
-.rightTab{
-    background:#cacaca;
-    border-top-right-radius: 16px;
-}
 
