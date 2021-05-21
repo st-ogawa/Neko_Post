@@ -5,7 +5,7 @@ import Profile from './components/Pages/Profile'
 import UserAuth from './components/Pages/UserAuth'
 import Login from './components/Unit/Login'
 import Register from './components/Unit/Register'
-
+import Favorite from './components/Unit/Favorite'
 
 Vue.use(VueRouter);
 
@@ -14,9 +14,13 @@ export default new VueRouter({
     mode : 'history',
     routes: [
         { path: '/', component: Discovery },
-        { path: '/profile', component: Profile },
+        { path: '/profile', component: Profile,  
+            children: [
+                { path: 'favorite', name: 'favorite', component: Favorite } 
+            ]
+        },
         { path: '/auth', component: UserAuth,
-            children : [
+            children :[
                 { path: 'register', name: 'register', component: Register, },
                 { path: 'login', name: 'login', component: Login,},
             ]
