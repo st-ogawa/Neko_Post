@@ -1,13 +1,13 @@
 <template>
   <div class="Register">
     <h3>ねこぽすと</h3>
-    <div class="login-form">
-      <comment-form  placeholder="ユーザー名" v-model="registerMail" @sendData="register"/>
+    <div class="register-form">
+      <comment-form  placeholder="ユーザー名" v-model="userName" @sendData="register"/>
     </div>
-    <div class="login-form">
+    <div class="register-form">
       <comment-form  placeholder="メール" v-model="registerMail" @sendData="register"/>
     </div>
-    <div class="login-form">
+    <div class="register-form">
       <div :class="iconType" @click="viewPass"/>
       <comment-form class="password" :type="inputType" placeholder="パスワード" v-model="registerPass" @sendData="register"/>
     </div>
@@ -28,6 +28,7 @@ export default {
   components: { CommentForm, SubmitButton },
   data(){
     return {
+      userName : '',
       registerMail : '',
       registerPass : '',
       isActive : false,

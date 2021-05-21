@@ -18,6 +18,8 @@
 <script>
 import CommentForm from '../SheredParts/CommentForm.vue'
 import SubmitButton from '../SheredParts/SubmitButton.vue'
+// import axios from 'axios'
+
 export default {
   components: { CommentForm, SubmitButton },
   data(){
@@ -41,7 +43,7 @@ export default {
       this.isActive  =  !this.isActive 
     },
     login(){
-
+      
     }
   }
 }
