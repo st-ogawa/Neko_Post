@@ -1,7 +1,6 @@
 @charset "utf-8";
 
 #app{
-    background: rgb(226, 224, 224);
     margin: 0 auto;
 }
 
@@ -63,7 +62,7 @@
     box-sizing: border-box;
     margin: 0;
     border-radius: 40px;
-    background-color: #f8b249;
+    background-color: #e69d30;
     color:#000;
     font-size: inherit;
     text-decoration: none;
@@ -78,19 +77,21 @@
 
 
 .CommentForm{
-    width: 230px;
+    width: 250px;
+    height: 30px;
     box-sizing: border-box;
     font-size: inherit;
     user-select: none;
-    border-bottom: 1px solid #27344d;
+    border: 1px solid #20212452;
     outline: none;
     justify-content: center;
     align-items: center;
-    color: #202020;
-    padding-inline-start:14px;
-    padding-inline-end: 20px;
-    
-    
+    color: #202124;
+    background-color: transparent;
+    border-radius: 5px;
+    padding: 6px 8px;
+    padding-inline-start: 30px;
+    padding-inline-end: 30px;
 }
 
 

@@ -2240,6 +2240,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SheredParts_CommentForm_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../SheredParts/CommentForm.vue */ "./resources/js/components/SheredParts/CommentForm.vue");
 /* harmony import */ var _SheredParts_SubmitButton_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../SheredParts/SubmitButton.vue */ "./resources/js/components/SheredParts/SubmitButton.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -2258,7 +2260,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
- // import axios from 'axios'
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2285,7 +2287,16 @@ __webpack_require__.r(__webpack_exports__);
     viewPass: function viewPass() {
       this.isActive = !this.isActive;
     },
-    login: function login() {}
+    login: function login() {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('http://127.0.0.1:8000/api/login', {
+        email: this.loginMail,
+        password: this.loginPass
+      }).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error.response);
+      });
+    }
   }
 });
 
@@ -2302,6 +2313,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SheredParts_CommentForm_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../SheredParts/CommentForm.vue */ "./resources/js/components/SheredParts/CommentForm.vue");
 /* harmony import */ var _SheredParts_SubmitButton_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../SheredParts/SubmitButton.vue */ "./resources/js/components/SheredParts/SubmitButton.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -2322,6 +2335,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2349,7 +2363,17 @@ __webpack_require__.r(__webpack_exports__);
     viewPass: function viewPass() {
       this.isActive = !this.isActive;
     },
-    register: function register() {}
+    register: function register() {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('http://127.0.0.1:8000/api/register', {
+        'name': this.userName,
+        'email': this.registerMail,
+        'password': this.registerPass
+      }).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error.response);
+      });
+    }
   }
 });
 
@@ -38161,7 +38185,18 @@ var render = function() {
     staticClass: "CommentForm",
     attrs: { spellcheck: "false" },
     domProps: { value: _vm.value },
-    on: { input: _vm.inputValue, keyup: _vm.keyup }
+    on: {
+      input: _vm.inputValue,
+      keyup: function($event) {
+        if (
+          !$event.type.indexOf("key") &&
+          _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+        ) {
+          return null
+        }
+        return _vm.keyup($event)
+      }
+    }
   })
 }
 var staticRenderFns = []
@@ -38342,7 +38377,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "Favorite" }, [_vm._v("\n    hoge\n")])
+  return _c("div", { staticClass: "Favorite" })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -38461,6 +38496,7 @@ var render = function() {
       { staticClass: "login-form" },
       [
         _c("comment-form", {
+          staticClass: "mail",
           attrs: { placeholder: "メール" },
           on: { sendData: _vm.login },
           model: {
