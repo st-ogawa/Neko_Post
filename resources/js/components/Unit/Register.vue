@@ -2,10 +2,10 @@
   <div class="Register">
     <h3>ねこぽすと</h3>
     <div class="register-form">
-      <comment-form  placeholder="ユーザー名" v-model="userName" @sendData="register"/>
+      <comment-form class="user-ame" placeholder="ユーザー名n" v-model="userName" @sendData="register"/>
     </div>
     <div class="register-form">
-      <comment-form  placeholder="メール" v-model="registerMail" @sendData="register"/>
+      <comment-form  class="mail" placeholder="メール" v-model="registerMail" @sendData="register"/>
     </div>
     <div class="register-form">
       <div :class="iconType" @click="viewPass"/>
@@ -22,6 +22,7 @@
 
 import CommentForm from '../SheredParts/CommentForm.vue'
 import SubmitButton from '../SheredParts/SubmitButton.vue'
+import axios from 'axios'
 
 export default {
 
@@ -47,7 +48,15 @@ export default {
       this.isActive  =  !this.isActive 
     },
     register(){
-
+      axios.post('http://127.0.0.1:8000/api/register', {
+        'name': this.userName,
+        'email' : this.registerMail,
+        'password' : this.registerPass,
+      }).then(response=>{
+        console.log(response)
+      }).catch(error=>{
+        console.log(error.response)
+      })
     }
   }
 }

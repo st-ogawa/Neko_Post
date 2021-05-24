@@ -2,7 +2,7 @@
   <div class="Login">
     <h3>ねこぽすと</h3>
     <div class="login-form">
-      <comment-form  placeholder="メール" v-model="loginMail" @sendData="login"/>
+      <comment-form  class="mail" placeholder="メール" v-model="loginMail" @sendData="login"/>
     </div>
     <div class="login-form">
       <div :class="iconType" @click="viewPass"/>
@@ -18,7 +18,7 @@
 <script>
 import CommentForm from '../SheredParts/CommentForm.vue'
 import SubmitButton from '../SheredParts/SubmitButton.vue'
-// import axios from 'axios'
+import axios from 'axios'
 
 export default {
   components: { CommentForm, SubmitButton },
@@ -43,7 +43,14 @@ export default {
       this.isActive  =  !this.isActive 
     },
     login(){
-      
+      axios.post('http://127.0.0.1:8000/api/login', {
+        email: this.loginMail,
+        password: this.loginPass
+      }).then(response=>{
+        console.log(response)
+      }).catch(error=>{
+        console.log(error.response)
+      })
     }
   }
 }

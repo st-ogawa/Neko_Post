@@ -3,7 +3,7 @@
     class="CommentForm"
     :value="value"
     @input="inputValue"
-    @keyup="keyup"
+    @keyup.enter="keyup"
     spellcheck="false"
   />
 </template>
