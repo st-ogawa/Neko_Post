@@ -71,7 +71,12 @@
     background-size: 20px;
     background-position: left 5px bottom 4px ; 
 }
-.userN
+.user-name{
+    background-image: url(../icon/user-circle.svg);
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-position: left 5px bottom 4px ; 
+}
 .unvisible{
     background: url(../icon/eye-slash.svg);
     background-repeat: no-repeat;
@@ -105,21 +110,23 @@
 }
 
 .swith-tab a{
-    padding: 15px 0;
-    height: 20px;
+    padding-top: 15px;
+    height: 70%;
 }
 
-.leftTab{
+/* .leftTab{
     background:#cacaca;
     border-top-left-radius: 16px;
-}
+} */
 
-.rightTab{
+.disableTab{
     background:#cacaca;
-    border-top-right-radius: 16px;
+    /* border-top-right-radius: 16px; */
+
 }
 
 /* profile style */
+
 .Profile{
     width: 100%;
     margin: 0 auto;

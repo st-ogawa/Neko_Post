@@ -2,7 +2,7 @@
   <div class="Register">
     <h3>ねこぽすと</h3>
     <div class="register-form">
-      <comment-form class="user-ame" placeholder="ユーザー名n" v-model="userName" @sendData="register"/>
+      <comment-form class="user-name" placeholder="ユーザー名" v-model="userName" @sendData="register"/>
     </div>
     <div class="register-form">
       <comment-form  class="mail" placeholder="メール" v-model="registerMail" @sendData="register"/>
@@ -55,7 +55,7 @@ export default {
       }).then(response=>{
         console.log(response)
       }).catch(error=>{
-        console.log(error.response)
+        console.log(error.response.data.message)
       })
     }
   }
