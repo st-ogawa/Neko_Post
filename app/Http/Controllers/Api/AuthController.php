@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Http\Exceptions\HttpResponseException;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
@@ -27,8 +28,16 @@ class AuthController extends Controller
             'password.required'=> 'パスワードを入力してください',
             'password.min'     => 'パスワードは:min文字以上で入力してください。',    
         ];
-
+        
         $validator = Validator::make($request->all(), $rules, $messages);
+
+        if($validator->errors()){
+            $response['message']['name'] = $validator->errors()->first('name');
+            $response['message']['email'] = $validator->errors()->first('email');
+            $response['message']['password'] = $validator->errors()->first('password');
+            throw new HttpResponseException(response()->json($response, 422));
+        }
+
         $validated = $validator->validate();
         $users = new User;
         $users->name = $request->input('name');
