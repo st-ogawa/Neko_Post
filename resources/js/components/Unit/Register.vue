@@ -2,18 +2,22 @@
   <div class="Register">
     <h3>ねこぽすと</h3>
     <div class="register-form">
-      <comment-form class="user-name" placeholder="ユーザー名" v-model="userName" @sendData="register"/>
+      <CommentForm class="user-name" placeholder="ユーザー名" v-model="userName" @sendData="register"/>
+      <ErrorMessage v-show="errormsg.name" v-model="errormsg.name"/>
+    </div>
+    
+    <div class="register-form">
+      <CommentForm  class="mail" placeholder="メール" v-model="registerMail" @sendData="register"/>
+      <ErrorMessage v-show="errormsg.email" v-model="errormsg.email"/>
     </div>
     <div class="register-form">
-      <comment-form  class="mail" placeholder="メール" v-model="registerMail" @sendData="register"/>
-    </div>
-    <div class="register-form">
+      <CommentForm class="password" :type="inputType" placeholder="パスワード" v-model="registerPass" @sendData="register"/>
       <div :class="iconType" @click="viewPass"/>
-      <comment-form class="password" :type="inputType" placeholder="パスワード" v-model="registerPass" @sendData="register"/>
+      <ErrorMessage v-show="errormsg.password" v-model="errormsg.password"/>
     </div>
-    <!-- <div v-show="errormsg" class="error">{{errormsg}}</div> -->
-    <div id="login-button">
-      <submit-button value="ログイン" @sendData="register"/>
+    
+    <div id="register-button">
+      <SubmitButton value="ログイン" @sendData="register"/>
     </div>
   </div>
 </template>
@@ -23,15 +27,17 @@
 import CommentForm from '../SheredParts/CommentForm.vue'
 import SubmitButton from '../SheredParts/SubmitButton.vue'
 import axios from 'axios'
+import ErrorMessage from '../SheredParts/ErrorMessage.vue'
 
 export default {
 
-  components: { CommentForm, SubmitButton },
+  components: { CommentForm, SubmitButton, ErrorMessage },
   data(){
     return {
       userName : '',
       registerMail : '',
       registerPass : '',
+      errormsg : '',
       isActive : false,
     }
   },
@@ -55,7 +61,7 @@ export default {
       }).then(response=>{
         console.log(response)
       }).catch(error=>{
-        console.log(error.response.data.message)
+        this.errormsg = error.response.data.message
       })
     }
   }

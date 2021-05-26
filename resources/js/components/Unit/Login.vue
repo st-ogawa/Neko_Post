@@ -2,15 +2,15 @@
   <div class="Login">
     <h3>ねこぽすと</h3>
     <div class="login-form">
-      <comment-form  class="mail" placeholder="メール" v-model="loginMail" @sendData="login"/>
+      <CommentForm  class="mail" placeholder="メール" v-model="loginMail" @sendData="login"/>
     </div>
     <div class="login-form">
+      <CommentForm class="password" :type="inputType" placeholder="パスワード" v-model="loginPass" @sendData="login"/>
       <div :class="iconType" @click="viewPass"/>
-      <comment-form class="password" :type="inputType" placeholder="パスワード" v-model="loginPass" @sendData="login"/>
+      <ErrorMessage v-show="errormsg" v-model="errormsg"/>
     </div>
-    <!-- <div v-show="errormsg" class="error">{{errormsg}}</div> -->
     <div id="login-button">
-      <submit-button value="ログイン" @sendData="login"/>
+      <SubmitButton value="ログイン" @sendData="login"/>
     </div>
   </div>
 </template>
@@ -19,9 +19,10 @@
 import CommentForm from '../SheredParts/CommentForm.vue'
 import SubmitButton from '../SheredParts/SubmitButton.vue'
 import axios from 'axios'
+import ErrorMessage from '../SheredParts/ErrorMessage.vue'
 
 export default {
-  components: { CommentForm, SubmitButton },
+  components: { CommentForm, SubmitButton, ErrorMessage },
   data(){
     return {
       loginMail : '',
@@ -49,7 +50,7 @@ export default {
       }).then(response=>{
         console.log(response)
       }).catch(error=>{
-        console.log(error.response)
+        this. errormsg = error.response.data.message
       })
     }
   }
