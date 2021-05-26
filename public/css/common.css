@@ -52,6 +52,12 @@
 .content{
     height: 100vh;
 }
+.ErrorMessage{
+    display: flex;
+    color: #D93025;
+    font-size: 14px;
+    justify-content: center;
+}
 
 .image-list{
     flex-wrap: wrap;
@@ -93,6 +99,7 @@
     padding-inline-start: 30px;
     padding-inline-end: 30px;
 }
+
 
 
 

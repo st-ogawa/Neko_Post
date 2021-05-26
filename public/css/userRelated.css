@@ -21,24 +21,26 @@
 
 .auth-card > nav{
     width: 100%;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 
 .Login{
     margin: 0 auto;
-    padding-top: 40px;
+    padding-top: 30px;
 }
 
 .Register{
     margin: 0 auto;
-    padding-top: 40px;
+    padding-top: 30px;
 }
 
 #login-button{
-  padding: 50px 0;
+  padding: 40px 0;
 }
-
-#login-button > .SubmitButton{
+#register-button{
+    padding: 30px 0;
+}
+.SubmitButton{
     padding: 0.3em 6em;
     color: rgb(19, 19, 19);
     font-size: 16px;
@@ -51,12 +53,16 @@
 
 .register-form{
     font-size: 17px;
-    padding: 1em 4em;
+    padding-top: 20px;
 }
 
 .login-form{
-    padding: 1em 4em;
+    padding-top: 24px;
     font-size: 17px;
+}
+
+.register-form .ErrorMessage{
+padding-top: -15px;
 }
 
 .password{
@@ -80,38 +86,38 @@
 .unvisible{
     background: url(../icon/eye-slash.svg);
     background-repeat: no-repeat;
-    width: 22px;
-    height: 22px;
+    width: 23px;
+    height: 23px;
     background-size: 20px;
-    margin: 0 0 -28px 223px ;
+    margin: -24px 0 0 289px;
     position: relative;
 }
 
 .visible{
     background: url(../icon/eye.svg);
     background-repeat: no-repeat;
-    width: 22px;
-    height: 22px;
+    width: 23px;
+    height: 23px;
     background-size: 20px;
-    margin: 0 0 -28px 223px ;
+    margin: -24px 0 0 289px;
     position: relative;
 }
 
-.swith-tab{
+.switch-tab{
     display: flex;
     margin: 0px 0px;
     height: 50px;
     position: relative;
 }
 
-.swith-tab > li{
-    width: 100%;
-    
-}
 
-.swith-tab a{
-    padding-top: 15px;
+
+.switch-tab li{
+    
     height: 70%;
+    width: 100%;
+    user-select: none;
+    cursor: pointer;
 }
 
 /* .leftTab{
@@ -119,12 +125,19 @@
     border-top-left-radius: 16px;
 } */
 
-.disableTab{
+.disabledTab{
+    padding-top: 15px;
     background:#cacaca;
-    /* border-top-right-radius: 16px; */
-
+    height: 100%;
+    
 }
-
+.active{
+    padding-top: 15px;
+    background:#fff;
+    height: 100%;
+    border-top-right-radius: 16px;
+    border-top-left-radius: 16px;
+}
 /* profile style */
 
 .Profile{
