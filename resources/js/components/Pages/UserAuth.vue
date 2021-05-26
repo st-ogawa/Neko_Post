@@ -3,9 +3,11 @@
     <Header/>
     <div class="container">
       <div class="auth-card">
-          <div class="swith-tab">
-            <LoginTab v-for="item in list" :key="item.id" v-bind="item" v-model="currentId"/>
-          </div>
+        <nav>
+          <ul class="switch-tab">
+            <LinkTab v-for="item in list" v-bind="item" :key="item.id" v-model="currentId"/>
+          </ul>
+        </nav>
         <router-view/>
       </div>
     </div>
@@ -14,17 +16,17 @@
 </template>
 
 <script>
-import LoginTab from '../SheredParts/LoginTab.vue'
+import LinkTab from '../SheredParts/LinkTab.vue'
 
 import Header from '../Unit/Header'
 export default {
-  components:{ Header, LoginTab, },
+  components:{ Header, LinkTab, },
   data() {
     return {
-      currentId:1,
-      list:[
-        {id: 1 , label: 'ログイン', link: 'login'},
-        {id: 2, label: '新規登録', link: 'register'}
+      currentId: 1,
+      list: [
+        { id: 1, label: 'ログイン', link: 'login' },
+        { id: 2, label: '新規登録', link: 'register' },
       ]
     }
   },
