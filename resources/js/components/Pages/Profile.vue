@@ -1,11 +1,32 @@
 <template>
   <div id="Profile">
-      <Header/>
-    <section class="user-status">
-       
-    </section>
-    <LinkTab v-for="item in list" v-bind="item" :key="item.id" v-model="currentId" />
-    <router-view/>
+    <Header/>
+    <div class="profile-card">
+      <section class="user-status">
+        <div class="profile-image">
+          <img src="" id="profile-image-circle">
+        </div>
+        <div class="profile-detail">
+          <h3>username</h3>
+          <span>account</span>
+        </div>
+        <ul>
+          <li>
+            <span>
+              投稿
+              <span>NaN</span>
+              件
+            </span>
+          </li>
+        </ul>
+      </section>
+        <nav>
+          <ul class="switch-tab">
+            <LinkTab v-for="item in list" v-bind="item" :key="item.id" v-model="currentId" />
+          </ul>
+        </nav>
+        <router-view/>
+    </div>
   </div>
 </template>
 
