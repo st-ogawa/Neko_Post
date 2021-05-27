@@ -3,19 +3,23 @@
     <h3>ねこぽすと</h3>
     <div class="register-form">
       <CommentForm class="user-name" placeholder="ユーザー名" v-model="userName" @sendData="register"/>
-      <ErrorMessage v-show="errormsg.name" v-model="errormsg.name"/>
     </div>
-    
+    <div class="error-message">
+       <ErrorMessage v-show="errormsg.name" v-model="errormsg.name"/>
+    </div>
     <div class="register-form">
       <CommentForm  class="mail" placeholder="メール" v-model="registerMail" @sendData="register"/>
+    </div>
+    <div class="error-message">
       <ErrorMessage v-show="errormsg.email" v-model="errormsg.email"/>
     </div>
     <div class="register-form">
       <CommentForm class="password" :type="inputType" placeholder="パスワード" v-model="registerPass" @sendData="register"/>
       <div :class="iconType" @click="viewPass"/>
+    </div>
+    <div class="error-message">
       <ErrorMessage v-show="errormsg.password" v-model="errormsg.password"/>
     </div>
-    
     <div id="register-button">
       <SubmitButton value="ログイン" @sendData="register"/>
     </div>
