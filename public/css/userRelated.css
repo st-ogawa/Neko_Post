@@ -12,10 +12,10 @@
     text-align: center;
     background:#fafafa;
     border-radius:16px;
-    width:380px;
-    height: 480px;
+    width:400px;
+    height: 500px;
     margin: 0 auto;
-    margin-top: 100px;
+    margin-top: 80px;
     box-shadow: 7px 7px 7px 5px rgba(0, 0, 0, 0.385);
 }
 
@@ -38,7 +38,7 @@
   padding: 40px 0;
 }
 #register-button{
-    padding: 30px 0;
+    padding: 35px 0;
 }
 .SubmitButton{
     padding: 0.3em 6em;
@@ -59,10 +59,6 @@
 .login-form{
     padding-top: 24px;
     font-size: 17px;
-}
-
-.register-form .ErrorMessage{
-padding-top: -15px;
 }
 
 .password{
@@ -120,11 +116,6 @@ padding-top: -15px;
     cursor: pointer;
 }
 
-/* .leftTab{
-    background:#cacaca;
-    border-top-left-radius: 16px;
-} */
-
 .disabledTab{
     padding-top: 15px;
     background:#cacaca;
@@ -147,8 +138,4 @@ padding-top: -15px;
 
 .user-status{
     height: 100px;
-}
-.changeTab{
-    background:#cacaca;
-    border-radius: 2px;
 }
