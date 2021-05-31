@@ -37,12 +37,17 @@ export default {
       preview: ''
     }
   },
+  mounted(){
+    this.message = 'クリックして画像を選択'
+  },
   methods:{
     close(){
       this.$router.go(-1)
     },
     post(){
-      this.mesage = 'aaaaaaa'
+      axios.post('http://127.0.0.1:8000/api/posts',{
+        file:this.file
+      })
     },
     upload(event){
       this.file = event.target.files[0]
