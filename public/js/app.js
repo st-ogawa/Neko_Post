@@ -1988,6 +1988,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2002,12 +2004,15 @@ __webpack_require__.r(__webpack_exports__);
       preview: ''
     };
   },
+  mounted: function mounted() {
+    this.message = 'クリックして画像を選択';
+  },
   methods: {
     close: function close() {
       this.$router.go(-1);
     },
     post: function post() {
-      this.mesage = 'aaaaaaa';
+      this.message = 'aaaaaaa';
     },
     upload: function upload(event) {
       this.file = event.target.files[0];
@@ -38234,44 +38239,46 @@ var render = function() {
       _c("Header"),
       _vm._v(" "),
       _c("div", { staticClass: "container" }, [
-        _c(
-          "div",
-          { staticClass: "post-card" },
-          [
-            _c("div", { staticClass: "close-post" }, [
+        _c("div", { staticClass: "post-card" }, [
+          _c("div", { staticClass: "close-post" }, [
+            _c("img", {
+              attrs: { src: __webpack_require__(/*! ../../../../public/icon/close.svg */ "./public/icon/close.svg") },
+              on: { click: _vm.close }
+            })
+          ]),
+          _vm._v(" "),
+          _c("h3", [_vm._v("新規投稿")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "post-detail" }, [
+            _c("div", { staticClass: "image-input-field" }, [
+              _c("input", {
+                attrs: { type: "file", accept: "image/*," },
+                on: { change: _vm.upload }
+              }),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(_vm.message))]),
+              _vm._v(" "),
               _c("img", {
-                attrs: { src: __webpack_require__(/*! ../../../../public/icon/close.svg */ "./public/icon/close.svg") },
-                on: { click: _vm.close }
+                class: { "post-image": _vm.preview },
+                attrs: { src: _vm.preview }
               })
             ]),
             _vm._v(" "),
-            _c("h3", [_vm._v("新規投稿")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "post-detail" }, [
-              _c("div", { staticClass: "image-input-field" }, [
-                _c("input", {
-                  attrs: { type: "file", accept: "image/*," },
-                  on: { change: _vm.upload }
-                }),
-                _vm._v(" "),
-                _c("p", [_vm._v(_vm._s(_vm.message))]),
-                _vm._v(" "),
-                _c("img", {
-                  class: { "post-image": _vm.preview },
-                  attrs: { src: _vm.preview }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "post-comment" })
-            ]),
-            _vm._v(" "),
-            _c("SubmitButton", {
-              attrs: { value: "投稿する" },
-              on: { sendData: _vm.post }
-            })
-          ],
-          1
-        )
+            _c("div", { staticClass: "post-comment" })
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "post-button" },
+            [
+              _c("SubmitButton", {
+                attrs: { value: "投稿する" },
+                on: { sendData: _vm.post }
+              })
+            ],
+            1
+          )
+        ])
       ])
     ],
     1

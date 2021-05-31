@@ -30,14 +30,12 @@ class AuthController extends Controller
         ];
         
         $validator = Validator::make($request->all(), $rules, $messages);
-
         if($validator->errors()){
             $response['message']['name'] = $validator->errors()->first('name');
             $response['message']['email'] = $validator->errors()->first('email');
             $response['message']['password'] = $validator->errors()->first('password');
             throw new HttpResponseException(response()->json($response, 422));
         }
-
         $validated = $validator->validate();
         $users = new User;
         $users->name = $request->input('name');
