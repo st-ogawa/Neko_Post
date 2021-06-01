@@ -10,11 +10,14 @@
         <div class="post-detail">
           <div class="image-input-field">
             <input type="file" @change="upload"  accept="image/*,">
-            <p>{{message}}</p>
+            <p><img :src="icon"><br/>
+            {{message}}</p>
             <img :src="preview" :class="{'post-image':preview}">
+            <div v-show="preview" ><img src="../../../../public/icon/close.svg" width="40" height="40">
+            </div>
           </div>
            <div class="post-comment">
-
+              <textarea placeholder="コメントを書く" class="comment"></textarea>
            </div>
         </div>
         <div class="post-button">
@@ -26,15 +29,18 @@
 </template>
 
 <script>
+import CommentForm from '../SheredParts/LoginForm.vue'
 import SubmitButton from '../SheredParts/SubmitButton.vue'
 import Header from '../Unit/Header.vue'
+
 export default {
-  components:{Header, SubmitButton,},
+  components:{Header, SubmitButton, CommentForm,},
   data() {
     return {
       message:'',
       file: '',
-      preview: ''
+      preview: '',
+      icon: require("../../../../public/icon/upload.svg")
     }
   },
   mounted(){
@@ -63,6 +69,7 @@ export default {
       reader.onload = (event) => {
         this.preview = event.target.result
         this.message = ''
+        this.icon = ''
       };
       reader.readAsDataURL(file);
       this.$emit('input', file);
