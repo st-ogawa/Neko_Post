@@ -2,10 +2,10 @@
   <div class="Login">
     <h3>ねこぽすと</h3>
     <div class="login-form">
-      <CommentForm  class="mail" placeholder="メール" v-model="loginMail" @sendData="login"/>
+      <LoginForm  class="mail" placeholder="メール" v-model="loginMail" @sendData="login"/>
     </div>
     <div class="login-form">
-      <CommentForm class="password" :type="inputType" placeholder="パスワード" v-model="loginPass" @sendData="login"/>
+      <LoginForm class="password" :type="inputType" placeholder="パスワード" v-model="loginPass" @sendData="login"/>
       <div :class="iconType" @click="viewPass"/>
     </div>
     <div class="error-message">
@@ -18,13 +18,13 @@
 </template>
 
 <script>
-import CommentForm from '../SheredParts/CommentForm.vue'
+import LoginForm from '../SheredParts/LoginForm.vue'
 import SubmitButton from '../SheredParts/SubmitButton.vue'
 import axios from 'axios'
 import ErrorMessage from '../SheredParts/ErrorMessage.vue'
 
 export default {
-  components: { CommentForm, SubmitButton, ErrorMessage },
+  components: { LoginForm, SubmitButton, ErrorMessage },
   data(){
     return {
       loginMail : '',

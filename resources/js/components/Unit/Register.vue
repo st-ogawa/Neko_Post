@@ -2,19 +2,19 @@
   <div class="Register">
     <h3>ねこぽすと</h3>
     <div class="register-form">
-      <CommentForm class="user-name" placeholder="ユーザー名" v-model="userName" @sendData="register"/>
+      <LoginForm class="user-name" placeholder="ユーザー名" v-model="userName" @sendData="register"/>
     </div>
     <div class="error-message">
        <ErrorMessage v-show="errormsg.name" v-model="errormsg.name"/>
     </div>
     <div class="register-form">
-      <CommentForm  class="mail" placeholder="メール" v-model="registerMail" @sendData="register"/>
+      <LoginForm  class="mail" placeholder="メール" v-model="registerMail" @sendData="register"/>
     </div>
     <div class="error-message">
       <ErrorMessage v-show="errormsg.email" v-model="errormsg.email"/>
     </div>
     <div class="register-form">
-      <CommentForm class="password" :type="inputType" placeholder="パスワード" v-model="registerPass" @sendData="register"/>
+      <LoginForm class="password" :type="inputType" placeholder="パスワード" v-model="registerPass" @sendData="register"/>
       <div :class="iconType" @click="viewPass"/>
     </div>
     <div class="error-message">
@@ -28,14 +28,14 @@
 
 <script>
 
-import CommentForm from '../SheredParts/CommentForm.vue'
+import LoginForm from '../SheredParts/LoginForm.vue'
 import SubmitButton from '../SheredParts/SubmitButton.vue'
 import axios from 'axios'
 import ErrorMessage from '../SheredParts/ErrorMessage.vue'
 
 export default {
 
-  components: { CommentForm, SubmitButton, ErrorMessage },
+  components: { LoginForm, SubmitButton, ErrorMessage },
   data(){
     return {
       userName : '',
