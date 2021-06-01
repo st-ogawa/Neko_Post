@@ -51,10 +51,9 @@ input::placeholder{
 }
 
 input:focus{
-    border: solid 1px #e69d30;
+    border-bottom: solid 1px #e69d30;
     transition: all 0.1s;
     outline: none;
-	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
 }
 
 

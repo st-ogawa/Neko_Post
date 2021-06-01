@@ -88,19 +88,18 @@
 
 
 
-.CommentForm{
+.LoginForm{
     width: 250px;
     height: 30px;
     box-sizing: border-box;
     font-size: inherit;
     user-select: none;
-    border: 1px solid #20212452;
+    border-bottom: 1px solid #20212452;
     outline: none;
     justify-content: center;
     align-items: center;
     color: #202124;
     background-color: transparent;
-    border-radius: 5px;
     padding: 6px 8px;
     padding-inline-start: 30px;
     padding-inline-end: 30px;
@@ -120,15 +119,17 @@
 .post-detail{
     width: 100%;
     height: 63%;
-
-}
-.image-input-field {
-    width: 100%;
-    height: 100%;
-    position: relative;
     display: flex;
     justify-content: center;
+}
+.image-input-field {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    display: flex;
     align-items: center;
+    background:#efefef;
+    border: solid 1px #2021246b;
 }
 
 .image-input-field > input {
@@ -141,13 +142,16 @@
     cursor: pointer;
 }
 .image-input-field > p {
-    color: #aaa;
-    text-align: center;
+    color: rgb(46, 46, 46);
+    margin: 0 auto;
+    
 }
 
 .post-image{
-    width: 250px;
-    height: 250px;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    position: relative;
 }
 
 
