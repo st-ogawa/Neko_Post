@@ -30,7 +30,7 @@ class AuthController extends Controller
         ];
         
         $validator = Validator::make($request->all(), $rules, $messages);
-        if($validator->errors()){
+        if($validator->errors()->first()){
             $response['message']['name'] = $validator->errors()->first('name');
             $response['message']['email'] = $validator->errors()->first('email');
             $response['message']['password'] = $validator->errors()->first('password');

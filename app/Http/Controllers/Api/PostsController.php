@@ -47,17 +47,20 @@ class PostsController extends Controller
         };
         
         $validated = $validator->validate();
+
         $file = request()->file;
         $comment = request()->comment;
+        $user_id = request()->user_id;
         if($file){
             $file_name = time().'.'.$file->getClientOriginalName();
             Image::make($file)->resize(250,250)->save(storage_path('app/public/images/'.$file_name));
             $posts = new Posts;
             $posts->image = $file_name;
             $posts->comment = $comment;
+            $posts->user_id = $user_id;
             $posts->save();
 
-            return response()->json('投稿しました');
+            return [$posts];
         }
         
     }
