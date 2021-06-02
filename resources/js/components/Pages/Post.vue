@@ -12,12 +12,15 @@
             <input type="file" @change="upload"  accept="image/*,">
             <p><img :src="icon"><br/>
             {{message}}</p>
-            <img :src="preview" :class="{'post-image':preview}">
-            <div v-show="preview" ><img src="../../../../public/icon/close.svg" width="40" height="40">
+            <div v-show="preview" class="preview">
+                <div class="cancel-preview">
+                  <img src="../../../../public/icon/close.svg" width="40" height="40">
+                </div>
+              <img :src="preview" :class="{'post-image':preview}">
             </div>
           </div>
            <div class="post-comment">
-              <textarea placeholder="コメントを書く" class="comment"></textarea>
+              <TextArea :comment="comment" @update="update"/>
            </div>
         </div>
         <div class="post-button">
@@ -29,17 +32,19 @@
 </template>
 
 <script>
-import CommentForm from '../SheredParts/LoginForm.vue'
 import SubmitButton from '../SheredParts/SubmitButton.vue'
+import TextArea from '../SheredParts/TextArea.vue'
 import Header from '../Unit/Header.vue'
 
 export default {
-  components:{Header, SubmitButton, CommentForm,},
+  components:{Header, SubmitButton, TextArea},
   data() {
+    
     return {
       message:'',
       file: '',
       preview: '',
+      comment:'',
       icon: require("../../../../public/icon/upload.svg")
     }
   },
@@ -51,9 +56,16 @@ export default {
       this.$router.go(-1)
     },
     post(){
-      axios.post('http://127.0.0.1:8000/api/posts',{
-        file:this.file
-      })
+
+      const postData = new FormData();
+        postData.append("file", this.file);
+        postData.append("comment", this.comment);
+
+      axios.post('http://127.0.0.1:8000/api/posts',postData).then((res) => {
+        console.log(res)
+      }).catch((err) => {
+        console.log(err)
+      });
     },
     upload(event){
       this.file = event.target.files[0]
@@ -72,7 +84,9 @@ export default {
         this.icon = ''
       };
       reader.readAsDataURL(file);
-      this.$emit('input', file);
+    },
+    update(comment) {
+      this.comment = comment
     }
   }
 }
