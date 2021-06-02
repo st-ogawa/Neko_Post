@@ -40,7 +40,7 @@ class PostsController extends Controller
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
-        
+       
         if($validator->errors()->first()){
             $response['message'] = $validator->errors()->first('file');
             throw new HttpResponseException(response()->json($response, 422));

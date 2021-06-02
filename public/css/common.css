@@ -112,15 +112,25 @@
     background:#fafafa;
     border-radius:16px;
     width:80%;
-    height: 500px;
+    height: auto;
     margin: 0 auto;
     margin-top: 95px;
 }
 .post-detail{
     width: 100%;
-    height: 63%;
+    height: auto;
     display: flex;
     justify-content: center;
+}
+.post-button{
+    text-align: right;
+    padding:20px 20px 20px 0;
+
+}
+.post-button .SubmitButton{
+    padding: 0;
+    width: 100px;
+    height: 35px;
 }
 .image-input-field {
     width: 300px;
@@ -130,6 +140,8 @@
     align-items: center;
     background:#efefef;
     border: solid 1px #2021246b;
+    margin-right: 50px;
+
 }
 
 .image-input-field > input {
@@ -154,4 +166,26 @@
     position: relative;
 }
 
-
+.post-comment{
+    width: 35%;
+    position: relative;
+}
+.TextArea{
+    border-bottom: solid 1px rgb(46, 46, 46);
+    outline: none; 
+    user-select: text; 
+    white-space: pre-wrap; 
+    overflow-wrap: break-word;
+    padding-top: 100px;
+}
+.TextArea:empty:before{
+    content: 'コメントを追加';
+    color: gray;
+}
+.cancel-preview{
+    width: 40px;
+    margin-left: -40px;
+}
+.preview{
+    border-radius: 50%;
+}
