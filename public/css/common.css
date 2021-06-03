@@ -183,9 +183,25 @@
     color: gray;
 }
 .cancel-preview{
-    width: 40px;
-    margin-left: -40px;
+    width: 45px;
+    height: 45px;
+    margin-right: -45px;
+    margin-top: -150px;
+    background:#fff;
+    z-index: 100;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+
 }
 .preview{
-    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    z-index: 101;
+    margin-top: 5px;
 }
+
+
+
+
+
