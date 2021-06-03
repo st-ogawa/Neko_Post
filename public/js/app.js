@@ -2026,6 +2026,7 @@ __webpack_require__.r(__webpack_exports__);
       var postData = new FormData();
       postData.append("file", this.file);
       postData.append("comment", this.comment);
+      postData.append("user_id", this.$store.getters.getUserId);
       axios.post('http://127.0.0.1:8000/api/posts', postData).then(function (res) {
         console.log(res);
       })["catch"](function (err) {
@@ -2058,6 +2059,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     update: function update(comment) {
       this.comment = comment;
+    },
+    imageCancel: function imageCancel() {
+      this.preview = '';
+      this.message = 'クリックして画像を選択';
     }
   }
 });
@@ -2453,8 +2458,14 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('http://127.0.0.1:8000/api/login', {
         email: this.loginMail,
         password: this.loginPass
-      }).then(function (response) {
-        console.log(response.data);
+      }).then(function (res) {
+        _this.$store.dispatch('getAuthToken', res.data.token);
+
+        _this.$store.dispatch('getAuthUser', res.data.user);
+
+        setTimeout(function () {
+          _this.$router.push('/');
+        }, 1500);
       })["catch"](function (error) {
         _this.errormsg = error.response.data.message;
       });
@@ -2544,8 +2555,14 @@ __webpack_require__.r(__webpack_exports__);
         'name': this.userName,
         'email': this.registerMail,
         'password': this.registerPass
-      }).then(function (response) {
-        console.log(response);
+      }).then(function (res) {
+        _this.$store.dispatch('getAuthToken', res.data.token);
+
+        _this.$store.dispatch('getAuthUser', res.data.user);
+
+        setTimeout(function () {
+          _this.$router.push('/');
+        }, 1500);
       })["catch"](function (error) {
         _this.errormsg = error.response.data.message;
       });
@@ -38300,7 +38317,10 @@ var render = function() {
           _c("div", { staticClass: "post-detail" }, [
             _c("div", { staticClass: "image-input-field" }, [
               _c("input", {
-                attrs: { type: "file", accept: "image/*," },
+                attrs: {
+                  type: "file",
+                  accept: "image/bmp,image/jpeg,image/png,image/tiff"
+                },
                 on: { change: _vm.upload }
               }),
               _vm._v(" "),
@@ -38320,18 +38340,31 @@ var render = function() {
                       value: _vm.preview,
                       expression: "preview"
                     }
-                  ],
-                  staticClass: "preview"
+                  ]
                 },
                 [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _c("img", {
-                    class: { "post-image": _vm.preview },
-                    attrs: { src: _vm.preview }
-                  })
+                  _c(
+                    "div",
+                    {
+                      staticClass: "cancel-preview",
+                      on: { click: _vm.imageCancel }
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "preview",
+                        attrs: {
+                          src: __webpack_require__(/*! ../../../../public/icon/close.svg */ "./public/icon/close.svg")
+                        }
+                      })
+                    ]
+                  )
                 ]
-              )
+              ),
+              _vm._v(" "),
+              _c("img", {
+                class: { "post-image": _vm.preview },
+                attrs: { src: _vm.preview }
+              })
             ]),
             _vm._v(" "),
             _c(
@@ -38364,22 +38397,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "cancel-preview" }, [
-      _c("img", {
-        attrs: {
-          src: __webpack_require__(/*! ../../../../public/icon/close.svg */ "./public/icon/close.svg"),
-          width: "40",
-          height: "40"
-        }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -38795,18 +38813,6 @@ var render = function() {
               ])
             ],
             1
-          ),
-          _vm._v(" "),
-          _c(
-            "li",
-            { staticClass: "link" },
-            [
-              _c("router-link", { attrs: { to: "/profile" } }, [
-                _vm._v("profile"),
-                _c("img", { attrs: { src: "" } })
-              ])
-            ],
-            1
           )
         ])
       ])
@@ -39085,7 +39091,7 @@ var render = function() {
       { attrs: { id: "register-button" } },
       [
         _c("SubmitButton", {
-          attrs: { value: "ログイン" },
+          attrs: { value: "新規登録" },
           on: { sendData: _vm.register }
         })
       ],
@@ -56872,13 +56878,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _modules_apiAuthToken__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/apiAuthToken */ "./resources/js/store/modules/apiAuthToken.js");
+/* harmony import */ var _modules_apiAuthUser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/apiAuthUser */ "./resources/js/store/modules/apiAuthUser.js");
+
 
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
-    apiAuthToken: _modules_apiAuthToken__WEBPACK_IMPORTED_MODULE_2__["default"]
+    apiAuthToken: _modules_apiAuthToken__WEBPACK_IMPORTED_MODULE_2__["default"],
+    apiAuthUser: _modules_apiAuthUser__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   strict: "development" !== 'production'
 }));
@@ -56894,14 +56903,76 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var state = {};
-var getters = {};
-var actions = {};
-var mutations = {};
+var state = {
+  authToken: ''
+};
+var getters = {
+  getToken: function getToken(state) {
+    return state.authToken;
+  }
+};
+var actions = {
+  getAuthToken: function getAuthToken(_ref, authToken) {
+    var commit = _ref.commit;
+    commit('setAuthToken', authToken);
+  }
+};
+var mutations = {
+  setAuthToken: function setAuthToken(state, authToken) {
+    state.authToken = authToken;
+  }
+};
 /* harmony default export */ __webpack_exports__["default"] = ({
   state: state,
   getters: getters,
   actions: actions,
+  mutations: mutations
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/apiAuthUser.js":
+/*!***************************************************!*\
+  !*** ./resources/js/store/modules/apiAuthUser.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var getDefaultState = function getDefaultState() {
+  return {
+    userName: '',
+    userId: ''
+  };
+};
+
+var state = getDefaultState;
+var getters = {
+  getUserName: function getUserName(state) {
+    return state.userName;
+  },
+  getUserId: function getUserId(state) {
+    return state.userId;
+  }
+};
+var actions = {
+  getAuthUser: function getAuthUser(_ref, user) {
+    var commit = _ref.commit;
+    commit('setAuthUser', user);
+  }
+};
+var mutations = {
+  setAuthUser: function setAuthUser(state, user) {
+    state.userName = user.name;
+    state.userId = user.id;
+    console.log(user);
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: state,
+  actions: actions,
+  getters: getters,
   mutations: mutations
 });
 
