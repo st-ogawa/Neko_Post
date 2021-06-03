@@ -49,8 +49,10 @@ export default {
       axios.post('http://127.0.0.1:8000/api/login', {
         email: this.loginMail,
         password: this.loginPass
-      }).then(response=>{
-        console.log(response.data)
+      }).then(res=>{
+        this.$store.dispatch('getAuthToken', res.data.token)
+        this.$store.dispatch('getAuthUser', res.data.user)
+        setTimeout(()=>{this.$router.push('/')},1500);
       }).catch(error=>{
         this. errormsg = error.response.data.message
       })

@@ -21,7 +21,7 @@
       <ErrorMessage v-show="errormsg.password" v-model="errormsg.password"/>
     </div>
     <div id="register-button">
-      <SubmitButton value="ログイン" @sendData="register"/>
+      <SubmitButton value="新規登録" @sendData="register"/>
     </div>
   </div>
 </template>
@@ -62,8 +62,10 @@ export default {
         'name': this.userName,
         'email' : this.registerMail,
         'password' : this.registerPass,
-      }).then(response=>{
-        console.log(response)
+      }).then(res=>{
+        this.$store.dispatch('getAuthToken', res.data.token);
+        this.$store.dispatch('getAuthUser', res.data.user);
+        setTimeout(()=>{this.$router.push('/')},1500);
       }).catch(error=>{
         this.errormsg = error.response.data.message
       })
