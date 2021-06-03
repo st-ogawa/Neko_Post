@@ -9,15 +9,15 @@
         <h3>新規投稿</h3>
         <div class="post-detail">
           <div class="image-input-field">
-            <input type="file" @change="upload"  accept="image/*,">
+            <input type="file" @change="upload"  accept="image/bmp,image/jpeg,image/png,image/tiff">
             <p><img :src="icon"><br/>
             {{message}}</p>
-            <div v-show="preview" class="preview">
-                <div class="cancel-preview">
-                  <img src="../../../../public/icon/close.svg" width="40" height="40">
-                </div>
-              <img :src="preview" :class="{'post-image':preview}">
+            <div v-show="preview">
+              <div class="cancel-preview" @click="imageCancel">
+                <img src="../../../../public/icon/close.svg" class="preview" >
+              </div>
             </div>
+            <img :src="preview" :class="{'post-image':preview}">
           </div>
            <div class="post-comment">
               <TextArea :comment="comment" @update="update"/>
@@ -60,6 +60,7 @@ export default {
       const postData = new FormData();
         postData.append("file", this.file);
         postData.append("comment", this.comment);
+        postData.append("user_id",this.$store.getters.getUserId)
 
       axios.post('http://127.0.0.1:8000/api/posts',postData).then((res) => {
         console.log(res)
@@ -87,6 +88,10 @@ export default {
     },
     update(comment) {
       this.comment = comment
+    },
+    imageCancel(){
+      this.preview =''
+      this.message = 'クリックして画像を選択'
     }
   }
 }

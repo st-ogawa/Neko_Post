@@ -57,7 +57,13 @@ class PostsController extends Controller
             $posts = new Posts;
             $posts->image = $file_name;
             $posts->comment = $comment;
-            $posts->user_id = $user_id;
+            if(!$user_id){
+                $posts->user_id = 1;
+            }
+            else{
+                $posts->user_id = $user_id;
+            }
+            
             $posts->save();
 
             return [$posts];
