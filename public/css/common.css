@@ -107,6 +107,7 @@
 
 /* post */
 
+
 .post-card{
     text-align: center;
     background:#fafafa;
@@ -116,33 +117,45 @@
     margin: 0 auto;
     margin-top: 95px;
 }
-.post-detail{
+
+.post-container{
     width: 100%;
     height: auto;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
-.post-button{
-    text-align: right;
-    padding:20px 20px 20px 0;
+.post-image-area{
+    width: 300px;
+    height: 340px;
+    padding:30px 30px 0 20px;
+}
+.post-comment-area{
+    padding: 165px 30px  0 20px;
+    width: 300px;
+}
+.post-image{
+    width: 100%;
+    position: relative;
+    border-radius: 7px;
+}
 
-}
-.post-button .SubmitButton{
-    padding: 0;
-    width: 100px;
-    height: 35px;
+.post-comment{
+    width: 70%;
+    position: relative;
+    margin: 0 auto;
 }
 .image-input-field {
     width: 300px;
-    height: 300px;
+    height: auto;
     position: relative;
     display: flex;
-    align-items: center;
     background:#efefef;
     border: solid 1px #2021246b;
     margin-right: 50px;
-
+    border-radius: 7px;
 }
+
 
 .image-input-field > input {
     position: absolute;
@@ -156,27 +169,25 @@
 .image-input-field > p {
     color: rgb(46, 46, 46);
     margin: 0 auto;
-    
+    padding-top: 160px;
+     
 }
 
-.post-image{
-    width: 100%;
-    height: 100%;
-    align-items: center;
-    position: relative;
-}
 
-.post-comment{
-    width: 35%;
-    position: relative;
+.post-button{
+    text-align: right;
+    padding:20px 20px 20px 0;
+}
+.post-button .SubmitButton{
+    padding: 0;
+    width: 100px;
+    height: 35px;
 }
 .TextArea{
+    height: 100%;
     border-bottom: solid 1px rgb(46, 46, 46);
     outline: none; 
     user-select: text; 
-    white-space: pre-wrap; 
-    overflow-wrap: break-word;
-    padding-top: 100px;
 }
 .TextArea:empty:before{
     content: 'コメントを追加';
@@ -201,7 +212,63 @@
     margin-top: 5px;
 }
 
+/* modal */
 
-
-
+.modal-mask {
+    position: fixed;
+    z-index: 900;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: table;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+}
+  
+.modal-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+  
+.modal-container {
+    width: 300px;
+    margin: 0px auto;
+    padding: 20px 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+    transition: all 0.3s ease;
+    font-family: Helvetica, Arial, sans-serif;
+}
+  
+  
+.modal-body {
+    margin: 20px 0;
+}
+  
+.modal-default-button {
+    float: right;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+  
+.modal-enter-active, .v-leave-active {
+    transition: all 0.5s
+}
+  
+.modal-enter {
+    transform: translateY(-10px);
+}
+.modal-leave {
+    transform:  translateY(10px);
+}
+.modal-enter, .modal-leave-to {
+    opacity: 0
+}
+.modal-image{
+    width: 236px;
+}
 
