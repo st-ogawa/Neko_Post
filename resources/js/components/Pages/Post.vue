@@ -1,30 +1,41 @@
 <template>
   <div class="Post">
-    <Header/>
     <div class="container">
       <div class="post-card">
         <div class="close-post">
             <img src="../../../../public/icon/close.svg" @click="close">
         </div>
         <h3>新規投稿</h3>
-        <div class="post-detail">
-          <div class="image-input-field">
-            <input type="file" @change="upload"  accept="image/bmp,image/jpeg,image/png,image/tiff">
-            <p><img :src="icon"><br/>
-            {{message}}</p>
-            <div v-show="preview">
-              <div class="cancel-preview" @click="imageCancel">
-                <img src="../../../../public/icon/close.svg" class="preview" >
+        <div class="post-container">
+          <div class="post-image-area">
+            <div class="image-input-field">
+              <input type="file" @change="upload"  accept="image/bmp,image/jpeg,image/png,image/tiff">
+              <p><img :src="icon"><br/>
+              {{message}}</p>
+              <div v-show="preview">
+                <div class="cancel-preview" @click="imageCancel">
+                  <img src="../../../../public/icon/close.svg" class="preview" >
+                </div>
               </div>
+              <img :src="preview" :class="{'post-image':preview}">
             </div>
-            <img :src="preview" :class="{'post-image':preview}">
           </div>
-           <div class="post-comment">
+          <div class="post-comment-area">
+            <div class="post-comment">
               <TextArea :comment="comment" @update="update"/>
-           </div>
+            </div>
+            <div class="post-button">
+              <SubmitButton value="投稿する" @sendData="post"/>
+            </div>
+          </div>
         </div>
-        <div class="post-button">
-          <SubmitButton value="投稿する" @sendData="post"/>
+        <div v-show="modal">
+          <modal @close="modal = !modal">
+            <p slot="header">投稿しました</p>
+            <div slot="body" class="post-modal">
+              <img :src="preview" class="modal-image">
+            </div>
+          </modal>
         </div>
       </div>
     </div>
@@ -34,18 +45,19 @@
 <script>
 import SubmitButton from '../SheredParts/SubmitButton.vue'
 import TextArea from '../SheredParts/TextArea.vue'
-import Header from '../Unit/Header.vue'
+import Modal from '../Unit/Modal.vue'
 
 export default {
-  components:{Header, SubmitButton, TextArea},
-  data() {
-    
+
+  components:{SubmitButton, TextArea, Modal},
+  data() { 
     return {
       message:'',
       file: '',
       preview: '',
       comment:'',
-      icon: require("../../../../public/icon/upload.svg")
+      icon: require("../../../../public/icon/upload.svg"),
+      modal:false,
     }
   },
   mounted(){
@@ -63,6 +75,7 @@ export default {
         postData.append("user_id",this.$store.getters.getUserId)
 
       axios.post('http://127.0.0.1:8000/api/posts',postData).then((res) => {
+        this.modal = true
         console.log(res)
       }).catch((err) => {
         console.log(err)
