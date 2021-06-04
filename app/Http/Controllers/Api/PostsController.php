@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-
-use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -28,7 +26,7 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Posts $posts) 
     {
         $rules = [
             'file' => 'required|image|max:5000'
@@ -47,28 +45,11 @@ class PostsController extends Controller
         };
         
         $validated = $validator->validate();
-
-        $file = request()->file;
-        $comment = request()->comment;
         $user_id = request()->user_id;
-        if($file){
-            $file_name = time().'.'.$file->getClientOriginalName();
-            Image::make($file)->resize(250,250)->save(storage_path('app/public/images/'.$file_name));
-            $posts = new Posts;
-            $posts->image = $file_name;
-            $posts->comment = $comment;
-            if(!$user_id){
-                $posts->user_id = 1;
-            }
-            else{
-                $posts->user_id = $user_id;
-            }
-            
-            $posts->save();
+        $data = request()->all();
+        $posts->postStore($user_id, $data);
+        return $posts;
 
-            return [$posts];
-        }
-        
     }
 
     /**
@@ -100,7 +81,7 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($post)
     {
         //
     }

@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Models;
-
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class Posts extends Model
 {
-    use SoftDeletes;
+
 
     
     protected $fillable = [
@@ -27,5 +26,29 @@ class Posts extends Model
     public function comments()
     {
         return $this->hasMany(Comments::class);
+    }
+    public function postStore($user_id, $data){
+        
+        $file = $data['file'];
+        $comment = $data['comment'];
+        if($file){
+            $file_name = time().'.'.$file->getClientOriginalName();
+            Image::make($file)->resize(250,250)->save(storage_path('app/public/images/'.$file_name));
+            
+            $this->image = $file_name;
+            $this->comment = $comment;
+            if(!$user_id){
+                $this->user_id = 1;
+            }
+            else{
+                $this->user_id = $user_id;
+            }
+            $this->save();
+            return;
+        }
+    }
+
+    public function postDestroy($user_id, $post_id){
+        return $this->where('user_id', $user_id)->where('id', $post_id)->delete();
     }
 }
