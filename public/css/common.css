@@ -4,12 +4,9 @@
     margin: 0 auto;
 }
 
-@media screen and (max-width: 480px){
-   
-}
 
 .Header{
-    height: 60px;
+    height: 70px;
     align-items: center;
     position: fixed;
     width: 100%;
@@ -23,35 +20,33 @@
 .header-navi{
     padding: 0 20px;
     display: flex;
-    height: 60px;
+    height: 100%;
 }
 
 .nav-link{
     display: flex;
     padding: 0 0 0 24px;
     margin: 0px 0px;
-    height: 60px;
+    height:100%;
 }
 
 .link{
     margin-left: 22px;
-    margin-top: 12px;
+    margin:16px 0 16px 22px;
 }
 
 #discovery{
     background-color: #f5f3f3;
-    height: 100vh;
+    height: 100%;
 }
 
 .container{
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
-    padding:50px 0px 50px 0;
+    padding:70px 0;
+    
 }
 
-.content{
-    height: 100vh;
-}
 .error-message{
     width: 85%;
     margin-left:63px;
@@ -112,7 +107,7 @@
     text-align: center;
     background:#fafafa;
     border-radius:16px;
-    width:80%;
+    width:65%;
     height: auto;
     margin: 0 auto;
     margin-top: 95px;
@@ -127,12 +122,12 @@
 }
 .post-image-area{
     width: 300px;
-    height: 340px;
-    padding:30px 30px 0 20px;
+    padding:30px 20px 70px 20px;
 }
 .post-comment-area{
-    padding: 165px 30px  0 20px;
-    width: 300px;
+    padding: 300px 20px  0 20px;
+    width: 350px;
+    height: auto;
 }
 .post-image{
     width: 100%;
@@ -151,7 +146,7 @@
     position: relative;
     display: flex;
     background:#efefef;
-    border: solid 1px #2021246b;
+    border: solid 1px #20212451;
     margin-right: 50px;
     border-radius: 7px;
 }
@@ -169,14 +164,14 @@
 .image-input-field > p {
     color: rgb(46, 46, 46);
     margin: 0 auto;
-    padding-top: 160px;
+    padding: 40% 0;
      
 }
 
 
 .post-button{
     text-align: right;
-    padding:20px 20px 20px 0;
+    padding:30px 30px 30px 0;
 }
 .post-button .SubmitButton{
     padding: 0;
@@ -184,32 +179,44 @@
     height: 35px;
 }
 .TextArea{
+    width: auto;
     height: 100%;
     border-bottom: solid 1px rgb(46, 46, 46);
     outline: none; 
-    user-select: text; 
+    user-select: text;
+    text-align: left;
+    padding-inline-start:8px;
 }
-.TextArea:empty:before{
-    content: 'コメントを追加';
-    color: gray;
+[contenteditable=true]:empty:before{
+    content: attr(placeholder);
+    color:#2e2e2ed9;
 }
-.cancel-preview{
+.TextArea:focus{
+    border-bottom: solid 1px #e69d30;
+    transition: all 0.1s;
+    outline: none;
+}
+.cancel-button{
     width: 45px;
     height: 45px;
     margin-right: -45px;
-    margin-top: -150px;
     background:#fff;
     z-index: 100;
     border-radius: 50%;
     position: relative;
     cursor: pointer;
-
 }
-.preview{
+.cancel{
     width: 35px;
     height: 35px;
     z-index: 101;
     margin-top: 5px;
+}
+.close-post{
+    width: 30px;
+    margin-left: 20px;
+    padding-top: 15px;
+    cursor: pointer;
 }
 
 /* modal */

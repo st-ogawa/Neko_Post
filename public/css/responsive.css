@@ -3,3 +3,56 @@
     margin:0;
     padding: 0;
 } 
+.post-card{
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 55px;
+}
+.post-image-area{
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    padding: 25px 20px 0 20px;  
+}
+.post-comment-area{
+    width: auto;
+    height: auto;
+    padding: 20px 20px 0 20px;
+    margin: 0 auto;
+}
+
+.image-input-field{
+    margin: 0 auto;
+    width: 70%;
+    height: auto;
+}
+.post-image{
+    width: 100%;
+    height: auto;
+}
+.image-input-field > p{
+    padding: 35% 0;
+    margin: 0 auto;
+    width: auto;
+}
+.image-input-field input{
+    height: 100%;
+}
+
+.cancel-button{
+    margin-bottom: -45px;
+    width: 30px;
+    height: 30px;
+    margin-right: -45px;
+}
+.cancel{
+    width: 25px;
+    height: 25px;
+    margin-top: 2.5px;
+}
+.TextArea{
+    width: auto;
+    height: 100%;
+    border-bottom: 1px solid #20212465;
+}
