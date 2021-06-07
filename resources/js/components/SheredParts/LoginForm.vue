@@ -14,7 +14,6 @@ export default {
   data(){
     return {
       value: '',
-      placeholder : '',
     }
   },
   methods: {

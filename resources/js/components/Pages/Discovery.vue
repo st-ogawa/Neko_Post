@@ -1,21 +1,32 @@
 <template>
   <div id="Discovery">
-    <div class="container">
-      <div class="content">
-        <ul class="image-list">
-         
-        </ul>
+    <main>
+      <div class="container">
+        <div class="image-list">
+          <PostList/>
+        </div>
       </div>
-    </div>
+    </main>
   </div>
 </template>
 
 <script>
+import PostList from '../Unit/PostList.vue'
 
 
 
 export default {
- 
+  components: { PostList },
+  data() {
+    return {
+      
+    }
+  },
+  methods: {
+    // getPostList(){
+    //   axios.get()
+    // }
+  },
     
 }
 </script>

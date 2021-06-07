@@ -10,11 +10,11 @@
           <div class="post-image-area">
             <div class="image-input-field">
               <input type="file" @change="upload"  accept="image/bmp,image/jpeg,image/png,image/tiff">
-              <p><img :src="icon"><br/>
+              <p v-show="!preview"><img :src="icon"><br/>
               {{message}}</p>
               <div v-show="preview">
-                <div class="cancel-preview" @click="imageCancel">
-                  <img src="../../../../public/icon/close.svg" class="preview" >
+                <div class="cancel-button" @click="imageCancel">
+                  <img src="../../../../public/icon/close.svg" class="cancel" >
                 </div>
               </div>
               <img :src="preview" :class="{'post-image':preview}">
@@ -22,7 +22,7 @@
           </div>
           <div class="post-comment-area">
             <div class="post-comment">
-              <TextArea :comment="comment" @update="update"/>
+              <TextArea :comment="comment" @update="update" placeholder="コメントを追加"/>
             </div>
             <div class="post-button">
               <SubmitButton value="投稿する" @sendData="post"/>
@@ -93,6 +93,7 @@ export default {
     readImage(file){
       var reader = new FileReader();
       reader.onload = (event) => {
+        this.input = false
         this.preview = event.target.result
         this.message = ''
         this.icon = ''
