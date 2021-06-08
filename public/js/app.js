@@ -1948,17 +1948,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     PostList: _Unit_PostList_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
-    return {};
+    return {
+      list: []
+    };
   },
-  methods: {// getPostList(){
-    //   axios.get()
-    // }
+  mounted: function mounted() {
+    this.getPostList();
+  },
+  methods: {
+    getPostList: function getPostList() {
+      var _this = this;
+
+      axios.get('http://127.0.0.1:8000/api/posts').then(function (res) {
+        _this.list = res.data;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
   }
 });
 
@@ -2020,6 +2034,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2035,12 +2050,11 @@ __webpack_require__.r(__webpack_exports__);
       file: '',
       preview: '',
       comment: '',
-      icon: __webpack_require__(/*! ../../../../public/icon/upload.svg */ "./public/icon/upload.svg"),
       modal: false
     };
   },
   mounted: function mounted() {
-    this.message = 'クリックして画像を選択';
+    this.message = '画像を選択';
   },
   methods: {
     close: function close() {
@@ -2055,6 +2069,11 @@ __webpack_require__.r(__webpack_exports__);
       postData.append("user_id", this.$store.getters.getUserId);
       axios.post('http://127.0.0.1:8000/api/posts', postData).then(function (res) {
         _this.modal = true;
+        setTimeout(function () {
+          _this.preview = '';
+
+          _this.$router.push('/');
+        }, 2000);
         console.log(res);
       })["catch"](function (err) {
         console.log(err);
@@ -2077,10 +2096,8 @@ __webpack_require__.r(__webpack_exports__);
       var reader = new FileReader();
 
       reader.onload = function (event) {
-        _this2.input = false;
         _this2.preview = event.target.result;
         _this2.message = '';
-        _this2.icon = '';
       };
 
       reader.readAsDataURL(file);
@@ -2090,7 +2107,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     imageCancel: function imageCancel() {
       this.preview = '';
-      this.message = 'クリックして画像を選択';
+      this.message = '画像を選択';
     }
   }
 });
@@ -2518,7 +2535,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    item: Object
+  },
+  data: function data() {
+    return {};
+  },
+  methods: {
+    postsDetail: function postsDetail() {}
+  }
+});
 
 /***/ }),
 
@@ -38312,7 +38340,16 @@ var render = function() {
   return _c("div", { attrs: { id: "Discovery" } }, [
     _c("main", [
       _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "image-list" }, [_c("PostList")], 1)
+        _c("div", { staticClass: "content" }, [
+          _c(
+            "div",
+            { staticClass: "image-list" },
+            _vm._l(_vm.list, function(item) {
+              return _c("PostList", { key: item.id, attrs: { item: item } })
+            }),
+            1
+          )
+        ])
       ])
     ])
   ])
@@ -38375,7 +38412,11 @@ var render = function() {
                   ]
                 },
                 [
-                  _c("img", { attrs: { src: _vm.icon } }),
+                  _c("img", {
+                    attrs: {
+                      src: __webpack_require__(/*! ../../../../public/icon/upload.svg */ "./public/icon/upload.svg")
+                    }
+                  }),
                   _c("br"),
                   _vm._v("\n            " + _vm._s(_vm.message))
                 ]
@@ -39111,7 +39152,12 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "PostList" })
+  return _c("div", { staticClass: "PostList" }, [
+    _c("img", {
+      attrs: { src: "" + _vm.item.image },
+      on: { click: _vm.postsDetail }
+    })
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
