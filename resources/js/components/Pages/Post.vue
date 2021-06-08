@@ -10,7 +10,8 @@
           <div class="post-image-area">
             <div class="image-input-field">
               <input type="file" @change="upload"  accept="image/bmp,image/jpeg,image/png,image/tiff">
-              <p v-show="!preview"><img :src="icon"><br/>
+              <p v-show="!preview">
+                <img src="../../../../public/icon/upload.svg"><br/>
               {{message}}</p>
               <div v-show="preview">
                 <div class="cancel-button" @click="imageCancel">
@@ -56,12 +57,11 @@ export default {
       file: '',
       preview: '',
       comment:'',
-      icon: require("../../../../public/icon/upload.svg"),
       modal:false,
     }
   },
   mounted(){
-    this.message = 'クリックして画像を選択'
+    this.message = '画像を選択'
   },
   methods:{
     close(){
@@ -76,6 +76,10 @@ export default {
 
       axios.post('http://127.0.0.1:8000/api/posts',postData).then((res) => {
         this.modal = true
+        setTimeout(() => {
+          this.preview = ''
+          this.$router.push('/')
+        },2000);
         console.log(res)
       }).catch((err) => {
         console.log(err)
@@ -93,10 +97,8 @@ export default {
     readImage(file){
       var reader = new FileReader();
       reader.onload = (event) => {
-        this.input = false
         this.preview = event.target.result
         this.message = ''
-        this.icon = ''
       };
       reader.readAsDataURL(file);
     },
@@ -105,7 +107,7 @@ export default {
     },
     imageCancel(){
       this.preview =''
-      this.message = 'クリックして画像を選択'
+      this.message = '画像を選択'
     }
   }
 }
