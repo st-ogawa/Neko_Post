@@ -31,9 +31,9 @@
           </div>
         </div>
         <div v-show="modal">
-          <modal @close="modal = !modal">
+          <modal @close="modal = !modal" class="post-modal">
             <p slot="header">投稿しました</p>
-            <div slot="body" class="post-modal">
+            <div slot="body">
               <img :src="preview" class="modal-image">
             </div>
           </modal>
@@ -80,7 +80,6 @@ export default {
           this.preview = ''
           this.$router.push('/')
         },2000);
-        console.log(res)
       }).catch((err) => {
         console.log(err)
       });

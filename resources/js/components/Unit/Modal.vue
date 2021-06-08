@@ -6,7 +6,7 @@
             <div class="modal-container">
               <div class="modal-close">
                 <button class="modal-default-button" @click="$emit('close')">
-                    <i class="fas fa-times-circle fa-lg" @click="$emit('close')"></i>
+                    <i class="" @click="$emit('close')"></i>
                 </button>
               </div>
               <div class="modal-header">

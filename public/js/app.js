@@ -2074,7 +2074,6 @@ __webpack_require__.r(__webpack_exports__);
 
           _this.$router.push('/');
         }, 2000);
-        console.log(res);
       })["catch"](function (err) {
         console.log(err);
       });
@@ -2530,21 +2529,49 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Modal_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Modal.vue */ "./resources/js/components/Unit/Modal.vue");
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Modal: _Modal_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   props: {
     item: Object
   },
   data: function data() {
-    return {};
+    return {
+      modal: false
+    };
   },
   methods: {
-    postsDetail: function postsDetail() {}
+    postsDetail: function postsDetail() {
+      this.modal = true;
+    }
   }
 });
 
@@ -38506,6 +38533,7 @@ var render = function() {
             _c(
               "modal",
               {
+                staticClass: "post-modal",
                 on: {
                   close: function($event) {
                     _vm.modal = !_vm.modal
@@ -38517,20 +38545,12 @@ var render = function() {
                   _vm._v("投稿しました")
                 ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "post-modal",
-                    attrs: { slot: "body" },
-                    slot: "body"
-                  },
-                  [
-                    _c("img", {
-                      staticClass: "modal-image",
-                      attrs: { src: _vm.preview }
-                    })
-                  ]
-                )
+                _c("div", { attrs: { slot: "body" }, slot: "body" }, [
+                  _c("img", {
+                    staticClass: "modal-image",
+                    attrs: { src: _vm.preview }
+                  })
+                ])
               ]
             )
           ],
@@ -39102,7 +39122,6 @@ var render = function() {
                     },
                     [
                       _c("i", {
-                        staticClass: "fas fa-times-circle fa-lg",
                         on: {
                           click: function($event) {
                             return _vm.$emit("close")
@@ -39153,10 +39172,68 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "PostList" }, [
-    _c("img", {
-      attrs: { src: "" + _vm.item.image },
-      on: { click: _vm.postsDetail }
-    })
+    _c("div", { staticClass: "show-image" }, [
+      _c("img", {
+        attrs: { src: "" + _vm.item.image },
+        on: { click: _vm.postsDetail }
+      })
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.modal,
+            expression: "modal"
+          }
+        ]
+      },
+      [
+        _c(
+          "Modal",
+          {
+            on: {
+              close: function($event) {
+                _vm.modal = !_vm.modal
+              }
+            }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "post-modal",
+                attrs: { slot: "body" },
+                slot: "body"
+              },
+              [
+                _c("div", { staticClass: "post-detail" }, [
+                  _c("div", { staticClass: "detail-image" }, [
+                    _c("img", { attrs: { src: "" + _vm.item.image } })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "detail" }, [
+                    _c("div", { staticClass: "post-detail-comment" }, [
+                      _vm._v(
+                        "\n              " +
+                          _vm._s(_vm.item.comment) +
+                          "\n            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "comment" })
+                  ])
+                ])
+              ]
+            )
+          ]
+        )
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = []
