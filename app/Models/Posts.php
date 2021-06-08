@@ -35,7 +35,7 @@ class Posts extends Model
             $file_name = time().'.'.$file->getClientOriginalName();
             Image::make($file)->resize(250,250)->save(storage_path('app/public/images/'.$file_name));
             
-            $this->image = $file_name;
+            $this->image = 'storage/images/'. $file_name;
             $this->comment = $comment;
             if(!$user_id){
                 $this->user_id = 1;
