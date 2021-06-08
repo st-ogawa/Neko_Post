@@ -111,6 +111,7 @@
     height: auto;
     margin: 0 auto;
     margin-top: 95px;
+    
 }
 
 .post-container{
@@ -231,6 +232,7 @@
     background-color: rgba(0, 0, 0, 0.5);
     display: table;
     transition: opacity 0.3s ease;
+    
     cursor: pointer;
 }
   
@@ -240,11 +242,11 @@
 }
   
 .modal-container {
-    width: 300px;
+    width: 70%;
     margin: 0px auto;
     padding: 20px 30px;
     background-color: #fff;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
     transition: all 0.3s ease;
     font-family: Helvetica, Arial, sans-serif;
@@ -252,6 +254,7 @@
   
   
 .modal-body {
+    width: auto;
     margin: 20px 0;
 }
   
@@ -276,9 +279,18 @@
     opacity: 0
 }
 .modal-image{
-    width: 236px;
+    width: 100%;
+}
+.post-modal{
+    width: 400px;
 }
 
+.post-detail{
+    display: flex;
+}
+.detail-image img{
+    width: auto;
+}
 /* discovery */
 
 .image-list{
@@ -291,6 +303,7 @@
     margin: 0 5px 25px 5px;
 }
 
-.PostList img{
+.show-image img{
     width: 100%;
+    cursor: pointer;
 }
