@@ -18,7 +18,7 @@
     <link href="{{ asset('css/common.css') }}" rel="stylesheet"> 
     <link href="{{ asset('css/default.css') }}" rel="stylesheet"> 
     <link href="{{ asset('css/userRelated.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/responsive.css') }}" rel="stylesheet" media="screen and (max-width: 780px)">
+    <link href="{{ asset('css/responsive.css') }}" rel="stylesheet" media="screen and (max-width: 810px)">
 </head>
 <body>
     <div id="app">
