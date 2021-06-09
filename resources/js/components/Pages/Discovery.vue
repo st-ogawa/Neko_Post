@@ -3,7 +3,10 @@
     <main>
       <div class="container">
         <div class="content">
-          <div class="image-list">
+          <div v-show="loading" class="loading">
+            <img src="../../../../public/icon/ball-triangle.svg">
+          </div>
+          <div v-show="!loading" class="image-list">
             <PostList v-for="item in list" :key="item.id" :item="item"/>
           </div>
         </div>
@@ -21,7 +24,8 @@ export default {
   components: { PostList },
   data() {
     return {
-    list:[]
+    list: [],
+    loading: true,
     }
   },
   mounted(){
@@ -32,6 +36,7 @@ export default {
       axios.get('http://127.0.0.1:8000/api/posts')
       .then(res=>{
         this.list = res.data
+        this.loading = false
       }).catch(err=>{
         console.log(err)
       })
