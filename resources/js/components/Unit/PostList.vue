@@ -1,11 +1,12 @@
 <template>
   <div class="PostList">
+    
     <div class="show-image">
       <img :src="`${item.image}`" @click="postsDetail" >
     </div>
-    <div v-show="modal">
-      <Modal @close="modal = !modal">
-        <div slot="body" class="post-modal">
+    <div v-show="detail">
+      <PostDetails @close="detail = !detail">
+        <div slot="body">
           <div class="post-detail">
             <div class="detail-image">
               <img :src="`${item.image}`">
@@ -18,27 +19,28 @@
             </div>
           </div>
         </div>
-      </Modal>
+      </PostDetails>
     </div>
   </div>
 </template>
 
 <script>
-import Modal from "./Modal.vue"
+
+import PostDetails from './PostDetails.vue'
 
 export default {
-  components: { Modal, },
+  components: {  PostDetails, },
   props:{
     item:Object
   },
   data() {
     return {
-      modal:false
+      detail:false
     }
   },
   methods: {
     postsDetail(){
-      this.modal = true
+      this.detail = true
     }
   },
 }
