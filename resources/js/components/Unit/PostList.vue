@@ -5,21 +5,7 @@
       <img :src="`${item.image}`" @click="postsDetail" >
     </div>
     <div v-show="detail">
-      <PostDetails @close="detail = !detail">
-        <div slot="body">
-          <div class="post-detail">
-            <div class="detail-image">
-              <img :src="`${item.image}`">
-            </div>
-            <div class="detail">
-              <div class="post-detail-comment">
-                {{item.comment}}
-              </div>
-              <div class="comment"></div>
-            </div>
-          </div>
-        </div>
-      </PostDetails>
+      <PostDetails :item="item" @close="detail = false"/>
     </div>
   </div>
 </template>
