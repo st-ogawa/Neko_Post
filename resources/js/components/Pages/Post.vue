@@ -23,7 +23,7 @@
           </div>
           <div class="post-comment-area">
             <div class="post-comment">
-              <TextArea :comment="comment" @update="update" placeholder="コメントを追加"/>
+              <TextArea v-model="comment" placeholder="コメントを追加"/>
             </div>
             <div class="post-button">
               <SubmitButton value="投稿する" @sendData="post"/>
@@ -73,13 +73,12 @@ export default {
         postData.append("file", this.file);
         postData.append("comment", this.comment);
         postData.append("user_id",this.$store.getters.getUserId)
-
       axios.post('http://127.0.0.1:8000/api/posts',postData).then((res) => {
         this.modal = true
         setTimeout(() => {
           this.preview = ''
-          this.$router.push('/')
-        },2000);
+          this.$router.push('/',()=>{})
+        },3000);
       }).catch((err) => {
         console.log(err)
       });
@@ -100,9 +99,6 @@ export default {
         this.message = ''
       };
       reader.readAsDataURL(file);
-    },
-    update(comment) {
-      this.comment = comment
     },
     imageCancel(){
       this.preview =''

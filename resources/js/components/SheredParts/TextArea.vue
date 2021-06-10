@@ -1,22 +1,26 @@
 <template>
-  <div class="TextArea" 
-  contenteditable="true" 
+  <textarea 
+  class="TextArea" 
   spellcheck="false" 
   :placeholder="placeholder"
-  @input="inputComment"></div>
+  :value="value"
+  @input="updateValue"></textarea>
 </template>
 
 <script>
 export default {
- props: ['comment'],
+ props: {
+   val: String,
+ },
  data() {
    return {
-     placeholder: ''
+     placeholder: '',
+     value:''
    }
  },
   methods: {
-    inputComment (e) {
-      this.$emit('update', e.target.innerHTML)
+    updateValue(e) {
+      this.$emit('input', e.target.value)
     }
   },
  
