@@ -61,4 +61,28 @@ img{
     max-width: 100%;
 }
 
+textarea{
+    resize: none;
+    margin: 0;
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #20212465;
+    color: rgb(49, 49, 49);
+    font-family:'Segoe UI', Frutige, Dejavu, Sans, Helvetica, Neue, Arial, sans-serif;
+    font-weight: 300;
+}
+
+::-webkit-scrollbar {
+    width: 14px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    border: 1px solid #20212465;
+    border: none; 
+  
+}
+::-webkit-scrollbar-thumb {
+    background:#ccc;
+    border-radius: 6px;
+}
 

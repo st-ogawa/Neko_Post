@@ -6,7 +6,7 @@
 
 
 .Header{
-    height: 70px;
+    height: 65px;
     align-items: center;
     position: fixed;
     width: 100%;
@@ -32,7 +32,7 @@
 
 .link{
     margin-left: 22px;
-    margin:16px 0 16px 22px;
+    margin:13px 0 16px 22px;
 }
 
 #discovery{
@@ -126,7 +126,7 @@
     padding:30px 20px 70px 20px;
 }
 .post-comment-area{
-    padding: 300px 20px  0 20px;
+    padding: 229px 20px  0 20px;
     width: 350px;
     height: auto;
 }
@@ -137,7 +137,8 @@
 }
 
 .post-comment{
-    width: 70%;
+    width: 100%;
+    height: 100%;
     position: relative;
     margin: 0 auto;
 }
@@ -180,20 +181,17 @@
     height: 35px;
 }
 .TextArea{
-    width: auto;
-    height: 100%;
+    width: 80%;
+    height: 15vh;
     border-bottom: solid 1px #20212465;
     outline: none; 
     user-select: text;
     text-align: left;
-    padding-inline-start:8px;
+    border-radius: 5px;
 }
-[contenteditable=true]:empty:before{
-    content: attr(placeholder);
-    color:#2e2e2ed9;
-}
+
 .TextArea:focus{
-    border-bottom: solid 1px #e69d30;
+    border: solid 1px #e69d30;
     transition: all 0.1s;
     outline: none;
 }
@@ -213,12 +211,7 @@
     z-index: 101;
     margin-top: 5px;
 }
-.close-post{
-    width: 30px;
-    margin-left: 20px;
-    padding-top: 15px;
-    cursor: pointer;
-}
+
 
 /* modal */
 
@@ -306,11 +299,16 @@
     text-align: center;
 }
 /* detail */
+.close-button{
+    text-align: right;
+    margin: 0 auto;
+    margin-bottom: -60px;
+    z-index: 100;
+}
 .detail-container{
-    width: 60%;
-    height: 70vh;
+    max-width: 870px;
     margin: 0px auto;
-    margin-top: 80px;
+    margin-top: 40px;
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
@@ -321,14 +319,25 @@
     height: 100%;
 }
 
-.post-detail{
+.detail-body{
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: 70vh;
+    height: 100%;
 }
 .detail-image img{
-    border-radius: 2px;
-    width: 70vh;
+    border-radius: 4px;
+    width: 75vh;
     height: 100%;
+}
+.detail{
+    max-width: 400px;
+    width: 34%;
+    text-align: center;
+    margin: 0 auto;
+}
+.post-detail-comment{
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    width: 50%;
 }
