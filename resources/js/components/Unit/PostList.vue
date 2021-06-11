@@ -2,20 +2,16 @@
   <div class="PostList">
     
     <div class="show-image">
-      <img :src="`${item.image}`" @click="postsDetail" >
+      <img :src="item.image" @click="postsDetail" >
     </div>
     <div v-show="detail">
-      <PostDetails :item="item" @close="detail = false"/>
+      <router-view :item="item" @close="detail = false"/>
     </div>
   </div>
 </template>
 
 <script>
-
-import PostDetails from './PostDetails.vue'
-
 export default {
-  components: {  PostDetails, },
   props:{
     item:Object
   },
@@ -27,6 +23,7 @@ export default {
   methods: {
     postsDetail(){
       this.detail = true
+      this.$router.push('content',()=>{})
     }
   },
 }

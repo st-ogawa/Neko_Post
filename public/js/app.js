@@ -2564,6 +2564,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     item: Object
@@ -2581,7 +2582,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PostDetails_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PostDetails.vue */ "./resources/js/components/Unit/PostDetails.vue");
 //
 //
 //
@@ -2594,11 +2594,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    PostDetails: _PostDetails_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
   props: {
     item: Object
   },
@@ -2610,6 +2606,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     postsDetail: function postsDetail() {
       this.detail = true;
+      this.$router.push('content', function () {});
     }
   }
 });
@@ -39251,46 +39248,6 @@ var render = function() {
       _c("transition", { attrs: { name: "modal" } }, [
         _c("div", { staticClass: "modal-mask" }, [
           _c("div", { staticClass: "modal-wrapper" }, [
-            _c(
-              "div",
-              {
-                staticClass: "close-button",
-                on: {
-                  close: function($event) {
-                    return _vm.$emit("close")
-                  }
-                }
-              },
-              [
-                _c(
-                  "svg",
-                  {
-                    staticStyle: { padding: "50px 40px 0 0" },
-                    attrs: {
-                      xmlns: "http://www.w3.org/2000/svg",
-                      width: "60",
-                      height: "60",
-                      viewBox: "0 0 60 60",
-                      fill: "none",
-                      stroke: "#ededed",
-                      "stroke-width": "2",
-                      "stroke-linecap": "round",
-                      "stroke-linejoin": "bevel"
-                    }
-                  },
-                  [
-                    _c("line", {
-                      attrs: { x1: "18", y1: "6", x2: "6", y2: "18" }
-                    }),
-                    _vm._v(" "),
-                    _c("line", {
-                      attrs: { x1: "6", y1: "6", x2: "18", y2: "18" }
-                    })
-                  ]
-                )
-              ]
-            ),
-            _vm._v(" "),
             _c("div", { staticClass: "detail-container" }, [
               _c("div", { staticClass: "detail-body" }, [
                 _c("div", { staticClass: "detail-image" }, [
@@ -39298,6 +39255,8 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "detail" }, [
+                  _c("div", { staticClass: "user-status" }),
+                  _vm._v(" "),
                   _c("div", { staticClass: "post-detail-comment" }, [
                     _vm._v(
                       "\n                " +
@@ -39306,7 +39265,46 @@ var render = function() {
                     )
                   ])
                 ])
-              ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "close-button",
+                  on: {
+                    click: function($event) {
+                      return _vm.$emit("close")
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "svg",
+                    {
+                      attrs: {
+                        xmlns: "http://www.w3.org/2000/svg",
+                        width: "20",
+                        height: "20",
+                        viewBox: "0 0 20 20",
+                        fill: "none",
+                        stroke: "#333",
+                        "stroke-width": "2",
+                        "stroke-linecap": "round",
+                        "stroke-linejoin": "bevel"
+                      }
+                    },
+                    [
+                      _c("line", {
+                        attrs: { x1: "18", y1: "1", x2: "1", y2: "18" }
+                      }),
+                      _vm._v(" "),
+                      _c("line", {
+                        attrs: { x1: "1", y1: "1", x2: "18", y2: "18" }
+                      })
+                    ]
+                  )
+                ]
+              )
             ])
           ])
         ])
@@ -39340,7 +39338,7 @@ var render = function() {
   return _c("div", { staticClass: "PostList" }, [
     _c("div", { staticClass: "show-image" }, [
       _c("img", {
-        attrs: { src: "" + _vm.item.image },
+        attrs: { src: _vm.item.image },
         on: { click: _vm.postsDetail }
       })
     ]),
@@ -39358,7 +39356,7 @@ var render = function() {
         ]
       },
       [
-        _c("PostDetails", {
+        _c("router-view", {
           attrs: { item: _vm.item },
           on: {
             close: function($event) {
@@ -57476,7 +57474,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
   mode: 'history',
   routes: [{
     path: '/',
-    component: _components_Pages_Discovery__WEBPACK_IMPORTED_MODULE_2__["default"]
+    component: _components_Pages_Discovery__WEBPACK_IMPORTED_MODULE_2__["default"],
+    children: [{
+      path: 'content',
+      name: 'content',
+      component: _components_Unit_PostDetails__WEBPACK_IMPORTED_MODULE_9__["default"]
+    }]
   }, {
     path: '/post',
     component: _components_Pages_Post__WEBPACK_IMPORTED_MODULE_8__["default"]

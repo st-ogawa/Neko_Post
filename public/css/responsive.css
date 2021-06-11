@@ -56,3 +56,22 @@
     height: 100%;
     border-bottom: 1px solid #20212465;
 }
+.detail-container{
+    display: block;
+    width: 55%;
+    height: 60%;
+    margin:auto;
+}
+.detail-body{
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+}
+.detail-image{
+    width: auto;
+    text-align: center;
+}
+.detail-image img{
+    width: 55vh;
+    height: 100%;
+}

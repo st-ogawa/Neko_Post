@@ -7,6 +7,7 @@ import Login from './components/Unit/Login'
 import Register from './components/Unit/Register'
 import Favorite from './components/Unit/Favorite'
 import Post from './components/Pages/Post'
+import PostDetails from './components/Unit/PostDetails';
 
 Vue.use(VueRouter);
 
@@ -14,7 +15,11 @@ Vue.use(VueRouter);
 export default new VueRouter({
     mode : 'history',
     routes: [
-        { path: '/', component: Discovery },
+        { path: '/', component: Discovery,
+            children: [
+                { path: 'content', name: 'content', component: PostDetails } 
+            ]
+        },
         { path: '/post', component: Post },
         { path: '/profile', component: Profile,  
             children: [
