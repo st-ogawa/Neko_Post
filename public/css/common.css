@@ -102,7 +102,10 @@
 
 /* post */
 
-
+.close-post{
+    text-align: left;
+    padding: 20px 0 0 20px;
+}
 .post-card{
     text-align: center;
     background:#fafafa;
@@ -119,14 +122,13 @@
     height: auto;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
 }
 .post-image-area{
     width: 300px;
     padding:30px 20px 70px 20px;
 }
 .post-comment-area{
-    padding: 229px 20px  0 20px;
     width: 350px;
     height: auto;
 }
@@ -173,7 +175,7 @@
 
 .post-button{
     text-align: right;
-    padding:30px 30px 30px 0;
+    padding:16px  0;
 }
 .post-button .SubmitButton{
     padding: 0;
@@ -182,7 +184,7 @@
 }
 .TextArea{
     width: 80%;
-    height: 15vh;
+    height: 40px;
     border-bottom: solid 1px #20212465;
     outline: none; 
     user-select: text;
@@ -221,15 +223,17 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
     display: table;
     transition: opacity 0.3s ease;
+    overflow: scroll;
 }
   
 .modal-wrapper {
     display: table-cell;
     vertical-align: middle;
+    
 }
   
 .modal-container {
@@ -270,7 +274,7 @@
     opacity: 0
 }
 .modal-image{
-    width: 60%;
+    width: 50%;
 }
 
 
@@ -297,12 +301,16 @@
     text-align: center;
 }
 /* detail */
+.PostDetails{
+    overflow-y: auto;
+    max-height: 90%;
+}
 .close-button{
     width: 20px;
     height: 20px;
     text-align: right;
     z-index: 100;
-    padding: 20px 20px;
+    margin: -20px -20px 0 0;
     cursor: pointer;
 
 }
@@ -310,10 +318,11 @@
 .detail-container{
     display: flex;
     max-width: 65%;
+    height: 500px;
     margin: 0px auto;
-    margin-top: 40px;
+    margin-top: 80px;
     background-color: #fff;
-    border-radius: 4px;
+    border-radius: 6px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
     transition: all 0.3s ease;
 }
@@ -327,14 +336,15 @@
     justify-content: space-between;
     width: 100%;
     height: 100%;
-}.detail-image{
+}
+.detail-image{
     width: auto;
     height: auto;
 }
 .detail-image img{
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-    width: 50vw;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    width: 37.5vw;
     height: 100%;
 }
 .detail{
@@ -342,14 +352,17 @@
     text-align: center;
     margin: 0 auto;
 }
-.post-detail-comment{
-    white-space: pre-wrap;
+.detail-comment{
     overflow-wrap: break-word;
-    width: 80%;
-    height: 100%;
-    align-items: center;
-    margin: 0 auto;
-    border-bottom: 1px solid #bfbfbf;
+    width: 70%;
+    height: 50vh;
+    overflow: scroll;
+    text-align: left;
+    margin:0 60px;
+}
+.detail-comment::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
 }
 .user-stasus{
     height: 20%;
