@@ -2,7 +2,7 @@
   <div class="Post">
     <div class="container">
       <div class="post-card">
-        <div class="close-post">
+        <div class="close-post" title="閉じる">
             <img src="../../../../public/icon/close.svg" @click="close">
         </div>
         <h3>新規投稿</h3>
@@ -78,7 +78,7 @@ export default {
         setTimeout(() => {
           this.preview = ''
           this.$router.push('/',()=>{})
-        },3000);
+        },2000);
       }).catch((err) => {
         console.log(err)
       });

@@ -2073,12 +2073,10 @@ __webpack_require__.r(__webpack_exports__);
       postData.append("comment", this.comment);
       postData.append("user_id", this.$store.getters.getUserId);
       axios.post('http://127.0.0.1:8000/api/posts', postData).then(function (res) {
-        _this.modal = true;
-        setTimeout(function () {
-          _this.preview = '';
-
-          _this.$router.push('/', function () {});
-        }, 3000);
+        _this.modal = true; // setTimeout(() => {
+        //   this.preview = ''
+        //   this.$router.push('/',()=>{})
+        // },2000);
       })["catch"](function (err) {
         console.log(err);
       });
@@ -2420,6 +2418,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -38474,7 +38474,7 @@ var render = function() {
   return _c("div", { staticClass: "Post" }, [
     _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "post-card" }, [
-        _c("div", { staticClass: "close-post" }, [
+        _c("div", { staticClass: "close-post", attrs: { title: "閉じる" } }, [
           _c("img", {
             attrs: { src: __webpack_require__(/*! ../../../../public/icon/close.svg */ "./public/icon/close.svg") },
             on: { click: _vm.close }
@@ -38996,7 +38996,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "Header" }, [
     _c("div", { staticClass: "header-navi" }, [
-      _c("div", { staticClass: "logo-container" }, [_vm._v("ねこぽすと")]),
+      _vm._m(0),
       _vm._v(" "),
       _c("nav", [
         _c("ul", { staticClass: "nav-link" }, [
@@ -39007,7 +39007,8 @@ var render = function() {
               _c("router-link", { attrs: { to: "/post" } }, [
                 _c("img", {
                   attrs: {
-                    src: __webpack_require__(/*! ../../../../public/icon/plus-circle.svg */ "./public/icon/plus-circle.svg")
+                    src: __webpack_require__(/*! ../../../../public/icon/plus-circle.svg */ "./public/icon/plus-circle.svg"),
+                    title: "投稿"
                   }
                 })
               ])
@@ -39021,7 +39022,10 @@ var render = function() {
             [
               _c("router-link", { attrs: { to: "/" } }, [
                 _c("img", {
-                  attrs: { src: __webpack_require__(/*! ../../../../public/icon/home.svg */ "./public/icon/home.svg") }
+                  attrs: {
+                    src: __webpack_require__(/*! ../../../../public/icon/home.svg */ "./public/icon/home.svg"),
+                    title: "ホーム"
+                  }
                 })
               ])
             ],
@@ -39032,7 +39036,18 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "logo-container" }, [
+      _c("img", {
+        attrs: { src: __webpack_require__(/*! ../../../../public/images/ねこぽすと.png */ "./public/images/ねこぽすと.png") }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -39257,7 +39272,7 @@ var render = function() {
                 _c("div", { staticClass: "detail" }, [
                   _c("div", { staticClass: "user-status" }),
                   _vm._v(" "),
-                  _c("div", { staticClass: "post-detail-comment" }, [
+                  _c("div", { staticClass: "detail-comment" }, [
                     _vm._v(
                       "\n                " +
                         _vm._s(_vm.item.comment) +
@@ -39271,6 +39286,7 @@ var render = function() {
                 "div",
                 {
                   staticClass: "close-button",
+                  attrs: { title: "閉じる" },
                   on: {
                     click: function($event) {
                       return _vm.$emit("close")
@@ -39287,7 +39303,7 @@ var render = function() {
                         height: "20",
                         viewBox: "0 0 20 20",
                         fill: "none",
-                        stroke: "#333",
+                        stroke: "#fff",
                         "stroke-width": "2",
                         "stroke-linecap": "round",
                         "stroke-linejoin": "bevel"
@@ -56192,6 +56208,17 @@ module.exports = "/images/plus-circle.svg?106b36ea9731a09aa3b65678d2b97c4a";
 /***/ (function(module, exports) {
 
 module.exports = "/images/upload.svg?642378573f800d816cbb8b9f510f3680";
+
+/***/ }),
+
+/***/ "./public/images/ねこぽすと.png":
+/*!*********************************!*\
+  !*** ./public/images/ねこぽすと.png ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/ねこぽすと.png?0155e41a3b5b4b90b7be7d4eaa90bcd2";
 
 /***/ }),
 
