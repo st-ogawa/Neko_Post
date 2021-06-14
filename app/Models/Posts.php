@@ -33,7 +33,7 @@ class Posts extends Model
         $comment = $data['comment'];
         if($file){
             $file_name = time().'.'.$file->getClientOriginalName();
-            Image::make($file)->fit(300,300)->save(storage_path('app/public/images/'.$file_name));
+            Image::make($file)->fit(290,290)->save(storage_path('app/public/images/'.$file_name));
             
             $this->image = 'storage/images/'. $file_name;
             $this->comment = $comment;
