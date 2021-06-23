@@ -57,21 +57,34 @@
     border-bottom: 1px solid #20212465;
 }
 .detail-container{
-    display: block;
     width: 55%;
     height: 60%;
     margin:auto;
 }
 .detail-body{
     display: block;
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
+    overflow: scroll;
+}
+.detail-body::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
 }
 .detail-image{
     width: auto;
     text-align: center;
 }
 .detail-image img{
-    width: 55vh;
+    width: 100%;
     height: 100%;
+}
+.PostList{
+    width: 47%;
+    margin: 1% 0;  
+}
+.show-image img{
+    border-radius: 2px;
+    width: 100%;
+    cursor: pointer;
 }
