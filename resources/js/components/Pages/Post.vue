@@ -30,6 +30,7 @@
             </div>
           </div>
         </div>
+        <Loader v-show="loading"/>
         <div v-show="modal">
           <modal @close="modal = !modal" class="post-modal">
             <p slot="header">投稿しました</p>
@@ -44,13 +45,14 @@
 </template>
 
 <script>
+import Loader from '../SheredParts/loader.vue'
 import SubmitButton from '../SheredParts/SubmitButton.vue'
 import TextArea from '../SheredParts/TextArea.vue'
 import Modal from '../Unit/Modal.vue'
 
 export default {
 
-  components:{SubmitButton, TextArea, Modal},
+  components:{SubmitButton, TextArea, Modal, Loader},
   data() { 
     return {
       message:'',
@@ -58,6 +60,7 @@ export default {
       preview: '',
       comment:'',
       modal:false,
+      loading:false,
     }
   },
   mounted(){
@@ -68,13 +71,14 @@ export default {
       this.$router.go(-1)
     },
     post(){
-
+      this.loading = true
       const postData = new FormData();
         postData.append("file", this.file);
         postData.append("comment", this.comment);
         postData.append("user_id",this.$store.getters.getUserId)
       axios.post('http://127.0.0.1:8000/api/posts',postData).then((res) => {
         this.modal = true
+        this.loading = false
         setTimeout(() => {
           this.preview = ''
           this.$router.push('/',()=>{})

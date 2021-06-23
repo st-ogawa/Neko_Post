@@ -3,9 +3,7 @@
     <main>
       <div class="container">
         <div class="content">
-          <div v-show="loading" class="loading">
-            <img src="../../../../public/icon/ball-triangle.svg">
-          </div>
+          <Loader v-show="loading"/>
           <div v-show="!loading" class="image-list">
             <PostList v-for="item in list" :key="item.id" :item="item"/>
           </div>
@@ -16,12 +14,13 @@
 </template>
 
 <script>
+import Loader from '../SheredParts/loader.vue';
 import PostList from '../Unit/PostList.vue'
 
 
 
 export default {
-  components: { PostList },
+  components: { PostList, Loader },
   data() {
     return {
     list: [],

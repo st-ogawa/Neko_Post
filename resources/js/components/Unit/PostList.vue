@@ -1,6 +1,5 @@
 <template>
   <div class="PostList">
-    
     <div class="show-image">
       <img :src="item.image" @click="postsDetail" >
     </div>

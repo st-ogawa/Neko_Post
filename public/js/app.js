@@ -1935,9 +1935,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Unit_PostList_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Unit/PostList.vue */ "./resources/js/components/Unit/PostList.vue");
-//
-//
+/* harmony import */ var _SheredParts_loader_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../SheredParts/loader.vue */ "./resources/js/components/SheredParts/loader.vue");
+/* harmony import */ var _Unit_PostList_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Unit/PostList.vue */ "./resources/js/components/Unit/PostList.vue");
 //
 //
 //
@@ -1954,9 +1953,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    PostList: _Unit_PostList_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    PostList: _Unit_PostList_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Loader: _SheredParts_loader_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
@@ -1992,9 +1993,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _SheredParts_SubmitButton_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../SheredParts/SubmitButton.vue */ "./resources/js/components/SheredParts/SubmitButton.vue");
-/* harmony import */ var _SheredParts_TextArea_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../SheredParts/TextArea.vue */ "./resources/js/components/SheredParts/TextArea.vue");
-/* harmony import */ var _Unit_Modal_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Unit/Modal.vue */ "./resources/js/components/Unit/Modal.vue");
+/* harmony import */ var _SheredParts_loader_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../SheredParts/loader.vue */ "./resources/js/components/SheredParts/loader.vue");
+/* harmony import */ var _SheredParts_SubmitButton_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../SheredParts/SubmitButton.vue */ "./resources/js/components/SheredParts/SubmitButton.vue");
+/* harmony import */ var _SheredParts_TextArea_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../SheredParts/TextArea.vue */ "./resources/js/components/SheredParts/TextArea.vue");
+/* harmony import */ var _Unit_Modal_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Unit/Modal.vue */ "./resources/js/components/Unit/Modal.vue");
 //
 //
 //
@@ -2040,14 +2042,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    SubmitButton: _SheredParts_SubmitButton_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    TextArea: _SheredParts_TextArea_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Modal: _Unit_Modal_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    SubmitButton: _SheredParts_SubmitButton_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    TextArea: _SheredParts_TextArea_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Modal: _Unit_Modal_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Loader: _SheredParts_loader_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
@@ -2055,7 +2060,8 @@ __webpack_require__.r(__webpack_exports__);
       file: '',
       preview: '',
       comment: '',
-      modal: false
+      modal: false,
+      loading: false
     };
   },
   mounted: function mounted() {
@@ -2068,15 +2074,19 @@ __webpack_require__.r(__webpack_exports__);
     post: function post() {
       var _this = this;
 
+      this.loading = true;
       var postData = new FormData();
       postData.append("file", this.file);
       postData.append("comment", this.comment);
       postData.append("user_id", this.$store.getters.getUserId);
       axios.post('http://127.0.0.1:8000/api/posts', postData).then(function (res) {
-        _this.modal = true; // setTimeout(() => {
-        //   this.preview = ''
-        //   this.$router.push('/',()=>{})
-        // },2000);
+        _this.modal = true;
+        _this.loading = false;
+        setTimeout(function () {
+          _this.preview = '';
+
+          _this.$router.push('/', function () {});
+        }, 2000);
       })["catch"](function (err) {
         console.log(err);
       });
@@ -2582,7 +2592,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -38403,10 +38412,11 @@ var render = function() {
   return _c("div", { attrs: { id: "Discovery" } }, [
     _c("main", [
       _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "content" }, [
-          _c(
-            "div",
-            {
+        _c(
+          "div",
+          { staticClass: "content" },
+          [
+            _c("Loader", {
               directives: [
                 {
                   name: "show",
@@ -38414,37 +38424,30 @@ var render = function() {
                   value: _vm.loading,
                   expression: "loading"
                 }
-              ],
-              staticClass: "loading"
-            },
-            [
-              _c("img", {
-                attrs: {
-                  src: __webpack_require__(/*! ../../../../public/icon/ball-triangle.svg */ "./public/icon/ball-triangle.svg")
-                }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: !_vm.loading,
-                  expression: "!loading"
-                }
-              ],
-              staticClass: "image-list"
-            },
-            _vm._l(_vm.list, function(item) {
-              return _c("PostList", { key: item.id, attrs: { item: item } })
+              ]
             }),
-            1
-          )
-        ])
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !_vm.loading,
+                    expression: "!loading"
+                  }
+                ],
+                staticClass: "image-list"
+              },
+              _vm._l(_vm.list, function(item) {
+                return _c("PostList", { key: item.id, attrs: { item: item } })
+              }),
+              1
+            )
+          ],
+          1
+        )
       ])
     ])
   ])
@@ -38473,161 +38476,177 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "Post" }, [
     _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "post-card" }, [
-        _c("div", { staticClass: "close-post", attrs: { title: "閉じる" } }, [
-          _c("img", {
-            attrs: { src: __webpack_require__(/*! ../../../../public/icon/close.svg */ "./public/icon/close.svg") },
-            on: { click: _vm.close }
-          })
-        ]),
-        _vm._v(" "),
-        _c("h3", [_vm._v("新規投稿")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "post-container" }, [
-          _c("div", { staticClass: "post-image-area" }, [
-            _c("div", { staticClass: "image-input-field" }, [
-              _c("input", {
-                attrs: {
-                  type: "file",
-                  accept: "image/bmp,image/jpeg,image/png,image/tiff"
-                },
-                on: { change: _vm.upload }
-              }),
-              _vm._v(" "),
-              _c(
-                "p",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: !_vm.preview,
-                      expression: "!preview"
-                    }
+      _c(
+        "div",
+        { staticClass: "post-card" },
+        [
+          _c("div", { staticClass: "close-post", attrs: { title: "閉じる" } }, [
+            _c("img", {
+              attrs: { src: __webpack_require__(/*! ../../../../public/icon/close.svg */ "./public/icon/close.svg") },
+              on: { click: _vm.close }
+            })
+          ]),
+          _vm._v(" "),
+          _c("h3", [_vm._v("新規投稿")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "post-container" }, [
+            _c("div", { staticClass: "post-image-area" }, [
+              _c("div", { staticClass: "image-input-field" }, [
+                _c("input", {
+                  attrs: {
+                    type: "file",
+                    accept: "image/bmp,image/jpeg,image/png,image/tiff"
+                  },
+                  on: { change: _vm.upload }
+                }),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.preview,
+                        expression: "!preview"
+                      }
+                    ]
+                  },
+                  [
+                    _c("img", {
+                      attrs: {
+                        src: __webpack_require__(/*! ../../../../public/icon/upload.svg */ "./public/icon/upload.svg")
+                      }
+                    }),
+                    _c("br"),
+                    _vm._v("\n            " + _vm._s(_vm.message))
                   ]
-                },
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.preview,
+                        expression: "preview"
+                      }
+                    ]
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "cancel-button",
+                        on: { click: _vm.imageCancel }
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "cancel",
+                          attrs: {
+                            src: __webpack_require__(/*! ../../../../public/icon/close.svg */ "./public/icon/close.svg")
+                          }
+                        })
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("img", {
+                  class: { "post-image": _vm.preview },
+                  attrs: { src: _vm.preview }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "post-comment-area" }, [
+              _c(
+                "div",
+                { staticClass: "post-comment" },
                 [
-                  _c("img", {
-                    attrs: {
-                      src: __webpack_require__(/*! ../../../../public/icon/upload.svg */ "./public/icon/upload.svg")
+                  _c("TextArea", {
+                    attrs: { placeholder: "コメントを追加" },
+                    model: {
+                      value: _vm.comment,
+                      callback: function($$v) {
+                        _vm.comment = $$v
+                      },
+                      expression: "comment"
                     }
-                  }),
-                  _c("br"),
-                  _vm._v("\n            " + _vm._s(_vm.message))
-                ]
+                  })
+                ],
+                1
               ),
               _vm._v(" "),
               _c(
                 "div",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.preview,
-                      expression: "preview"
-                    }
-                  ]
-                },
+                { staticClass: "post-button" },
                 [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "cancel-button",
-                      on: { click: _vm.imageCancel }
-                    },
-                    [
-                      _c("img", {
-                        staticClass: "cancel",
-                        attrs: {
-                          src: __webpack_require__(/*! ../../../../public/icon/close.svg */ "./public/icon/close.svg")
-                        }
-                      })
-                    ]
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("img", {
-                class: { "post-image": _vm.preview },
-                attrs: { src: _vm.preview }
-              })
+                  _c("SubmitButton", {
+                    attrs: { value: "投稿する" },
+                    on: { sendData: _vm.post }
+                  })
+                ],
+                1
+              )
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "post-comment-area" }, [
-            _c(
-              "div",
-              { staticClass: "post-comment" },
-              [
-                _c("TextArea", {
-                  attrs: { placeholder: "コメントを追加" },
-                  model: {
-                    value: _vm.comment,
-                    callback: function($$v) {
-                      _vm.comment = $$v
-                    },
-                    expression: "comment"
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "post-button" },
-              [
-                _c("SubmitButton", {
-                  attrs: { value: "投稿する" },
-                  on: { sendData: _vm.post }
-                })
-              ],
-              1
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
+          _c("Loader", {
             directives: [
               {
                 name: "show",
                 rawName: "v-show",
-                value: _vm.modal,
-                expression: "modal"
+                value: _vm.loading,
+                expression: "loading"
               }
             ]
-          },
-          [
-            _c(
-              "modal",
-              {
-                staticClass: "post-modal",
-                on: {
-                  close: function($event) {
-                    _vm.modal = !_vm.modal
-                  }
+          }),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.modal,
+                  expression: "modal"
                 }
-              },
-              [
-                _c("p", { attrs: { slot: "header" }, slot: "header" }, [
-                  _vm._v("投稿しました")
-                ]),
-                _vm._v(" "),
-                _c("div", { attrs: { slot: "body" }, slot: "body" }, [
-                  _c("img", {
-                    staticClass: "modal-image",
-                    attrs: { src: _vm.preview }
-                  })
-                ])
               ]
-            )
-          ],
-          1
-        )
-      ])
+            },
+            [
+              _c(
+                "modal",
+                {
+                  staticClass: "post-modal",
+                  on: {
+                    close: function($event) {
+                      _vm.modal = !_vm.modal
+                    }
+                  }
+                },
+                [
+                  _c("p", { attrs: { slot: "header" }, slot: "header" }, [
+                    _vm._v("投稿しました")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { attrs: { slot: "body" }, slot: "body" }, [
+                    _c("img", {
+                      staticClass: "modal-image",
+                      attrs: { src: _vm.preview }
+                    })
+                  ])
+                ]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
     ])
   ])
 }
@@ -38949,6 +38968,45 @@ var render = function() {
   })
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SheredParts/loader.vue?vue&type=template&id=324ae2ce&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SheredParts/loader.vue?vue&type=template&id=324ae2ce& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "Loader" }, [
+      _c("div", { staticClass: "modal-mask" }, [
+        _c("div", { staticClass: "loading" }, [
+          _c("img", {
+            attrs: { src: __webpack_require__(/*! ../../../../public/icon/ball-triangle.svg */ "./public/icon/ball-triangle.svg") }
+          })
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -56152,7 +56210,7 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/ball-triangle.svg?150f00f48925d7ca3cd49aa0827bb569";
+module.exports = "/images/ball-triangle.svg?4d6c821feb38ddf062e12fe22df26784";
 
 /***/ }),
 
@@ -56994,6 +57052,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TextArea_vue_vue_type_template_id_394f59f5___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TextArea_vue_vue_type_template_id_394f59f5___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/SheredParts/loader.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/SheredParts/loader.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _loader_vue_vue_type_template_id_324ae2ce___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./loader.vue?vue&type=template&id=324ae2ce& */ "./resources/js/components/SheredParts/loader.vue?vue&type=template&id=324ae2ce&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _loader_vue_vue_type_template_id_324ae2ce___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _loader_vue_vue_type_template_id_324ae2ce___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/SheredParts/loader.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/SheredParts/loader.vue?vue&type=template&id=324ae2ce&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/SheredParts/loader.vue?vue&type=template&id=324ae2ce& ***!
+  \***************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_loader_vue_vue_type_template_id_324ae2ce___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./loader.vue?vue&type=template&id=324ae2ce& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SheredParts/loader.vue?vue&type=template&id=324ae2ce&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_loader_vue_vue_type_template_id_324ae2ce___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_loader_vue_vue_type_template_id_324ae2ce___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
