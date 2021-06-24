@@ -67,11 +67,14 @@ textarea{
     resize: none;
     margin: 0;
     padding: 12px;
-    font-size: 14px;
-    border: 1px solid #20212465;
+    font-size: 15px;
+    border: none;
     color: rgb(49, 49, 49);
     font-family:'Segoe UI', Frutige, Dejavu, Sans, Helvetica, Neue, Arial, sans-serif;
     font-weight: 300;
+    user-select: text;
+    text-align: left;
+    outline: none;
 }
 
 ::-webkit-scrollbar {

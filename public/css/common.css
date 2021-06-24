@@ -139,7 +139,7 @@
 
 .post-comment{
     width: 100%;
-    height: 100%;
+    height: auto;
     position: relative;
     margin: 0 auto;
 }
@@ -174,7 +174,7 @@
 
 .post-button{
     text-align: right;
-    padding:16px  0;
+    padding:16px 0  16px  0;
 }
 .post-button .SubmitButton{
     padding: 0;
@@ -182,13 +182,10 @@
     height: 35px;
 }
 .TextArea{
-    width: 80%;
-    height: 40px;
-    border-bottom: solid 1px #20212465;
-    outline: none; 
-    user-select: text;
-    text-align: left;
+    width: 90%;
+    height: 10vh;
     border-radius: 5px;
+    border: 1px solid #20212465;
 }
 
 .TextArea:focus{
@@ -232,14 +229,15 @@
 .modal-wrapper {
     display: table-cell;
     vertical-align: middle;
-    
+    overflow: scroll;
+    padding: 0 40px;
 }
   
 .modal-container {
-    width: 40%;
+    width: 35%;
     margin: 0px auto;
     margin-top: 90px;
-    padding: 20px 30px;
+    padding: 10px;
     background-color: #fff;
     border-radius: 6px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
@@ -249,7 +247,7 @@
   
 .modal-body {
     width: auto;
-    margin: 20px 0;
+    margin: 10px 0;
 }
   
 .modal-default-button {
@@ -273,7 +271,10 @@
     opacity: 0
 }
 .modal-image{
-    width: 50%;
+    width: 90%;
+    height: 45vh;
+    border-radius: 5px;
+    object-fit: cover;
 }
 
 
@@ -290,7 +291,7 @@
     margin: 0 5px 18px 5px;
 }
 
-.show-image img{
+.show-image{
     border-radius: 2px;
     width: 100%;
     cursor: pointer;
@@ -306,21 +307,20 @@
     max-height: 90%;
 }
 .close-button{
-    width: 20px;
+    width: 0px;
     height: 20px;
-    text-align: right;
     z-index: 100;
-    margin: -20px -20px 0 0;
+    margin: 90px 10% 0 auto;
     cursor: pointer;
 
 }
 
 .detail-container{
     display: flex;
-    max-width: 65%;
-    height: 500px;
-    margin: 0px auto;
-    margin-top: 80px;
+    max-width: 935px;
+    width: 100%;
+    height: 100%;
+    margin: 16px auto 30px auto;
     background-color: #fff;
     border-radius: 6px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
@@ -332,56 +332,58 @@
     justify-content: space-between;
     width: 100%;
     height: 100%;
-   
+    
 }
-.detail-image{
-    width: auto;
-    height: auto;
+.detail-image-container{
+    width: 80%;
+    height: 80%;
 }
-.detail-image img{
+.detail-image {
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
-    width: 500px;
+    width: 100%;
     height: 100%;
+    object-fit: cover;
 }
 .detail{
     width: 45%;
     text-align: center;
     margin: 0 auto;
+    
 }
 .detail-comment{
     overflow-wrap: break-word;
-    width: 70%;
+    
+    width: 100%;
+    max-width: 240px;
     height: 50vh;
     overflow: scroll;
     text-align: left;
-    margin:0 60px;
+    margin: 10px auto;
 }
 .detail-comment::-webkit-scrollbar {
     width: 0px;
     height: 0px;
 }
-.user-stasus{
-    height: 20%;
-    border-bottom: 1px solid #bfbfbf;
+.post-user-status{
+    width: 100%;
+    height: 15%;
+    border-bottom: 1px solid #edecec;
 }
-@media screen and (max-width:1080px){
+
+/* @media screen and (max-width:1080px){
     .detail-body{
         width: 100%;
         height: 100%;
     }
-    .detail-image{
-        width: auto;
-        margin: 0 auto;
-    }
-    .detail-image img{
-        width: 37vw;
+    .detail-image {
+        width: 420px;
     }
     .detail-container{
-        height: 55%;
+        height: 65%;
         width: auto;
     }
     .detail-comment{
-       margin: 0 40px;
+        height: auto;
     }
-}
+} */
