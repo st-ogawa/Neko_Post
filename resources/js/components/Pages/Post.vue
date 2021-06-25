@@ -33,7 +33,7 @@
         <Loader v-show="loading"/>
         <div v-show="modal">
           <modal @close="modal = !modal" class="post-modal">
-            <p slot="header">投稿しました</p>
+            <h4 slot="header">投稿しました</h4>
             <div slot="body">
               <img :src="preview" class="modal-image">
             </div>
