@@ -2575,10 +2575,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     item: Object
-  }
+  },
+  data: function data() {
+    return {
+      comment: ''
+    };
+  },
+  methods: {}
 });
 
 /***/ }),
@@ -38629,7 +38636,7 @@ var render = function() {
                   }
                 },
                 [
-                  _c("p", { attrs: { slot: "header" }, slot: "header" }, [
+                  _c("h4", { attrs: { slot: "header" }, slot: "header" }, [
                     _vm._v("投稿しました")
                   ]),
                   _vm._v(" "),
@@ -39262,7 +39269,7 @@ var render = function() {
                   },
                   [
                     _c("img", {
-                      staticClass: "cancel",
+                      staticClass: "modal-close",
                       attrs: {
                         src: __webpack_require__(/*! ../../../../public/icon/close.svg */ "./public/icon/close.svg")
                       },
@@ -39319,66 +39326,88 @@ var render = function() {
     { staticClass: "PostDetails" },
     [
       _c("transition", { attrs: { name: "modal" } }, [
-        _c("div", { staticClass: "modal-mask" }, [
+        _c("div", { staticClass: "post-mask" }, [
           _c("div", { staticClass: "modal-wrapper" }, [
+            _c(
+              "div",
+              {
+                staticClass: "close-button",
+                attrs: { title: "閉じる" },
+                on: {
+                  click: function($event) {
+                    return _vm.$emit("close")
+                  }
+                }
+              },
+              [
+                _c(
+                  "svg",
+                  {
+                    attrs: {
+                      xmlns: "http://www.w3.org/2000/svg",
+                      width: "20",
+                      height: "20",
+                      viewBox: "0 0 20 20",
+                      fill: "none",
+                      stroke: "#fff",
+                      "stroke-width": "2",
+                      "stroke-linecap": "round",
+                      "stroke-linejoin": "bevel"
+                    }
+                  },
+                  [
+                    _c("line", {
+                      attrs: { x1: "18", y1: "1", x2: "1", y2: "18" }
+                    }),
+                    _vm._v(" "),
+                    _c("line", {
+                      attrs: { x1: "1", y1: "1", x2: "18", y2: "18" }
+                    })
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
             _c("div", { staticClass: "detail-container" }, [
               _c("div", { staticClass: "detail-body" }, [
-                _c("div", { staticClass: "detail-image" }, [
-                  _c("img", { attrs: { src: "" + _vm.item.image } })
+                _c("div", { staticClass: "detail-image-container" }, [
+                  _c("img", {
+                    staticClass: "detail-image",
+                    attrs: { src: "" + _vm.item.image }
+                  })
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "detail" }, [
-                  _c("div", { staticClass: "user-status" }),
+                  _c("div", { staticClass: "post-user-status" }),
                   _vm._v(" "),
                   _c("div", { staticClass: "detail-comment" }, [
-                    _vm._v(
-                      "\n                " +
-                        _vm._s(_vm.item.comment) +
-                        "\n              "
-                    )
+                    _vm._v(_vm._s(_vm.item.comment))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "post-comment" }, [
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.comment,
+                          expression: "comment"
+                        }
+                      ],
+                      attrs: { placeholder: "コメントを追加" },
+                      domProps: { value: _vm.comment },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.comment = $event.target.value
+                        }
+                      }
+                    })
                   ])
                 ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "close-button",
-                  attrs: { title: "閉じる" },
-                  on: {
-                    click: function($event) {
-                      return _vm.$emit("close")
-                    }
-                  }
-                },
-                [
-                  _c(
-                    "svg",
-                    {
-                      attrs: {
-                        xmlns: "http://www.w3.org/2000/svg",
-                        width: "20",
-                        height: "20",
-                        viewBox: "0 0 20 20",
-                        fill: "none",
-                        stroke: "#fff",
-                        "stroke-width": "2",
-                        "stroke-linecap": "round",
-                        "stroke-linejoin": "bevel"
-                      }
-                    },
-                    [
-                      _c("line", {
-                        attrs: { x1: "18", y1: "1", x2: "1", y2: "18" }
-                      }),
-                      _vm._v(" "),
-                      _c("line", {
-                        attrs: { x1: "1", y1: "1", x2: "18", y2: "18" }
-                      })
-                    ]
-                  )
-                ]
-              )
+              ])
             ])
           ])
         ])

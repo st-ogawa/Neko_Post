@@ -4,6 +4,7 @@
       <div class="container">
         <div class="content">
           <Loader v-show="loading"/>
+          <div v-infinite-scroll="handler"/>
           <div v-show="!loading" class="image-list">
             <PostList v-for="item in list" :key="item.id" :item="item"/>
           </div>
@@ -24,11 +25,17 @@ export default {
   data() {
     return {
     list: [],
+    perScroll: 20,
     loading: true,
     }
   },
   mounted(){
   this.getPostList();
+  },
+  computed:{
+    postList(){
+      return this.list.slice()
+    }
   },
   methods: {
     getPostList(){
@@ -39,7 +46,7 @@ export default {
       }).catch(err=>{
         console.log(err)
       })
-    }
+    },
   },
 }
 </script>
