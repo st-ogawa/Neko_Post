@@ -10,9 +10,10 @@ html, body{
     width: 100%;
     height: 100%;
     background: #e7e8e9;
-    overflow: auto;
     height: 100%;
+    overflow-y: auto;
 }
+
 @media screen and (max-width: 480px){
     html, body{
         width: 100vw;
@@ -77,17 +78,5 @@ textarea{
     outline: none;
 }
 
-::-webkit-scrollbar {
-    width: 14px;
-    height: 10px;
-}
-::-webkit-scrollbar-track {
-    border: 1px solid #20212465;
-    border: none; 
-  
-}
-::-webkit-scrollbar-thumb {
-    background:#ccc;
-    border-radius: 6px;
-}
+
 

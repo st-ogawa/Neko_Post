@@ -2,6 +2,7 @@
 
 #app{
     margin: 0 auto;
+    
 }
 
 
@@ -233,7 +234,7 @@
     padding: 0 40px;
     width: 100vw;
     height: 100vh;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 }
   
 .modal-container {
@@ -312,7 +313,6 @@
 }
 /* detail */
 .PostDetails{
-    overflow-y: auto;
     max-height: 90%;
 }
 .close-button{
@@ -326,13 +326,13 @@
 }
 
 .detail-container{
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     width: 100%;
     height:85%;
     max-width: 935px;
-    margin: 150px auto 30px auto;
+    margin: 200px auto 50px auto;
     background-color: #fff;
-    border-radius: 6px;
+    border-radius: 4px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
     transition: all 0.3s ease;
 }
@@ -347,25 +347,26 @@
     height: 100%;
 }
 .detail-image-container{
-    width: 54%;
+    width: 65%;
     height: 100%;
 }
 .detail-image {
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
     width: 100%;
-    height: 100%;
-    /* object-fit: cover; */
+    height: auto;
+    object-fit: cover;
 }
 .detail{
     width: 46%;
     text-align: center;
 }
 .detail-comment{
+    white-space: pre-wrap;
     overflow-wrap: break-word;
     width: 100%;
     max-width: 240px;
-    height: 50vh;
+    height: 60%;
     overflow: scroll;
     text-align: left;
     margin: 10px auto;
@@ -378,6 +379,16 @@
     width: 100%;
     height: 15%;
     border-bottom: 1px solid #edecec;
+}
+.post-mask{
+    background-color: rgba(0,0,0,.5);
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 100;
 }
 
 /* @media screen and (max-width:1080px){
