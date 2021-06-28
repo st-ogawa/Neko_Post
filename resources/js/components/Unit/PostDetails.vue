@@ -1,7 +1,7 @@
 <template>
   <div class="PostDetails">
     <transition name="modal">
-      <div class="modal-mask">
+      <div class="post-mask">
         <div class="modal-wrapper">
           <div class="close-button" @click="$emit('close')" title="閉じる">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="bevel">
@@ -16,9 +16,7 @@
               </div>
               <div class="detail">
                 <div class="post-user-status"></div>
-                <div class="detail-comment">
-                  {{item.comment}}
-                </div>
+                <div class="detail-comment">{{item.comment}}</div>
                 <div class="post-comment">
                   <textarea v-model="comment"  placeholder="コメントを追加"/>
                 </div>
@@ -42,5 +40,8 @@ export default {
       comment: '',
     }
   },
+  methods:{
+    
+  }
 }
 </script>
