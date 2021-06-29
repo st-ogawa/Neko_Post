@@ -4,9 +4,8 @@
       <div class="container">
         <div class="content">
           <Loader v-show="loading"/>
-          <div v-infinite-scroll="handler"/>
           <div v-show="!loading" class="image-list">
-            <PostList v-for="item in list" :key="item.id" :item="item"/>
+            <PostList v-for="item in items" :key="item.id" :item="item"/>
           </div>
         </div>
       </div>
@@ -24,26 +23,37 @@ export default {
   components: { PostList, Loader },
   data() {
     return {
-    list: [],
-    perScroll: 20,
-    loading: true,
+      items: [],
+      loading: true,
+      load:false,
+      page:1,
     }
   },
   mounted(){
-  this.getPostList();
-  },
-  computed:{
-    postList(){
-      return this.list.slice()
-    }
+    window.onscroll= () =>{
+      let scrollDownWindow = document.documentElement.scrollTop + window.innerHeight >= document;
+      if(scrollDownWindow)this.getPostList()
+    };
+    this.getPostList();
   },
   methods: {
+    
     getPostList(){
+      if(this.loading){
+        if(!this.load){
+           this.loading = false
+        }
+      }
       axios.get('http://127.0.0.1:8000/api/posts')
       .then(res=>{
-        this.list = res.data
-        this.loading = false
+        if(this.page == res.data.last_page)this.load = true
+        if(res.data.data){
+          this.items = res.data.data
+        }
+        this.page +=1
       }).catch(err=>{
+        this.load = true
+        this.loading = true
         console.log(err)
       })
     },
