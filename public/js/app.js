@@ -1961,21 +1961,43 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      list: [],
-      loading: true
+      items: [],
+      loading: true,
+      load: false,
+      page: 1
     };
   },
   mounted: function mounted() {
+    var _this = this;
+
+    window.onscroll = function () {
+      var scrollDownWindow = document.documentElement.scrollTop + window.innerHeight >= document;
+      if (scrollDownWindow) _this.getPostList();
+    };
+
     this.getPostList();
   },
   methods: {
     getPostList: function getPostList() {
-      var _this = this;
+      var _this2 = this;
+
+      if (this.loading) {
+        if (!this.load) {
+          this.loading = false;
+        }
+      }
 
       axios.get('http://127.0.0.1:8000/api/posts').then(function (res) {
-        _this.list = res.data;
-        _this.loading = false;
+        if (_this2.page == res.data.last_page) _this2.load = true;
+
+        if (res.data.data) {
+          _this2.items = res.data.data;
+        }
+
+        _this2.page += 1;
       })["catch"](function (err) {
+        _this2.load = true;
+        _this2.loading = true;
         console.log(err);
       });
     }
@@ -2081,12 +2103,10 @@ __webpack_require__.r(__webpack_exports__);
       postData.append("user_id", this.$store.getters.getUserId);
       axios.post('http://127.0.0.1:8000/api/posts', postData).then(function (res) {
         _this.modal = true;
-        _this.loading = false;
-        setTimeout(function () {
-          _this.preview = '';
-
-          _this.$router.push('/', function () {});
-        }, 2000);
+        _this.loading = false; // setTimeout(() => {
+        //   this.preview = ''
+        //   this.$router.push('/',()=>{})
+        // },2000);
       })["catch"](function (err) {
         console.log(err);
       });
@@ -38447,7 +38467,7 @@ var render = function() {
                 ],
                 staticClass: "image-list"
               },
-              _vm._l(_vm.list, function(item) {
+              _vm._l(_vm.items, function(item) {
                 return _c("PostList", { key: item.id, attrs: { item: item } })
               }),
               1

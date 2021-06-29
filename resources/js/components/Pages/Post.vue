@@ -79,10 +79,10 @@ export default {
       axios.post('http://127.0.0.1:8000/api/posts',postData).then((res) => {
         this.modal = true
         this.loading = false
-        setTimeout(() => {
-          this.preview = ''
-          this.$router.push('/',()=>{})
-        },2000);
+        // setTimeout(() => {
+        //   this.preview = ''
+        //   this.$router.push('/',()=>{})
+        // },2000);
       }).catch((err) => {
         console.log(err)
       });

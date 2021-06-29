@@ -19,6 +19,7 @@ export default {
       detail:false
     }
   },
+  
   methods: {
     postsDetail(){
       this.detail = true
