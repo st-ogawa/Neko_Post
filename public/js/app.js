@@ -1952,6 +1952,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1962,42 +1963,40 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       items: [],
-      loading: true,
+      loading: false,
       load: false,
-      page: 1
+      page: 0,
+      perPage: 30,
+      startScrollYOffset: 0
     };
   },
   mounted: function mounted() {
-    var _this = this;
-
-    window.onscroll = function () {
-      var scrollDownWindow = document.documentElement.scrollTop + window.innerHeight >= document;
-      if (scrollDownWindow) _this.getPostList();
-    };
-
+    this.startScrollYOffset = window.scrollTop;
     this.getPostList();
   },
   methods: {
-    getPostList: function getPostList() {
-      var _this2 = this;
+    handler: function handler(evt, el) {
+      console.log(window.offsetHeight);
 
-      if (this.loading) {
-        if (!this.load) {
-          this.loading = false;
-        }
+      if (window.pageYOffset >= this.startScrollYOffset && !this.load) {
+        this.startScrollYOffset = window.innerHeight + window.pageYOffset;
+        this.perPage += 30;
+        this.getPostList();
       }
+    },
+    getPostList: function getPostList() {
+      var _this = this;
 
-      axios.get('http://127.0.0.1:8000/api/posts').then(function (res) {
-        if (_this2.page == res.data.last_page) _this2.load = true;
-
-        if (res.data.data) {
-          _this2.items = res.data.data;
-        }
-
-        _this2.page += 1;
+      if (this.load) return;
+      this.load = true;
+      this.loading = true;
+      axios.get('http://127.0.0.1:8000/api/posts?page=' + this.page).then(function (res) {
+        _this.items = res.data.slice(_this.page, _this.perPage);
+        _this.loading = false;
+        _this.load = false;
       })["catch"](function (err) {
-        _this2.load = true;
-        _this2.loading = true;
+        _this.load = false;
+        _this.loading = false;
         console.log(err);
       });
     }
@@ -38456,21 +38455,24 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: !_vm.loading,
-                    expression: "!loading"
-                  }
-                ],
-                staticClass: "image-list"
-              },
-              _vm._l(_vm.items, function(item) {
-                return _c("PostList", { key: item.id, attrs: { item: item } })
-              }),
-              1
+              { staticClass: "image-list" },
+              [
+                _vm._l(_vm.items, function(item) {
+                  return _c("PostList", { key: item.id, attrs: { item: item } })
+                }),
+                _vm._v(" "),
+                _c("div", {
+                  directives: [
+                    {
+                      name: "infinite-scroll",
+                      rawName: "v-infinite-scroll",
+                      value: _vm.handler,
+                      expression: "handler"
+                    }
+                  ]
+                })
+              ],
+              2
             )
           ],
           1
@@ -56342,6 +56344,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
 /* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/index */ "./resources/js/store/index.js");
+/* harmony import */ var _scroll__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./scroll */ "./resources/js/scroll.js");
+
 
 
 
@@ -57692,6 +57696,32 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
     }]
   }]
 }));
+
+/***/ }),
+
+/***/ "./resources/js/scroll.js":
+/*!********************************!*\
+  !*** ./resources/js/scroll.js ***!
+  \********************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.directive('infinite-scroll', {
+  inserted: function inserted(el, binding) {
+    var f = function f(evt) {
+      if (binding.value(evt, el)) {
+        window.removeEventListener('scroll', f);
+      }
+    };
+
+    window.addEventListener('scroll', f);
+  }
+});
 
 /***/ }),
 

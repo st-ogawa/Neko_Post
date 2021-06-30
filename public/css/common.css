@@ -390,7 +390,10 @@
     top: 0;
     z-index: 100;
 }
-
+.post-mask::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+}
 /* @media screen and (max-width:1080px){
     .detail-body{
         width: 100%;
