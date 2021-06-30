@@ -17,7 +17,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-      return  Posts::latest()->paginate(21);
+      return  Posts::latest()->get();
     }
 
     /**
