@@ -4,8 +4,9 @@
       <div class="container">
         <div class="content">
           <Loader v-show="loading"/>
-          <div v-show="!loading" class="image-list">
+          <div  class="image-list">
             <PostList v-for="item in items" :key="item.id" :item="item"/>
+            <div v-infinite-scroll="handler"/>
           </div>
         </div>
       </div>
@@ -24,36 +25,42 @@ export default {
   data() {
     return {
       items: [],
-      loading: true,
+      loading: false,
       load:false,
-      page:1,
+      page:0,
+      perPage:30,
+      startScrollYOffset:0
     }
   },
   mounted(){
-    window.onscroll= () =>{
-      let scrollDownWindow = document.documentElement.scrollTop + window.innerHeight >= document;
-      if(scrollDownWindow)this.getPostList()
-    };
+    this.startScrollYOffset = window.scrollTop
     this.getPostList();
   },
+  
   methods: {
-    
-    getPostList(){
-      if(this.loading){
-        if(!this.load){
-           this.loading = false
-        }
+    handler(evt, el){
+      console.log(window.offsetHeight)
+      if(window.pageYOffset  >= this.startScrollYOffset&&!this.load){
+        this.startScrollYOffset = window.innerHeight + window.pageYOffset;
+        this.perPage +=30
+        this.getPostList();
       }
-      axios.get('http://127.0.0.1:8000/api/posts')
+    },
+    getPostList(){
+    
+      if(this.load)return
+      this.load = true
+      this.loading = true
+      
+      axios.get('http://127.0.0.1:8000/api/posts?page=' + this.page)
       .then(res=>{
-        if(this.page == res.data.last_page)this.load = true
-        if(res.data.data){
-          this.items = res.data.data
-        }
-        this.page +=1
+        
+        this.items = res.data.slice(this.page, this.perPage)
+        this.loading = false
+        this.load = false
       }).catch(err=>{
-        this.load = true
-        this.loading = true
+        this.load = false
+        this.loading = false
         console.log(err)
       })
     },
