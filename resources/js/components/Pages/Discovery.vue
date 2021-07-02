@@ -1,21 +1,20 @@
 <template>
   <div id="Discovery">
-    <main>
-      <div class="container">
-        <div class="content">
-          <Loader v-show="loading"/>
-          <div  class="image-list">
-            <PostList v-for="item in items" :key="item.id" :item="item"/>
-            <div v-infinite-scroll="handler"/>
-          </div>
+    <div class="container">
+      <div class="content">
+        <Loader v-show="loading"/>
+        <div  class="image-list">
+          <PostList v-for="item in items" :key="item.id" :item="item"/>
+          <div v-infinite-scroll="handler"/>
         </div>
       </div>
-    </main>
+    </div>
   </div>
 </template>
 
 <script>
 import Loader from '../SheredParts/loader.vue';
+
 import PostList from '../Unit/PostList.vue'
 
 
@@ -33,14 +32,18 @@ export default {
     }
   },
   mounted(){
-    this.startScrollYOffset = window.scrollTop
     this.getPostList();
   },
   
   methods: {
     handler(evt, el){
-      console.log(window.offsetHeight)
-      if(window.pageYOffset  >= this.startScrollYOffset&&!this.load){
+      let scrollHeight = Math.max(
+        document.body.scrollHeight, document.documentElement.scrollHeight,
+        document.body.offsetHeight, document.documentElement.offsetHeight,
+        document.body.clientHeight, document.documentElement.clientHeight)
+
+      let scrollBottom = scrollHeight - window.innerHeight
+      if(window.pageYOffset  >= scrollBottom && !this.load){
         this.startScrollYOffset = window.innerHeight + window.pageYOffset;
         this.perPage +=30
         this.getPostList();
@@ -54,7 +57,6 @@ export default {
       
       axios.get('http://127.0.0.1:8000/api/posts?page=' + this.page)
       .then(res=>{
-        
         this.items = res.data.slice(this.page, this.perPage)
         this.loading = false
         this.load = false

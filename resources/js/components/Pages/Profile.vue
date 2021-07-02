@@ -1,6 +1,5 @@
 <template>
   <div id="Profile">
-    <Header/>
     <div class="profile-card">
       <section class="user-status">
         <div class="profile-image">
@@ -32,9 +31,9 @@
 
 <script>
 import LinkTab from '../SheredParts/LinkTab.vue'
-import Header from '../Unit/Header'
+
 export default {
-  components:{ Header, LinkTab },
+  components:{ LinkTab },
   data() {
     return {
       currentId: 1,
