@@ -88,3 +88,9 @@
     width: 100%;
     cursor: pointer;
 }
+.modal-container{
+    width: 280px;
+}
+.modal-image{
+    height: 45vh;
+}

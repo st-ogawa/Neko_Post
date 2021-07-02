@@ -1951,8 +1951,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1971,14 +1969,14 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    this.startScrollYOffset = window.scrollTop;
     this.getPostList();
   },
   methods: {
     handler: function handler(evt, el) {
-      console.log(window.offsetHeight);
+      var scrollHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, document.body.offsetHeight, document.documentElement.offsetHeight, document.body.clientHeight, document.documentElement.clientHeight);
+      var scrollBottom = scrollHeight - window.innerHeight;
 
-      if (window.pageYOffset >= this.startScrollYOffset && !this.load) {
+      if (window.pageYOffset >= scrollBottom && !this.load) {
         this.startScrollYOffset = window.innerHeight + window.pageYOffset;
         this.perPage += 30;
         this.getPostList();
@@ -2152,7 +2150,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SheredParts_LinkTab_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../SheredParts/LinkTab.vue */ "./resources/js/components/SheredParts/LinkTab.vue");
-/* harmony import */ var _Unit_Header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Unit/Header */ "./resources/js/components/Unit/Header.vue");
 //
 //
 //
@@ -2184,12 +2181,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    Header: _Unit_Header__WEBPACK_IMPORTED_MODULE_1__["default"],
     LinkTab: _SheredParts_LinkTab_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
@@ -38436,48 +38430,46 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "Discovery" } }, [
-    _c("main", [
-      _c("div", { staticClass: "container" }, [
-        _c(
-          "div",
-          { staticClass: "content" },
-          [
-            _c("Loader", {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.loading,
-                  expression: "loading"
-                }
-              ]
-            }),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "image-list" },
-              [
-                _vm._l(_vm.items, function(item) {
-                  return _c("PostList", { key: item.id, attrs: { item: item } })
-                }),
-                _vm._v(" "),
-                _c("div", {
-                  directives: [
-                    {
-                      name: "infinite-scroll",
-                      rawName: "v-infinite-scroll",
-                      value: _vm.handler,
-                      expression: "handler"
-                    }
-                  ]
-                })
-              ],
-              2
-            )
-          ],
-          1
-        )
-      ])
+    _c("div", { staticClass: "container" }, [
+      _c(
+        "div",
+        { staticClass: "content" },
+        [
+          _c("Loader", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.loading,
+                expression: "loading"
+              }
+            ]
+          }),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "image-list" },
+            [
+              _vm._l(_vm.items, function(item) {
+                return _c("PostList", { key: item.id, attrs: { item: item } })
+              }),
+              _vm._v(" "),
+              _c("div", {
+                directives: [
+                  {
+                    name: "infinite-scroll",
+                    rawName: "v-infinite-scroll",
+                    value: _vm.handler,
+                    expression: "handler"
+                  }
+                ]
+              })
+            ],
+            2
+          )
+        ],
+        1
+      )
     ])
   ])
 }
@@ -38593,7 +38585,6 @@ var render = function() {
             _c("div", { staticClass: "post-comment-area" }, [
               _c(
                 "div",
-                { staticClass: "post-comment" },
                 [
                   _c("TextArea", {
                     attrs: { placeholder: "コメントを追加" },
@@ -38701,53 +38692,46 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { attrs: { id: "Profile" } },
-    [
-      _c("Header"),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "profile-card" },
-        [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("nav", [
-            _c(
-              "ul",
-              { staticClass: "switch-tab" },
-              _vm._l(_vm.list, function(item) {
-                return _c(
+  return _c("div", { attrs: { id: "Profile" } }, [
+    _c(
+      "div",
+      { staticClass: "profile-card" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("nav", [
+          _c(
+            "ul",
+            { staticClass: "switch-tab" },
+            _vm._l(_vm.list, function(item) {
+              return _c(
+                "LinkTab",
+                _vm._b(
+                  {
+                    key: item.id,
+                    model: {
+                      value: _vm.currentId,
+                      callback: function($$v) {
+                        _vm.currentId = $$v
+                      },
+                      expression: "currentId"
+                    }
+                  },
                   "LinkTab",
-                  _vm._b(
-                    {
-                      key: item.id,
-                      model: {
-                        value: _vm.currentId,
-                        callback: function($$v) {
-                          _vm.currentId = $$v
-                        },
-                        expression: "currentId"
-                      }
-                    },
-                    "LinkTab",
-                    item,
-                    false
-                  )
+                  item,
+                  false
                 )
-              }),
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _c("router-view")
-        ],
-        1
-      )
-    ],
-    1
-  )
+              )
+            }),
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _c("router-view")
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
