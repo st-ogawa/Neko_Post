@@ -2598,7 +2598,12 @@ __webpack_require__.r(__webpack_exports__);
       comment: ''
     };
   },
-  methods: {}
+  methods: {
+    closeDetails: function closeDetails() {
+      this.$emit('close');
+      this.$router.go(-1);
+    }
+  }
 });
 
 /***/ }),
@@ -38585,6 +38590,7 @@ var render = function() {
             _c("div", { staticClass: "post-comment-area" }, [
               _c(
                 "div",
+                { staticClass: "post-comment" },
                 [
                   _c("TextArea", {
                     attrs: { placeholder: "コメントを追加" },
@@ -39339,11 +39345,7 @@ var render = function() {
               {
                 staticClass: "close-button",
                 attrs: { title: "閉じる" },
-                on: {
-                  click: function($event) {
-                    return _vm.$emit("close")
-                  }
-                }
+                on: { click: _vm.closeDetails }
               },
               [
                 _c(
