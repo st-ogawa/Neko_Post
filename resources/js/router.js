@@ -17,7 +17,7 @@ export default new VueRouter({
     routes: [
         { path: '/', component: Discovery,
             children: [
-                { path: 'content', name: 'content', component: PostDetails } 
+                { path: 'content/:postId', name: 'content', component: PostDetails } 
             ]
         },
         { path: '/post', component: Post },
@@ -34,3 +34,5 @@ export default new VueRouter({
         },
     ]
 })
+// src="storage/images/1625537993.cat-2083492_1920.jpg"
+// src="storage/images/1625537993.cat-2083492_1920.jpg"
