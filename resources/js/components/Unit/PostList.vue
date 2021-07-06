@@ -12,18 +12,17 @@
 <script>
 export default {
   props:{
-    item:Object
+    item: Object
   },
   data() {
     return {
       detail:false
     }
   },
-  
   methods: {
     postsDetail(){
       this.detail = true
-      this.$router.push('content',()=>{})
+      this.$router.push({ name:'content', params:{postId:`${this.item.id}`}})
     }
   },
 }
