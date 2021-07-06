@@ -12,7 +12,7 @@
           <div class="detail-container">
             <div class="detail-body">
               <div class="detail-image-container">
-                <img :src="`${item.image}`" class="detail-image">
+                <img :src="'/'+item.image" class="detail-image">
               </div>
               <div class="detail">
                 <div class="post-user-status"></div>
