@@ -3,8 +3,11 @@
     <div class="container">
       <div class="content">
         <Loader v-show="loading"/>
+        <div v-show="detail">
+          <router-view :items="items" @close="detail = false"/>
+        </div>
         <div  class="image-list">
-          <PostList v-for="item in items" :key="item.id" :item="item"/>
+          <PostList v-for="item in items" :key="item.id" :item="item" @open="detail = true"/>
           <div v-infinite-scroll="handler"/>
         </div>
       </div>
@@ -28,7 +31,8 @@ export default {
       load:false,
       page:0,
       perPage:30,
-      startScrollYOffset:0
+      startScrollYOffset:0,
+      detail:false,
     }
   },
   mounted(){
