@@ -34,5 +34,3 @@ export default new VueRouter({
         },
     ]
 })
-// src="storage/images/1625537993.cat-2083492_1920.jpg"
-// src="storage/images/1625537993.cat-2083492_1920.jpg"

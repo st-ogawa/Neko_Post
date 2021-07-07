@@ -318,14 +318,13 @@
     width: 0px;
     height: 20px;
     position: absolute;
-    top: 85px;
+    top: 50px;
     right: 140px;
     cursor: pointer;
 
 }
 
-.detail-container{
-    /* overflow-y: scroll; */
+.detail-card{
     width: 100%;
     height:auto;
     max-width: 935px;

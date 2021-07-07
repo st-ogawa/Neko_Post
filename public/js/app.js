@@ -1951,6 +1951,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1965,7 +1968,8 @@ __webpack_require__.r(__webpack_exports__);
       load: false,
       page: 0,
       perPage: 30,
-      startScrollYOffset: 0
+      startScrollYOffset: 0,
+      detail: false
     };
   },
   mounted: function mounted() {
@@ -2591,17 +2595,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    item: Object
+    items: Array
   },
   data: function data() {
     return {
       comment: ''
     };
   },
+  mounted: function mounted() {
+    var postId = this.$route.params.postId;
+    var a = this.items.filter(function (item) {
+      console.log(item);
+    });
+    console.log(a);
+  },
   methods: {
     closeDetails: function closeDetails() {
       this.$emit('close');
       this.$router.go(-1);
+    },
+    postComment: function postComment() {
+      var comment = this.$route.params.comment;
+
+      if (comment === 'null') {
+        comment = '';
+      }
+
+      return comment;
     }
   }
 });
@@ -2625,22 +2645,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     item: Object
   },
-  data: function data() {
-    return {
-      detail: false
-    };
-  },
   methods: {
-    postsDetail: function postsDetail() {
-      this.detail = true;
-      this.$router.push('content', function () {});
+    postsDetail: function postsDetail(post_id) {
+      this.$emit('open');
+      this.$router.push({
+        name: 'content',
+        params: {
+          postId: "".concat(post_id)
+        }
+      });
     }
   }
 });
@@ -38453,10 +38470,43 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.detail,
+                  expression: "detail"
+                }
+              ]
+            },
+            [
+              _c("router-view", {
+                attrs: { items: _vm.items },
+                on: {
+                  close: function($event) {
+                    _vm.detail = false
+                  }
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
             { staticClass: "image-list" },
             [
               _vm._l(_vm.items, function(item) {
-                return _c("PostList", { key: item.id, attrs: { item: item } })
+                return _c("PostList", {
+                  key: item.id,
+                  attrs: { item: item },
+                  on: {
+                    open: function($event) {
+                      _vm.detail = true
+                    }
+                  }
+                })
               }),
               _vm._v(" "),
               _c("div", {
@@ -39376,12 +39426,12 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "detail-container" }, [
+            _c("div", { staticClass: "detail-card" }, [
               _c("div", { staticClass: "detail-body" }, [
                 _c("div", { staticClass: "detail-image-container" }, [
                   _c("img", {
                     staticClass: "detail-image",
-                    attrs: { src: "" + _vm.item.image }
+                    attrs: { src: "/" + _vm.$route.params.image }
                   })
                 ]),
                 _vm._v(" "),
@@ -39389,7 +39439,7 @@ var render = function() {
                   _c("div", { staticClass: "post-user-status" }),
                   _vm._v(" "),
                   _c("div", { staticClass: "detail-comment" }, [
-                    _vm._v(_vm._s(_vm.item.comment))
+                    _vm._v(_vm._s(_vm.postComment()))
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "post-comment" }, [
@@ -39450,34 +39500,13 @@ var render = function() {
     _c("div", { staticClass: "show-image" }, [
       _c("img", {
         attrs: { src: _vm.item.image },
-        on: { click: _vm.postsDetail }
+        on: {
+          click: function($event) {
+            return _vm.postsDetail(_vm.item.id)
+          }
+        }
       })
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.detail,
-            expression: "detail"
-          }
-        ]
-      },
-      [
-        _c("router-view", {
-          attrs: { item: _vm.item },
-          on: {
-            close: function($event) {
-              _vm.detail = false
-            }
-          }
-        })
-      ],
-      1
-    )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -57653,7 +57682,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
     path: '/',
     component: _components_Pages_Discovery__WEBPACK_IMPORTED_MODULE_2__["default"],
     children: [{
-      path: 'content',
+      path: 'content/:postId',
       name: 'content',
       component: _components_Unit_PostDetails__WEBPACK_IMPORTED_MODULE_9__["default"]
     }]
