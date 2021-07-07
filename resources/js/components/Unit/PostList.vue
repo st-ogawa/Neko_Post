@@ -1,28 +1,20 @@
 <template>
   <div class="PostList">
+    
     <div class="show-image">
-      <img :src="item.image" @click="postsDetail" >
-    </div>
-    <div v-show="detail">
-      <router-view :item="item" @close="detail = false"/>
+      <img :src="item.image" @click="postsDetail(item.id)" >
     </div>
   </div>
 </template>
-
 <script>
 export default {
   props:{
     item: Object
   },
-  data() {
-    return {
-      detail:false
-    }
-  },
   methods: {
-    postsDetail(){
-      this.detail = true
-      this.$router.push({ name:'content', params:{postId:`${this.item.id}`}})
+    postsDetail(post_id){
+      this.$emit('open')
+      this.$router.push({ name:'content', params:{postId:`${post_id}`}})
     }
   },
 }
