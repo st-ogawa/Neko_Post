@@ -9,14 +9,14 @@
               <line x1="1" y1="1" x2="18" y2="18"/>
             </svg>
           </div>
-          <div class="detail-container">
+          <div class="detail-card">
             <div class="detail-body">
               <div class="detail-image-container">
-                <img :src="'/'+item.image" class="detail-image">
+                <img :src="`/${$route.params.image}`" class="detail-image">
               </div>
               <div class="detail">
                 <div class="post-user-status"></div>
-                <div class="detail-comment">{{item.comment}}</div>
+                <div class="detail-comment">{{postComment()}}</div>
                 <div class="post-comment">
                   <textarea v-model="comment"  placeholder="コメントを追加"/>
                 </div>
@@ -32,7 +32,7 @@
 <script>
 export default {
   props:{
-    item:Object
+    items: Array
   }
   ,
   data() {
@@ -40,10 +40,25 @@ export default {
       comment: '',
     }
   },
+  mounted(){
+    let postId = this.$route.params.postId;
+     
+    let a = this.items.filter((item)=>{
+     console.log(item)
+    })
+    console.log(a)
+  },
   methods:{
     closeDetails(){
       this.$emit('close');
       this.$router.go(-1);
+    },
+    postComment(){
+      let comment = this.$route.params.comment
+      if(comment === 'null'){
+        comment = ''
+      }
+      return comment
     }
   }
 }
