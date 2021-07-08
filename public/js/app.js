@@ -2599,29 +2599,46 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      comment: ''
+      detail: [],
+      comment: '',
+      postId: ''
     };
   },
   mounted: function mounted() {
     var postId = this.$route.params.postId;
-    var a = this.items.filter(function (item) {
-      console.log(item);
+    var item = this.items.filter(function (item) {
+      if (postId == item.id) return true;
     });
-    console.log(a);
+    this.detail = item[0];
   },
   methods: {
     closeDetails: function closeDetails() {
-      this.$emit('close');
-      this.$router.go(-1);
-    },
-    postComment: function postComment() {
-      var comment = this.$route.params.comment;
+      // this.$emit('close');
+      // this.$router.go(-1);
+      var pre = parseInt(this.$route.params.postId) - 1;
+      var prev = this.items.filter(function (item) {
+        if (pre == item.id) return true;
+      });
 
-      if (comment === 'null') {
-        comment = '';
+      if (prev.length <= 0) {
+        this.$router.replace('/');
+        this.$emit('close');
       }
 
-      return comment;
+      this.detail = prev[0];
+      this.$router.push({
+        name: 'content',
+        params: {
+          postId: "".concat(pre)
+        }
+      });
+    },
+    detailComment: function detailComment() {
+      if (this.detail.comment == null) {
+        this.detail.comment = '';
+      }
+
+      return this.detail.comment;
     }
   }
 });
@@ -39389,85 +39406,89 @@ var render = function() {
     [
       _c("transition", { attrs: { name: "modal" } }, [
         _c("div", { staticClass: "post-mask" }, [
-          _c("div", { staticClass: "modal-wrapper" }, [
-            _c(
-              "div",
-              {
-                staticClass: "close-button",
-                attrs: { title: "閉じる" },
-                on: { click: _vm.closeDetails }
-              },
-              [
-                _c(
-                  "svg",
-                  {
-                    attrs: {
-                      xmlns: "http://www.w3.org/2000/svg",
-                      width: "20",
-                      height: "20",
-                      viewBox: "0 0 20 20",
-                      fill: "none",
-                      stroke: "#fff",
-                      "stroke-width": "2",
-                      "stroke-linecap": "round",
-                      "stroke-linejoin": "bevel"
-                    }
-                  },
-                  [
-                    _c("line", {
-                      attrs: { x1: "18", y1: "1", x2: "1", y2: "18" }
-                    }),
-                    _vm._v(" "),
-                    _c("line", {
-                      attrs: { x1: "1", y1: "1", x2: "18", y2: "18" }
+          _c(
+            "div",
+            { staticClass: "modal-wrapper", on: { click: _vm.closeDetails } },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "close-button",
+                  attrs: { title: "閉じる" },
+                  on: { click: _vm.closeDetails }
+                },
+                [
+                  _c(
+                    "svg",
+                    {
+                      attrs: {
+                        xmlns: "http://www.w3.org/2000/svg",
+                        width: "20",
+                        height: "20",
+                        viewBox: "0 0 20 20",
+                        fill: "none",
+                        stroke: "#fff",
+                        "stroke-width": "2",
+                        "stroke-linecap": "round",
+                        "stroke-linejoin": "bevel"
+                      }
+                    },
+                    [
+                      _c("line", {
+                        attrs: { x1: "18", y1: "1", x2: "1", y2: "18" }
+                      }),
+                      _vm._v(" "),
+                      _c("line", {
+                        attrs: { x1: "1", y1: "1", x2: "18", y2: "18" }
+                      })
+                    ]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "detail-card" }, [
+                _c("div", { staticClass: "detail-body" }, [
+                  _c("div", { staticClass: "detail-image-container" }, [
+                    _c("img", {
+                      staticClass: "detail-image",
+                      attrs: { src: "/" + _vm.detail.image }
                     })
-                  ]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "detail-card" }, [
-              _c("div", { staticClass: "detail-body" }, [
-                _c("div", { staticClass: "detail-image-container" }, [
-                  _c("img", {
-                    staticClass: "detail-image",
-                    attrs: { src: "/" + _vm.$route.params.image }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "detail" }, [
-                  _c("div", { staticClass: "post-user-status" }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "detail-comment" }, [
-                    _vm._v(_vm._s(_vm.postComment()))
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "post-comment" }, [
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.comment,
-                          expression: "comment"
-                        }
-                      ],
-                      attrs: { placeholder: "コメントを追加" },
-                      domProps: { value: _vm.comment },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
+                  _c("div", { staticClass: "detail" }, [
+                    _c("div", { staticClass: "post-user-status" }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "detail-comment" }, [
+                      _vm._v(_vm._s(_vm.detailComment()))
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "post-comment" }, [
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.comment,
+                            expression: "comment"
                           }
-                          _vm.comment = $event.target.value
+                        ],
+                        attrs: { placeholder: "コメントを追加" },
+                        domProps: { value: _vm.comment },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.comment = $event.target.value
+                          }
                         }
-                      }
-                    })
+                      })
+                    ])
                   ])
                 ])
               ])
-            ])
-          ])
+            ]
+          )
         ])
       ])
     ],
