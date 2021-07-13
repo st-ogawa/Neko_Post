@@ -60,52 +60,12 @@
     font-size: 17px;
 }
 
-.password{
-    background: url(../icon/lock.svg);
-    background-repeat: no-repeat;
-    background-size: 20px;
-    background-position: left 5px bottom 4px; 
-}
-.mail{
-    background-image: url(../icon/mail.svg);
-    background-repeat: no-repeat;
-    background-size: 20px;
-    background-position: left 5px bottom 4px ; 
-}
-.user-name{
-    background-image: url(../icon/user-circle.svg);
-    background-repeat: no-repeat;
-    background-size: 20px;
-    background-position: left 5px bottom 4px ; 
-}
-.unvisible{
-    background: url(../icon/eye-slash.svg);
-    background-repeat: no-repeat;
-    width: 23px;
-    height: 23px;
-    background-size: 20px;
-    margin: -24px 0 0 289px;
-    position: relative;
-}
-
-.visible{
-    background: url(../icon/eye.svg);
-    background-repeat: no-repeat;
-    width: 23px;
-    height: 23px;
-    background-size: 20px;
-    margin: -24px 0 0 289px;
-    position: relative;
-}
-
 .switch-tab{
     display: flex;
     margin: 0px 0px;
     height: 50px;
     position: relative;
 }
-
-
 
 .switch-tab li{
     

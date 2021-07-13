@@ -30,10 +30,14 @@
 }
 
 .link{
-    margin-left: 22px;
-    margin:13px 0 16px 22px;
+    font-size: 22px;
+    margin:23px 0 16px 25px;
 }
-
+.nav-img{
+    width: 120px;
+    height: 50px;
+    border-radius: 20px;
+}
 #discovery{
     background-color: #f5f3f3;
     width: 100%;
@@ -189,7 +193,7 @@
     outline: none;
 }
 .cancel-button{
-    width: 45px;
+    width: 38px;
     margin-right: -45px;
     background:#fff;
     z-index: 100;
@@ -198,13 +202,8 @@
     cursor: pointer;
 }
 .cancel{
-    width: 35px;
-    height: 35px;
-    z-index: 101;
-    margin-top: 5px;
+    margin-top: 3px;
 }
-
-
 /* modal */
 
 .modal-mask {
@@ -255,7 +254,6 @@
     border: none;
     outline: none;
     cursor: pointer;
-    margin: 0 0 -17px;
 }
   
 .modal-enter-active, .v-leave-active {
@@ -277,9 +275,7 @@
     border-radius: 5px;
     object-fit: cover;
 }
-.modal-close{
-    width: 26px;
-}
+
 @media screen and (max-width:1080px){
     .modal-container{
         width: 350px;
@@ -321,7 +317,6 @@
     top: 50px;
     right: 140px;
     cursor: pointer;
-
 }
 
 .detail-card{
