@@ -1,6 +1,6 @@
 <template>
   <div class="ErrorMessage">
-      <img src="../../../../public/icon/exclamation-mark.svg">
+      <i class="exclamation"/>
       <p>{{value}}</p>
     </div>
 </template>

@@ -3,19 +3,22 @@
     <div class="container">
       <div class="post-card">
         <div class="close-post" title="閉じる">
-            <img src="../../../../public/icon/close.svg" @click="close">
+            <i class="close-icon-b" @click="close"/>
         </div>
-        <h3>新規投稿</h3>
+        <h2 class="nf-font">新規投稿</h2>
         <div class="post-container">
           <div class="post-image-area">
             <div class="image-input-field">
               <input type="file" @change="upload"  accept="image/bmp,image/jpeg,image/png,image/tiff">
               <p v-show="!preview">
-                <img src="../../../../public/icon/upload.svg"><br/>
+                <i class="upload-icon"/><br/>
               {{message}}</p>
               <div v-show="preview">
                 <div class="cancel-button" @click="imageCancel">
-                  <img src="../../../../public/icon/close.svg" class="cancel" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#373737" stroke-width="2" stroke-linecap="round" stroke-linejoin="bevel" class="cancel">
+                    <line x1="18" y1="1" x2="1" y2="18"/>
+                    <line x1="1" y1="1" x2="18" y2="18"/>
+                  </svg>
                 </div>
               </div>
               <img :src="preview" :class="{'post-image':preview}">

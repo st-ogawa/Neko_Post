@@ -2066,6 +2066,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -2461,8 +2464,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -2593,6 +2594,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     items: Array
@@ -2612,26 +2615,50 @@ __webpack_require__.r(__webpack_exports__);
     this.detail = item[0];
   },
   methods: {
+    getItem: function getItem() {},
     closeDetails: function closeDetails() {
-      // this.$emit('close');
-      // this.$router.go(-1);
-      var pre = parseInt(this.$route.params.postId) - 1;
-      var prev = this.items.filter(function (item) {
-        if (pre == item.id) return true;
+      this.$emit('close');
+      this.$router.push('/', function () {});
+    },
+    prev: function prev() {
+      var postId = parseInt(this.$route.params.postId) + 1;
+      var item = this.items.filter(function (item) {
+        if (postId == item.id) return true;
       });
 
-      if (prev.length <= 0) {
-        this.$router.replace('/');
+      if (item.length <= 0) {
+        this.$router.push('/', function () {});
         this.$emit('close');
+      } else {
+        this.$router.push({
+          name: 'content',
+          params: {
+            postId: "".concat(postId)
+          }
+        });
       }
 
-      this.detail = prev[0];
-      this.$router.push({
-        name: 'content',
-        params: {
-          postId: "".concat(pre)
-        }
+      this.detail = item[0];
+    },
+    next: function next() {
+      var postId = parseInt(this.$route.params.postId) - 1;
+      var item = this.items.filter(function (item) {
+        if (postId == item.id) return true;
       });
+
+      if (item.length <= 0) {
+        this.$router.push('/');
+        this.$emit('close');
+      } else {
+        this.$router.push({
+          name: 'content',
+          params: {
+            postId: "".concat(postId)
+          }
+        });
+      }
+
+      this.detail = item[0];
     },
     detailComment: function detailComment() {
       if (this.detail.comment == null) {
@@ -38574,13 +38601,10 @@ var render = function() {
         { staticClass: "post-card" },
         [
           _c("div", { staticClass: "close-post", attrs: { title: "閉じる" } }, [
-            _c("img", {
-              attrs: { src: __webpack_require__(/*! ../../../../public/icon/close.svg */ "./public/icon/close.svg") },
-              on: { click: _vm.close }
-            })
+            _c("i", { staticClass: "close-icon-b", on: { click: _vm.close } })
           ]),
           _vm._v(" "),
-          _c("h3", [_vm._v("新規投稿")]),
+          _c("h2", { staticClass: "nf-font" }, [_vm._v("新規投稿")]),
           _vm._v(" "),
           _c("div", { staticClass: "post-container" }, [
             _c("div", { staticClass: "post-image-area" }, [
@@ -38606,11 +38630,7 @@ var render = function() {
                     ]
                   },
                   [
-                    _c("img", {
-                      attrs: {
-                        src: __webpack_require__(/*! ../../../../public/icon/upload.svg */ "./public/icon/upload.svg")
-                      }
-                    }),
+                    _c("i", { staticClass: "upload-icon" }),
                     _c("br"),
                     _vm._v("\n            " + _vm._s(_vm.message))
                   ]
@@ -38636,12 +38656,32 @@ var render = function() {
                         on: { click: _vm.imageCancel }
                       },
                       [
-                        _c("img", {
-                          staticClass: "cancel",
-                          attrs: {
-                            src: __webpack_require__(/*! ../../../../public/icon/close.svg */ "./public/icon/close.svg")
-                          }
-                        })
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "cancel",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              width: "24",
+                              height: "24",
+                              viewBox: "0 0 24 24",
+                              fill: "none",
+                              stroke: "#373737",
+                              "stroke-width": "2",
+                              "stroke-linecap": "round",
+                              "stroke-linejoin": "bevel"
+                            }
+                          },
+                          [
+                            _c("line", {
+                              attrs: { x1: "18", y1: "1", x2: "1", y2: "18" }
+                            }),
+                            _vm._v(" "),
+                            _c("line", {
+                              attrs: { x1: "1", y1: "1", x2: "18", y2: "18" }
+                            })
+                          ]
+                        )
                       ]
                     )
                   ]
@@ -38919,9 +38959,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "ErrorMessage" }, [
-    _c("img", {
-      attrs: { src: __webpack_require__(/*! ../../../../public/icon/exclamation-mark.svg */ "./public/icon/exclamation-mark.svg") }
-    }),
+    _c("i", { staticClass: "exclamation" }),
     _vm._v(" "),
     _c("p", [_vm._v(_vm._s(_vm.value))])
   ])
@@ -39140,37 +39178,26 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "Header" }, [
     _c("div", { staticClass: "header-navi" }, [
-      _vm._m(0),
+      _c("img", {
+        staticStyle: { height: "65px" },
+        attrs: { src: __webpack_require__(/*! ../../../../public/images/ねこぽすと.png */ "./public/images/ねこぽすと.png") }
+      }),
       _vm._v(" "),
       _c("nav", [
         _c("ul", { staticClass: "nav-link" }, [
           _c(
             "li",
-            { staticClass: "link" },
-            [
-              _c("router-link", { attrs: { to: "/post" } }, [
-                _c("img", {
-                  attrs: {
-                    src: __webpack_require__(/*! ../../../../public/icon/plus-circle.svg */ "./public/icon/plus-circle.svg"),
-                    title: "投稿"
-                  }
-                })
-              ])
-            ],
+            { staticClass: "link nf-font" },
+            [_c("router-link", { attrs: { to: "/" } }, [_vm._v("ホーム")])],
             1
           ),
           _vm._v(" "),
           _c(
             "li",
-            { staticClass: "link" },
+            { staticClass: "link nf-font" },
             [
-              _c("router-link", { attrs: { to: "/" } }, [
-                _c("img", {
-                  attrs: {
-                    src: __webpack_require__(/*! ../../../../public/icon/home.svg */ "./public/icon/home.svg"),
-                    title: "ホーム"
-                  }
-                })
+              _c("router-link", { attrs: { to: "/post" } }, [
+                _vm._v("投稿する")
               ])
             ],
             1
@@ -39180,18 +39207,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "logo-container" }, [
-      _c("img", {
-        attrs: { src: __webpack_require__(/*! ../../../../public/images/ねこぽすと.png */ "./public/images/ねこぽすと.png") }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -39347,11 +39363,8 @@ var render = function() {
                     }
                   },
                   [
-                    _c("img", {
-                      staticClass: "modal-close",
-                      attrs: {
-                        src: __webpack_require__(/*! ../../../../public/icon/close.svg */ "./public/icon/close.svg")
-                      },
+                    _c("i", {
+                      staticClass: "close-icon-b",
                       on: {
                         click: function($event) {
                           return _vm.$emit("close")
@@ -39405,11 +39418,11 @@ var render = function() {
     { staticClass: "PostDetails" },
     [
       _c("transition", { attrs: { name: "modal" } }, [
-        _c("div", { staticClass: "post-mask" }, [
-          _c(
-            "div",
-            { staticClass: "modal-wrapper", on: { click: _vm.closeDetails } },
-            [
+        _c(
+          "div",
+          { staticClass: "post-mask", on: { click: _vm.closeDetails } },
+          [
+            _c("div", { staticClass: "modal-wrapper" }, [
               _c(
                 "div",
                 {
@@ -39423,9 +39436,9 @@ var render = function() {
                     {
                       attrs: {
                         xmlns: "http://www.w3.org/2000/svg",
-                        width: "20",
-                        height: "20",
-                        viewBox: "0 0 20 20",
+                        width: "24",
+                        height: "24",
+                        viewBox: "0 0 24 24",
                         fill: "none",
                         stroke: "#fff",
                         "stroke-width": "2",
@@ -39486,10 +39499,14 @@ var render = function() {
                     ])
                   ])
                 ])
-              ])
-            ]
-          )
-        ])
+              ]),
+              _vm._v(" "),
+              _c("a", { staticClass: "leftPaginationArrow" }),
+              _vm._v(" "),
+              _c("a", { staticClass: "rightPaginationArrow" })
+            ])
+          ]
+        )
       ])
     ],
     1
@@ -56301,61 +56318,6 @@ module.exports = "/images/ball-triangle.svg?4d6c821feb38ddf062e12fe22df26784";
 
 /***/ }),
 
-/***/ "./public/icon/close.svg":
-/*!*******************************!*\
-  !*** ./public/icon/close.svg ***!
-  \*******************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/close.svg?3499bf1bf980460b9a5164dd9bff191f";
-
-/***/ }),
-
-/***/ "./public/icon/exclamation-mark.svg":
-/*!******************************************!*\
-  !*** ./public/icon/exclamation-mark.svg ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/exclamation-mark.svg?be7c49d225b3938cb96c47608839b558";
-
-/***/ }),
-
-/***/ "./public/icon/home.svg":
-/*!******************************!*\
-  !*** ./public/icon/home.svg ***!
-  \******************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/home.svg?7b45b214f12cf53a33b81cae5623e683";
-
-/***/ }),
-
-/***/ "./public/icon/plus-circle.svg":
-/*!*************************************!*\
-  !*** ./public/icon/plus-circle.svg ***!
-  \*************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/plus-circle.svg?106b36ea9731a09aa3b65678d2b97c4a";
-
-/***/ }),
-
-/***/ "./public/icon/upload.svg":
-/*!********************************!*\
-  !*** ./public/icon/upload.svg ***!
-  \********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/upload.svg?642378573f800d816cbb8b9f510f3680";
-
-/***/ }),
-
 /***/ "./public/images/ねこぽすと.png":
 /*!*********************************!*\
   !*** ./public/images/ねこぽすと.png ***!
@@ -56363,7 +56325,7 @@ module.exports = "/images/upload.svg?642378573f800d816cbb8b9f510f3680";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/ねこぽすと.png?0155e41a3b5b4b90b7be7d4eaa90bcd2";
+module.exports = "/images/ねこぽすと.png?40ded7493737634379173adb9a96abc2";
 
 /***/ }),
 
