@@ -2464,6 +2464,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -38604,7 +38606,11 @@ var render = function() {
             _c("i", { staticClass: "close-icon-b", on: { click: _vm.close } })
           ]),
           _vm._v(" "),
-          _c("h2", { staticClass: "nf-font" }, [_vm._v("新規投稿")]),
+          _c(
+            "h2",
+            { staticClass: "nf-font", staticStyle: { margin: "20px 0  0 0" } },
+            [_vm._v("新規投稿")]
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "post-container" }, [
             _c("div", { staticClass: "post-image-area" }, [
@@ -39178,10 +39184,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "Header" }, [
     _c("div", { staticClass: "header-navi" }, [
-      _c("img", {
-        staticStyle: { height: "65px" },
-        attrs: { src: __webpack_require__(/*! ../../../../public/images/ねこぽすと.png */ "./public/images/ねこぽすと.png") }
-      }),
+      _vm._m(0),
       _vm._v(" "),
       _c("nav", [
         _c("ul", { staticClass: "nav-link" }, [
@@ -39207,7 +39210,22 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "header-logo" }, [
+      _c("img", {
+        staticClass: "title-logo",
+        attrs: {
+          src: __webpack_require__(/*! ../../../../public/images/ねこぽすと.png */ "./public/images/ねこぽすと.png"),
+          alt: "ねこぽすと"
+        }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -39501,9 +39519,29 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("a", { staticClass: "leftPaginationArrow" }),
+              _c("img", {
+                attrs: {
+                  src: __webpack_require__(/*! ../../../../public/icon/arrow-left.svg */ "./public/icon/arrow-left.svg"),
+                  alt: "次へ"
+                },
+                on: {
+                  click: function($event) {
+                    return _vm.next()
+                  }
+                }
+              }),
               _vm._v(" "),
-              _c("a", { staticClass: "rightPaginationArrow" })
+              _c("img", {
+                attrs: {
+                  src: __webpack_require__(/*! ../../../../public/icon/arrow-right.svg */ "./public/icon/arrow-right.svg"),
+                  alt: "前へ"
+                },
+                on: {
+                  click: function($event) {
+                    return _vm.prev()
+                  }
+                }
+              })
             ])
           ]
         )
@@ -56304,6 +56342,28 @@ module.exports = function(module) {
 	return module;
 };
 
+
+/***/ }),
+
+/***/ "./public/icon/arrow-left.svg":
+/*!************************************!*\
+  !*** ./public/icon/arrow-left.svg ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/arrow-left.svg?140130aa047546595fa00d9b8c9d9280";
+
+/***/ }),
+
+/***/ "./public/icon/arrow-right.svg":
+/*!*************************************!*\
+  !*** ./public/icon/arrow-right.svg ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/arrow-right.svg?a5857c722aa3d9efca1906083ce1050f";
 
 /***/ }),
 

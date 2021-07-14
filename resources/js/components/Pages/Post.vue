@@ -5,7 +5,7 @@
         <div class="close-post" title="閉じる">
             <i class="close-icon-b" @click="close"/>
         </div>
-        <h2 class="nf-font">新規投稿</h2>
+        <h2 class="nf-font" style="margin:20px 0  0 0;">新規投稿</h2>
         <div class="post-container">
           <div class="post-image-area">
             <div class="image-input-field">

@@ -13,9 +13,13 @@
     top: 0;
     background-color: #fafafa;
     width: 100%;
-    border-bottom: 1px solid #dcdcdc
+    border-bottom: 1px solid #dcdcdc;
+    z-index: 1;
 }
-
+.header-logo{
+    flex: 1 9999 0%;
+    min-width: 40px;
+}
 .header-navi{
     padding: 0 20px;
     display: flex;
@@ -27,6 +31,8 @@
     padding: 0 0 0 24px;
     margin: 0px 0px;
     height:100%;
+    flex: 1 9999 0%;
+    min-width: 70px;
 }
 
 .link{
@@ -107,17 +113,19 @@
 
 .close-post{
     text-align: left;
-    padding: 20px 0 0 20px;
+    position: absolute;
+    top: 25%;
+    left: 21%;
 }
+
 .post-card{
     text-align: center;
     background:#fafafa;
     border-radius:16px;
-    width:60%;
-    padding-right: 15px;
+    width:57%;
     height: auto;
-    margin: 0 auto;
-    margin-top: 95px;
+    margin: 60px auto 0 auto ;
+    padding: 20px;
     
 }
 
@@ -185,6 +193,9 @@
     height: 10vh;
     border-radius: 5px;
     border: 1px solid #20212465;
+    font-size: 16px;
+    padding-inline-start: 5px;
+
 }
 
 .TextArea:focus{
@@ -193,7 +204,7 @@
     outline: none;
 }
 .cancel-button{
-    width: 38px;
+    width: 35px;
     margin-right: -45px;
     background:#fff;
     z-index: 100;
@@ -202,7 +213,7 @@
     cursor: pointer;
 }
 .cancel{
-    margin-top: 3px;
+    padding: 7px 0 0 5px;
 }
 /* modal */
 

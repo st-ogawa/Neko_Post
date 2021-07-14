@@ -1,3 +1,10 @@
+.title-logo{
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    height: 65px;
+}
+
 .close-icon-w{
     position: absolute;
     top: 50px;
@@ -13,20 +20,14 @@
     background: url('../icon/icon.png') -9px -136px;
 }
 .upload-icon{
+    position: absolute;
+    top: 40%;
+    right: 46%;
     width: 24px; height: 24px;
     background: url('../icon/icon.png') -51px -52px;
 }
-.rightPaginationArrow{
-    position: absolute;
-    width: 25px; height: 25px;
-    background: url('../icon/icon.png') -52px -9px;
-}
-.leftPaginationArrow{
-    position: absolute;
-    width: 25px; height: 25px;
-    background: url('../icon/icon.png') -9px -9px;
-}
 .exclamation{
+    position: absolute;
     width: 24px; height: 24px;
     background: url('../icon/icon.png') -9px -94px;
 }

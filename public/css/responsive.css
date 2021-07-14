@@ -21,7 +21,9 @@
     padding: 20px 20px 0 20px;
     margin: 0 auto;
 }
-
+.post-comment{
+    display: block;
+}
 .image-input-field{
     margin: 0 auto;
     width: 70%;
@@ -52,8 +54,8 @@
     margin-top: 2.5px;
 }
 .TextArea{
-    width: 63%;
-    height: 100%;
+    width: 74%;
+    margin: 0 auto;
     border-bottom: 1px solid #20212465;
 }
 .detail-container{
@@ -93,4 +95,14 @@
 }
 .modal-image{
     height: 45vh;
+}
+.link{
+    font-size: 17px;
+}
+.upload-icon{
+    top: 37%;
+}
+.close-post{
+    top: 28%;
+    left: 5%;
 }
