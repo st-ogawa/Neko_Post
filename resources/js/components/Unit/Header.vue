@@ -1,7 +1,9 @@
 <template>
   <div class="Header">
     <div class="header-navi">
-      <img src="../../../../public/images/ねこぽすと.png" style="height:65px;">
+      <div class="header-logo">
+        <img src="../../../../public/images/ねこぽすと.png" class="title-logo" alt="ねこぽすと">
+      </div>
       <nav>
         <ul class="nav-link">
           <li class="link nf-font"><router-link to="/">ホーム</router-link></li>
