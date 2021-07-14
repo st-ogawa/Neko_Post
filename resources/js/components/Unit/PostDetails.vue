@@ -23,8 +23,8 @@
               </div>
             </div>
           </div>
-          <a class="leftPaginationArrow"></a>
-          <a class="rightPaginationArrow"></a>
+          <img src="../../../../public/icon/arrow-left.svg" alt="次へ" @click="next()">
+          <img src="../../../../public/icon/arrow-right.svg" alt="前へ" @click="prev()">
         </div>
       </div>
     </transition>
