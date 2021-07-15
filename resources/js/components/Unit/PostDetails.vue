@@ -1,14 +1,14 @@
 <template>
   <div class="PostDetails">
     <transition name="modal">
-      <div class="post-mask"  @click="closeDetails">
+      <div class="post-mask" >
+        <div class="close-button" @click="closeDetails" title="閉じる">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="bevel">
+            <line x1="18" y1="1" x2="1" y2="18"/>
+            <line x1="1" y1="1" x2="18" y2="18"/>
+          </svg>
+        </div>
         <div class="modal-wrapper" >
-          <div class="close-button" @click="closeDetails" title="閉じる">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="bevel">
-              <line x1="18" y1="1" x2="1" y2="18"/>
-              <line x1="1" y1="1" x2="18" y2="18"/>
-            </svg>
-          </div>
           <div class="detail-card">
             <div class="detail-body">
               <div class="detail-image-container">
@@ -23,8 +23,12 @@
               </div>
             </div>
           </div>
-          <img src="../../../../public/icon/arrow-left.svg" alt="次へ" @click="next()">
-          <img src="../../../../public/icon/arrow-right.svg" alt="前へ" @click="prev()">
+        </div>
+        <div class="prevPaginationArrow " @click="prev()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="bevel"><path d="M15 18l-6-6 6-6"/></svg>
+        </div>
+        <div class="nextPaginationArrow" @click="next()" >
+          <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="bevel"><path d="M9 18l6-6-6-6"/></svg>
         </div>
       </div>
     </transition>
@@ -41,7 +45,7 @@ export default {
     return {
       detail:[],
       comment:'',
-      postId:''
+      postId:'',
     }
   },
   mounted(){
@@ -50,6 +54,7 @@ export default {
     let item = this.items.filter(function(item){
       if(postId == item.id)return true
     })
+     console.log(item)
     this.detail = item[0]
   },
  
@@ -66,23 +71,26 @@ export default {
       let item = this.items.filter((item)=>{
         if(postId == item.id)return true
       })
-      if(item.length <= 0){
-        this.$router.push('/',()=>{})
-        this.$emit('close');
+     
+      if(item.length === 0){
+        this.closeDetails();
       }
       else{
+        
         this.$router.push({ name:'content', params:{postId:`${postId}`}})
       }
+      
       this.detail = item[0]
+       
     },
     next(){
       let postId = parseInt(this.$route.params.postId) -1
       let item = this.items.filter((item)=>{
         if(postId == item.id)return true
       })
-      if(item.length <= 0){
-        this.$router.push('/')
-        this.$emit('close');
+      if(item.length < 1){
+        this.paginateArrow = false
+        this.closeDetails();
       }
       else{
         this.$router.push({ name:'content', params:{postId:`${postId}`}})

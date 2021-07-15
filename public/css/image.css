@@ -68,9 +68,15 @@
     width: 24px; height: 24px;
     background-position: left 5px bottom 4px ; 
 }
-/* .preview-cancel{
-    width: 35px;
-    height: 35px;
-    z-index: 101;
-    margin-top: 5px;
-} */
+.nextPaginationArrow{
+    cursor: pointer;
+    position: absolute;
+    top: 55%;
+    right: 7%;
+}
+.prevPaginationArrow{
+    cursor: pointer;
+    position: absolute;
+    top: 55%;
+    left: 7%;
+}

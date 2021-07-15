@@ -2,7 +2,6 @@
 
 #app{
     margin: 0 auto;
-    
 }
 
 
@@ -219,7 +218,7 @@
 
 .modal-mask {
     position: fixed;
-    z-index: 900;
+    z-index: 1;
     top: 0;
     left: 0;
     width: 100vw;
@@ -238,7 +237,6 @@
     padding: 0 40px;
     width: 100vw;
     height: 100vh;
-    /* overflow-y: scroll; */
 }
   
 .modal-container {
@@ -328,6 +326,7 @@
     top: 50px;
     right: 140px;
     cursor: pointer;
+    z-index: 2;
 }
 
 .detail-card{
@@ -404,7 +403,7 @@
     position: fixed;
     right: 0;
     top: 0;
-    z-index: 100;
+    z-index: 1;
 }
 .post-mask::-webkit-scrollbar{
     width: 0;
