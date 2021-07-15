@@ -13,3 +13,4 @@ Route::post('login', 'Api\AuthController@login');
 
 Route::apiResource('posts', 'Api\PostsController');
 
+Route::apiResource('comments', 'Api\CommentsController',['only'=>['store']]);
