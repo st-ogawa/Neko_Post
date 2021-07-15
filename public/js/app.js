@@ -2107,10 +2107,12 @@ __webpack_require__.r(__webpack_exports__);
       postData.append("user_id", this.$store.getters.getUserId);
       axios.post('http://127.0.0.1:8000/api/posts', postData).then(function (res) {
         _this.modal = true;
-        _this.loading = false; // setTimeout(() => {
-        //   this.preview = ''
-        //   this.$router.push('/',()=>{})
-        // },2000);
+        _this.loading = false;
+        setTimeout(function () {
+          _this.preview = '';
+
+          _this.$router.push('/', function () {});
+        }, 2000);
       })["catch"](function (err) {
         console.log(err);
       });
@@ -2598,6 +2600,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     items: Array
@@ -2614,6 +2620,7 @@ __webpack_require__.r(__webpack_exports__);
     var item = this.items.filter(function (item) {
       if (postId == item.id) return true;
     });
+    console.log(item);
     this.detail = item[0];
   },
   methods: {
@@ -2628,9 +2635,8 @@ __webpack_require__.r(__webpack_exports__);
         if (postId == item.id) return true;
       });
 
-      if (item.length <= 0) {
-        this.$router.push('/', function () {});
-        this.$emit('close');
+      if (item.length === 0) {
+        this.closeDetails();
       } else {
         this.$router.push({
           name: 'content',
@@ -2648,9 +2654,9 @@ __webpack_require__.r(__webpack_exports__);
         if (postId == item.id) return true;
       });
 
-      if (item.length <= 0) {
-        this.$router.push('/');
-        this.$emit('close');
+      if (item.length < 1) {
+        this.paginateArrow = false;
+        this.closeDetails();
       } else {
         this.$router.push({
           name: 'content',
@@ -39436,115 +39442,149 @@ var render = function() {
     { staticClass: "PostDetails" },
     [
       _c("transition", { attrs: { name: "modal" } }, [
-        _c(
-          "div",
-          { staticClass: "post-mask", on: { click: _vm.closeDetails } },
-          [
-            _c("div", { staticClass: "modal-wrapper" }, [
+        _c("div", { staticClass: "post-mask" }, [
+          _c(
+            "div",
+            {
+              staticClass: "close-button",
+              attrs: { title: "閉じる" },
+              on: { click: _vm.closeDetails }
+            },
+            [
               _c(
-                "div",
+                "svg",
                 {
-                  staticClass: "close-button",
-                  attrs: { title: "閉じる" },
-                  on: { click: _vm.closeDetails }
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    width: "24",
+                    height: "24",
+                    viewBox: "0 0 24 24",
+                    fill: "none",
+                    stroke: "#fff",
+                    "stroke-width": "2",
+                    "stroke-linecap": "round",
+                    "stroke-linejoin": "bevel"
+                  }
                 },
                 [
-                  _c(
-                    "svg",
-                    {
-                      attrs: {
-                        xmlns: "http://www.w3.org/2000/svg",
-                        width: "24",
-                        height: "24",
-                        viewBox: "0 0 24 24",
-                        fill: "none",
-                        stroke: "#fff",
-                        "stroke-width": "2",
-                        "stroke-linecap": "round",
-                        "stroke-linejoin": "bevel"
-                      }
-                    },
-                    [
-                      _c("line", {
-                        attrs: { x1: "18", y1: "1", x2: "1", y2: "18" }
-                      }),
-                      _vm._v(" "),
-                      _c("line", {
-                        attrs: { x1: "1", y1: "1", x2: "18", y2: "18" }
-                      })
-                    ]
-                  )
+                  _c("line", {
+                    attrs: { x1: "18", y1: "1", x2: "1", y2: "18" }
+                  }),
+                  _vm._v(" "),
+                  _c("line", {
+                    attrs: { x1: "1", y1: "1", x2: "18", y2: "18" }
+                  })
                 ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "detail-card" }, [
-                _c("div", { staticClass: "detail-body" }, [
-                  _c("div", { staticClass: "detail-image-container" }, [
-                    _c("img", {
-                      staticClass: "detail-image",
-                      attrs: { src: "/" + _vm.detail.image }
-                    })
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-wrapper" }, [
+            _c("div", { staticClass: "detail-card" }, [
+              _c("div", { staticClass: "detail-body" }, [
+                _c("div", { staticClass: "detail-image-container" }, [
+                  _c("img", {
+                    staticClass: "detail-image",
+                    attrs: { src: "/" + _vm.detail.image }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "detail" }, [
+                  _c("div", { staticClass: "post-user-status" }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "detail-comment" }, [
+                    _vm._v(_vm._s(_vm.detailComment()))
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "detail" }, [
-                    _c("div", { staticClass: "post-user-status" }),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "detail-comment" }, [
-                      _vm._v(_vm._s(_vm.detailComment()))
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "post-comment" }, [
-                      _c("textarea", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.comment,
-                            expression: "comment"
-                          }
-                        ],
-                        attrs: { placeholder: "コメントを追加" },
-                        domProps: { value: _vm.comment },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.comment = $event.target.value
-                          }
+                  _c("div", { staticClass: "post-comment" }, [
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.comment,
+                          expression: "comment"
                         }
-                      })
-                    ])
+                      ],
+                      attrs: { placeholder: "コメントを追加" },
+                      domProps: { value: _vm.comment },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.comment = $event.target.value
+                        }
+                      }
+                    })
                   ])
                 ])
-              ]),
-              _vm._v(" "),
-              _c("img", {
-                attrs: {
-                  src: __webpack_require__(/*! ../../../../public/icon/arrow-left.svg */ "./public/icon/arrow-left.svg"),
-                  alt: "次へ"
-                },
-                on: {
-                  click: function($event) {
-                    return _vm.next()
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("img", {
-                attrs: {
-                  src: __webpack_require__(/*! ../../../../public/icon/arrow-right.svg */ "./public/icon/arrow-right.svg"),
-                  alt: "前へ"
-                },
-                on: {
-                  click: function($event) {
-                    return _vm.prev()
-                  }
-                }
-              })
+              ])
             ])
-          ]
-        )
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "prevPaginationArrow ",
+              on: {
+                click: function($event) {
+                  return _vm.prev()
+                }
+              }
+            },
+            [
+              _c(
+                "svg",
+                {
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    width: "35",
+                    height: "35",
+                    viewBox: "0 0 24 24",
+                    fill: "none",
+                    stroke: "#ffffff",
+                    "stroke-width": "2",
+                    "stroke-linecap": "round",
+                    "stroke-linejoin": "bevel"
+                  }
+                },
+                [_c("path", { attrs: { d: "M15 18l-6-6 6-6" } })]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "nextPaginationArrow",
+              on: {
+                click: function($event) {
+                  return _vm.next()
+                }
+              }
+            },
+            [
+              _c(
+                "svg",
+                {
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    width: "35",
+                    height: "35",
+                    viewBox: "0 0 24 24",
+                    fill: "none",
+                    stroke: "#ffffff",
+                    "stroke-width": "2",
+                    "stroke-linecap": "round",
+                    "stroke-linejoin": "bevel"
+                  }
+                },
+                [_c("path", { attrs: { d: "M9 18l6-6-6-6" } })]
+              )
+            ]
+          )
+        ])
       ])
     ],
     1
@@ -56342,28 +56382,6 @@ module.exports = function(module) {
 	return module;
 };
 
-
-/***/ }),
-
-/***/ "./public/icon/arrow-left.svg":
-/*!************************************!*\
-  !*** ./public/icon/arrow-left.svg ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/arrow-left.svg?140130aa047546595fa00d9b8c9d9280";
-
-/***/ }),
-
-/***/ "./public/icon/arrow-right.svg":
-/*!*************************************!*\
-  !*** ./public/icon/arrow-right.svg ***!
-  \*************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/arrow-right.svg?a5857c722aa3d9efca1906083ce1050f";
 
 /***/ }),
 

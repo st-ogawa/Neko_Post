@@ -17,7 +17,9 @@ class PostsController extends Controller
      */
     public function index()
     {
-      return  Posts::latest()->get();
+        $posts = Posts::latest()->get();
+        $user = auth()->user();
+        dd($user);
     }
 
     /**
