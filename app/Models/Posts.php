@@ -27,7 +27,8 @@ class Posts extends Model
     {
         return $this->hasMany(Comments::class);
     }
-    public function postStore($user_id, $data){
+    public function postStore($user_id, $data)
+    {
         
         $file = $data['file'];
         $comment = $data['comment'];
@@ -49,8 +50,11 @@ class Posts extends Model
             return;
         }
     }
-
-    public function postDestroy($user_id, $post_id){
-        return $this->where('user_id', $user_id)->where('id', $post_id)->delete();
+    public function getPosts($post_id)
+    {
+        return $this->with('user')->where('id',$post_id)->first();
     }
+    // public function postDestroy($user_id, $post_id){
+    //     return $this->where('user_id', $user_id)->where('id', $post_id)->delete();
+    // }
 }

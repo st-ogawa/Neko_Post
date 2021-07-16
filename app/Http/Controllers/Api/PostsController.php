@@ -1,10 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Api;
+
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Posts;
+use App\Models\User;
+
+use App\Models\Comment;
+
 use Validator; 
 
 
@@ -18,8 +23,8 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Posts::latest()->get();
-        $user = auth()->user();
-        dd($user);
+        $user = User::where('id',1)->first();
+        return ['user' => $user, 'posts' => $posts];
     }
 
     /**
@@ -60,8 +65,11 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($post_id)
+    {  
+        $posts = new Posts();
+        $post = $posts->with('user')->where('id',$post_id)->first();
+        
     }
 
     /**
