@@ -19,6 +19,7 @@
                 <div class="detail-comment">{{detailComment()}}</div>
                 <div class="post-comment">
                   <textarea v-model="comment"  placeholder="コメントを追加"/>
+                  <div @click="submitComment"></div>
                 </div>
               </div>
             </div>
@@ -54,7 +55,6 @@ export default {
     let item = this.items.filter(function(item){
       if(postId == item.id)return true
     })
-     console.log(item)
     this.detail = item[0]
   },
  
@@ -103,6 +103,9 @@ export default {
       }
       return this.detail.comment
     },
+    submitComment(){
+      axios.post('http://127.0.0.1:8000/api/comments',this.comments)
+    }
     
   }
 }
