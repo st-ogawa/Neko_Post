@@ -15,7 +15,6 @@ class UsersTableSeeder extends Seeder
             'name'=> 'のらねこ',
             'email'=> 'nekopost@email.com',
             'password'=> 'nekoneko',
-            'user_image'=>'storage\app\public\images\1625105476.gray_cat.jpg'
         ];
 
         DB::table('users')->insert($param);

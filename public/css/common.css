@@ -206,7 +206,7 @@
     width: 35px;
     margin-right: -45px;
     background:#fff;
-    z-index: 100;
+    z-index: 1;
     border-radius: 50%;
     position: relative;
     cursor: pointer;
@@ -371,19 +371,18 @@
     overflow-wrap: break-word;
     width: 100%;
     max-width: 260px;
-    height: 60%;
+    min-width: 0;
     overflow: scroll;
     text-align: left;
     margin: 10px auto;
 }
 .post-comment{
-    align-items: center;
     display: flex;
-    flex-direction: row;
-    flex-grow: 1;
     position: relative;
     margin-top: 8px;
-    padding: 0 16px;
+    padding: 0 11px;
+    font-size: 16px;
+    border-top: 1px solid #edecec;
 }
 
 .detail-comment::-webkit-scrollbar {
