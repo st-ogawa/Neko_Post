@@ -67,9 +67,11 @@ class PostsController extends Controller
      */
     public function show($post_id)
     {  
-        $posts = new Posts();
-        $post = $posts->with('user')->where('id',$post_id)->first();
         
+        $posts = Posts::with('user')->where('id',$post_id)->first();
+        $comment = Comment::with('user')->where('post_id',$post_id)->get();
+
+        return ['posts' => $posts, 'comment' => $comment];
     }
 
     /**

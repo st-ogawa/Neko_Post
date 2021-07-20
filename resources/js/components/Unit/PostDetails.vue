@@ -12,15 +12,16 @@
           <div class="detail-card">
             <div class="detail-body">
               <div class="detail-image-container">
-                <img :src="`/${detail.image}`" class="detail-image">
+                <img :src="`/${detail.posts.image}`" class="detail-image">
               </div>
               <div class="detail">
                 <div class="post-user-status"></div>
                 <div class="detail-comment">{{detailComment()}}</div>
                 <div class="post-comment">
                   <textarea v-model="comment"  placeholder="コメントを追加"/>
-                  <div @click="submitComment"></div>
+                  <button @click="submitComment">送信</button>
                 </div>
+                
               </div>
             </div>
           </div>
@@ -38,10 +39,10 @@
 
 <script>
 export default {
-  props:{
-    items: Array
-  }
-  ,
+  // props:{
+  //   items: Array
+  // }
+  // ,
   data() {
     return {
       detail:[],
@@ -49,18 +50,20 @@ export default {
       postId:'',
     }
   },
-  mounted(){
-    
-    let postId = this.$route.params.postId;
-    let item = this.items.filter(function(item){
-      if(postId == item.id)return true
-    })
-    this.detail = item[0]
+  created(){
+    let post_id = this.$route.params.postId;
+    this.getItem(post_id);
   },
  
   methods:{
-    getItem(){
-
+    getItem(post_id){
+      
+      axios.get('http://127.0.0.1:8000/api/posts/' + post_id)
+      .then((res) => {
+        this.detail = res.data
+      }).catch((err) => {
+        console.log(err)
+      });
     },
     closeDetails(){
       this.$emit('close');
@@ -98,13 +101,13 @@ export default {
       this.detail = item[0]
     },
     detailComment(){
-      if(this.detail.comment == null){
-        this.detail.comment = ''
+      if(this.detail.posts.comment == null){
+        this.detail.posts.comment = ''
       }
-      return this.detail.comment
+      return this.detail.posts.comment
     },
     submitComment(){
-      axios.post('http://127.0.0.1:8000/api/comments',this.comments)
+      axios.post('http://127.0.0.1:8000/api/comments',this.comment)
     }
     
   }

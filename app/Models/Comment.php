@@ -25,8 +25,4 @@ class Comment extends Model
     //     $this->save();
     //     return;
     // }
-    public function getComments(Int $post_id)
-    {
-        return  $this->with('user')->where('post_id',$post_id)->get();
-    }
 }

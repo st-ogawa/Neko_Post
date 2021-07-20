@@ -50,10 +50,6 @@ class Posts extends Model
             return;
         }
     }
-    public function getPosts($post_id)
-    {
-        return $this->with('user')->where('id',$post_id)->first();
-    }
     // public function postDestroy($user_id, $post_id){
     //     return $this->where('user_id', $user_id)->where('id', $post_id)->delete();
     // }
