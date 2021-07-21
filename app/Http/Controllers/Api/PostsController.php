@@ -22,9 +22,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Posts::latest()->get();
-        $user = User::where('id',1)->first();
-        return ['user' => $user, 'posts' => $posts];
+        $posts = Posts::with('user')->latest()->get();
+        return ['posts' => $posts];
     }
 
     /**
@@ -67,11 +66,8 @@ class PostsController extends Controller
      */
     public function show($post_id)
     {  
-        
-        $posts = Posts::with('user')->where('id',$post_id)->first();
         $comment = Comment::with('user')->where('post_id',$post_id)->get();
-
-        return ['posts' => $posts, 'comment' => $comment];
+        return ['comment' => $comment];
     }
 
     /**
