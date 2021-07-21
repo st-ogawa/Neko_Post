@@ -1993,7 +1993,7 @@ __webpack_require__.r(__webpack_exports__);
       this.load = true;
       this.loading = true;
       axios.get('http://127.0.0.1:8000/api/posts?page=' + this.page).then(function (res) {
-        _this.items = res.data.slice(_this.page, _this.perPage);
+        _this.items = res.data.posts.slice(_this.page, _this.perPage);
         _this.loading = false;
         _this.load = false;
       })["catch"](function (err) {
@@ -2604,6 +2604,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     items: Array
@@ -2611,31 +2614,37 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       detail: [],
-      comment: '',
-      postId: ''
+      inputComment: ''
     };
   },
-  mounted: function mounted() {
+  created: function created() {
     var postId = this.$route.params.postId;
-    var item = this.items.filter(function (item) {
-      if (postId == item.id) return true;
-    });
-    console.log(item);
-    this.detail = item[0];
+    this.getPosts(postId);
+    this.getComment(postId);
   },
   methods: {
-    getItem: function getItem() {},
+    getPosts: function getPosts(postId) {
+      var item = this.items.filter(function (item) {
+        if (postId == item.id) return true;
+      });
+      this.detail = item[0];
+    },
+    getComment: function getComment(postId) {
+      axios.get('http://127.0.0.1:8000/api/posts/' + postId).then(function (res) {
+        console.log(res.data.comment);
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
     closeDetails: function closeDetails() {
       this.$emit('close');
       this.$router.push('/', function () {});
     },
     prev: function prev() {
       var postId = parseInt(this.$route.params.postId) + 1;
-      var item = this.items.filter(function (item) {
-        if (postId == item.id) return true;
-      });
+      this.getPosts(postId);
 
-      if (item.length === 0) {
+      if (this.detail === undefined) {
         this.closeDetails();
       } else {
         this.$router.push({
@@ -2645,17 +2654,12 @@ __webpack_require__.r(__webpack_exports__);
           }
         });
       }
-
-      this.detail = item[0];
     },
     next: function next() {
       var postId = parseInt(this.$route.params.postId) - 1;
-      var item = this.items.filter(function (item) {
-        if (postId == item.id) return true;
-      });
+      this.getPosts(postId);
 
-      if (item.length < 1) {
-        this.paginateArrow = false;
+      if (this.detail === undefined) {
         this.closeDetails();
       } else {
         this.$router.push({
@@ -2665,8 +2669,6 @@ __webpack_require__.r(__webpack_exports__);
           }
         });
       }
-
-      this.detail = item[0];
     },
     detailComment: function detailComment() {
       if (this.detail.comment == null) {
@@ -2674,6 +2676,14 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return this.detail.comment;
+    },
+    submitComment: function submitComment() {
+      var data = {
+        post_id: this.detail.id,
+        user_id: this.detail.user_id,
+        comment: this.inputComment
+      };
+      axios.post('http://127.0.0.1:8000/api/comments', data);
     }
   }
 });
@@ -39489,36 +39499,49 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "detail" }, [
-                  _c("div", { staticClass: "post-user-status" }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "detail-comment" }, [
-                    _vm._v(_vm._s(_vm.detailComment()))
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "post-comment" }, [
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.comment,
-                          expression: "comment"
-                        }
-                      ],
-                      attrs: { placeholder: "コメントを追加" },
-                      domProps: { value: _vm.comment },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
+                _c(
+                  "div",
+                  { staticClass: "detail" },
+                  [
+                    _c("div", { staticClass: "post-user-status" }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "detail-comment" }, [
+                      _vm._v(_vm._s(_vm.detailComment()))
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.items, function(item, index) {
+                      return _c("ul", { key: index })
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "input-field" }, [
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.inputComment,
+                            expression: "inputComment"
                           }
-                          _vm.comment = $event.target.value
+                        ],
+                        attrs: { placeholder: "コメントを追加" },
+                        domProps: { value: _vm.inputComment },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.inputComment = $event.target.value
+                          }
                         }
-                      }
-                    })
-                  ])
-                ])
+                      }),
+                      _vm._v(" "),
+                      _c("button", { on: { click: _vm.submitComment } }, [
+                        _vm._v("送信")
+                      ])
+                    ])
+                  ],
+                  2
+                )
               ])
             ])
           ]),
