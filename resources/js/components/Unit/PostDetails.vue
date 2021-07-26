@@ -17,8 +17,11 @@
               <div class="detail">
                 <div class="post-user-status"></div>
                 <div class="detail-comment">{{detailComment()}}</div>
+                <ul>
+                  <li  v-for="a of postComment" :key="a.id">{{a.comment}}</li>
+                </ul>
                 <div class="input-field">
-                  <textarea v-model="inputComment"  placeholder="コメントを追加"/>
+                  <textarea v-model="inputComment"  placeholder="コメントを追加" @keydown.enter="submitComment"/>
                   <button @click="submitComment">送信</button>
                 </div>
               </div>
@@ -45,29 +48,28 @@ export default {
     return {
       detail:[],
       inputComment:'',
+      postComment:'',
     }
   },
   created(){
     let postId = this.$route.params.postId;
     this.getPosts(postId);
-    this.getComment(postId);
   },
  
   methods:{
-    getPosts(postId){
+    async getPosts(postId){
       let item = this.items.filter((item)=>{
         if(postId == item.id)return true
       })
-       this.detail = item[0]
-    },
-    getComment(postId){
-      axios.get('http://127.0.0.1:8000/api/posts/' + postId)
-      .then((res) => {
-        console.log(res.data.comment)
-      }).catch((err) => {
+      this.detail = item[0]
+
+      const res = await axios.get('http://127.0.0.1:8000/api/posts/' + postId)
+      .catch(err=>{
         console.log(err)
-      });
+      })
+      this.postComment = res.data
     },
+
     closeDetails(){
       this.$emit('close');
       this.$router.push('/',()=>{});
@@ -80,6 +82,7 @@ export default {
         this.closeDetails();
       }
       else{
+        
         this.$router.push({ name:'content', params:{postId:`${postId}`}})
       }
     },
@@ -103,6 +106,9 @@ export default {
     submitComment(){
       const data = { post_id: this.detail.id, user_id: this.detail.user_id, comment: this.inputComment }
       axios.post('http://127.0.0.1:8000/api/comments', data)
+      .then(res=>{
+        this.getPosts(this.detail.id);
+      })
     }
   }
 }

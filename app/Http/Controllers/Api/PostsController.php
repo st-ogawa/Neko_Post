@@ -67,7 +67,7 @@ class PostsController extends Controller
     public function show($post_id)
     {  
         $comment = Comment::with('user')->where('post_id',$post_id)->get();
-        return ['comment' => $comment];
+        return $comment;
     }
 
     /**

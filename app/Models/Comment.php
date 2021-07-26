@@ -18,8 +18,8 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function commentStore($data){
-        // $this->user_id = $user_id;
+    public function commentStore($data, $user_id){
+        $this->user_id = $user_id;
         $this->post_id = $data['post_id'];
         $this->comment = $data['comment'];
         $this->save();

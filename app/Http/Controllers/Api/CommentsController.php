@@ -20,16 +20,15 @@ class CommentsController extends Controller
      */
     public function store(Request $request, Comment $comment)
     {
-         $user = User::all();
-         dd();
+        $user_id = request()->input('user_id');
         $data = request()->all();
         $validator = Validator::make($data, [
             'post_id' =>['required', 'integer'],
-            'text'     => ['required', 'string']
+            'comment'     => ['required', 'string']
         ]);
 
         $validator->validate();
-        $comment->commentStore($data);
+        $comment->commentStore($data, $user_id);
     }
 
     /**
