@@ -364,17 +364,20 @@
 }
 .detail{
     width: 46%;
+    display: flex;
+    flex-direction: column;
     text-align: center;
 }
 .detail-comment{
     white-space: pre-wrap;
     overflow-wrap: break-word;
     width: 100%;
-    max-width: 260px;
+    max-width: 270px;
     min-width: 0;
     overflow: scroll;
     text-align: left;
     margin: 10px auto;
+    flex-shrink: 1;
 }
 .input-field{
     display: flex;
