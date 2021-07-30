@@ -10,15 +10,20 @@
         </div>
         <div class="modal-wrapper">
           <div class="detail-card">
+            <Loader v-show="loading"/>
             <div class="detail-body">
               <div class="detail-image-container">
                 <img :src="`/${detail.image}`" class="detail-image">
               </div>
               <div class="detail">
                 <div class="post-user-status"></div>
-                <div class="detail-comment">{{detailComment()}}</div>
-                <ul>
-                  <li  v-for="a of postComment" :key="a.id">{{a.comment}}</li>
+                <ul class="detail-comment">
+                  <div class="comment-list">
+                    <li><span class="detail-comment">{{detailComment()}}</span></li> 
+                    <li  v-for="item of postComment" :key="item.id">
+                      <span>{{item.comment}}</span>
+                    </li>
+                  </div>
                 </ul>
                 <div class="input-field">
                   <textarea v-model="inputComment"  placeholder="コメントを追加" @keydown.enter="submitComment"/>
@@ -40,15 +45,17 @@
 </template>
 
 <script>
+import Loader from '../SheredParts/loader.vue';
+
 export default {
-  props:{
-    items: Array
-  },
+  components: { Loader },
+ 
   data() {
     return {
       detail:[],
       inputComment:'',
       postComment:'',
+      loading:false,
     }
   },
   created(){
@@ -58,16 +65,23 @@ export default {
  
   methods:{
     async getPosts(postId){
-      let item = this.items.filter((item)=>{
-        if(postId == item.id)return true
-      })
-      this.detail = item[0]
+
+      this.loading = true
 
       const res = await axios.get('http://127.0.0.1:8000/api/posts/' + postId)
       .catch(err=>{
         console.log(err)
       })
-      this.postComment = res.data
+     
+      this.postComment =  res.data.comment
+      this.detail =  res.data.posts
+
+      if(this.detail === null){
+        this.loading = false
+        this.closeDetails();
+      }  
+
+      this.loading = false
     },
 
     closeDetails(){
@@ -76,26 +90,13 @@ export default {
     },
     prev(){
       let postId = parseInt(this.$route.params.postId) +1
-      this.getPosts(postId)
-     
-      if(this.detail === undefined){
-        this.closeDetails();
-      }
-      else{
-        
-        this.$router.push({ name:'content', params:{postId:`${postId}`}})
-      }
+      this.getPosts(postId);
+      this.$router.push({ name:'content', params:{postId:`${postId}`}})
     },
     next(){
       let postId = parseInt(this.$route.params.postId) -1
       this.getPosts(postId)
-     
-      if(this.detail === undefined){
-        this.closeDetails();
-      }
-      else{
-        this.$router.push({ name:'content', params:{postId:`${postId}`}})
-      }
+      this.$router.push({ name:'content', params:{postId:`${postId}`}})  
     },
     detailComment(){
       if(this.detail.comment == null){
@@ -108,8 +109,8 @@ export default {
       axios.post('http://127.0.0.1:8000/api/comments', data)
       .then(res=>{
         this.getPosts(this.detail.id);
-      })
-    }
+      }) 
+    },
   }
 }
 </script>
