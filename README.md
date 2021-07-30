@@ -1,12 +1,13 @@
 # ねこぽすと
 
+##　アプリ概要
 
-猫写真投稿アプリ<br/>
+写真の投稿閲覧ができるアプリです。<br/>
 
 　
 ***
 
-## Dependency
+## 技術要件
 
 ```
 laravel: 6.*
@@ -16,9 +17,12 @@ axios: 0.19
 vue: 2.*
 vuex : 3.6.2
 vue-router :3.5.1
+intervention/image": 2.5,
 ```
 
 
-## License
 
-[MIT](/LICENSE)
+
+
+
+
