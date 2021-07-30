@@ -65,9 +65,10 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($post_id)
-    {  
+    {   
+        $posts = Posts::where('id',$post_id)->first();
         $comment = Comment::with('user')->where('post_id',$post_id)->get();
-        return $comment;
+        return response()->json(['comment' => $comment, 'posts' => $posts]);
     }
 
     /**
