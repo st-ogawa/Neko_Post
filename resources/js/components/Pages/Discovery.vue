@@ -61,7 +61,6 @@ export default {
       
       axios.get('/api/posts?page=' + this.page)
       .then(res=>{
-        
         this.items = res.data.posts.slice(this.page, this.perPage)
         
         this.loading = false
