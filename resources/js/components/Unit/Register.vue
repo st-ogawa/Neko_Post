@@ -58,7 +58,7 @@ export default {
       this.isActive  =  !this.isActive 
     },
     register(){
-      axios.post('http://127.0.0.1:8000/api/register', {
+      axios.post('/api/register', {
         'name': this.userName,
         'email' : this.registerMail,
         'password' : this.registerPass,

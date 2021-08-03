@@ -46,7 +46,7 @@ export default {
       this.isActive  =  !this.isActive 
     },
     login(){
-      axios.post('http://127.0.0.1:8000/api/login', {
+      axios.post('/api/login', {
         email: this.loginMail,
         password: this.loginPass
       }).then(res=>{

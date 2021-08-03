@@ -68,7 +68,7 @@ export default {
 
       this.loading = true
 
-      const res = await axios.get('http://127.0.0.1:8000/api/posts/' + postId)
+      const res = await axios.get('/api/posts/' + postId)
       .catch(err=>{
         console.log(err)
       })
@@ -106,7 +106,7 @@ export default {
     },
     submitComment(){
       const data = { post_id: this.detail.id, user_id: this.detail.user_id, comment: this.inputComment }
-      axios.post('http://127.0.0.1:8000/api/comments', data)
+      axios.post('/api/comments', data)
       .then(res=>{
         this.getPosts(this.detail.id);
       }) 

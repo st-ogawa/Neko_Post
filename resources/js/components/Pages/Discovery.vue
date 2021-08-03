@@ -59,7 +59,7 @@ export default {
       this.load = true
       this.loading = true
       
-      axios.get('http://127.0.0.1:8000/api/posts?page=' + this.page)
+      axios.get('/api/posts?page=' + this.page)
       .then(res=>{
         
         this.items = res.data.posts.slice(this.page, this.perPage)
