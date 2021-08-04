@@ -79,13 +79,13 @@ export default {
         postData.append("file", this.file);
         postData.append("comment", this.comment);
         postData.append("user_id",this.$store.getters.getUserId)
-      axios.post('/api/posts',postData).then((res) => {
+      axios.post('https://neko-post.com/api/posts',postData).then((res) => {
         this.modal = true
         this.loading = false
-        // setTimeout(() => {
-        //   this.preview = ''
-        //   this.$router.push('/',()=>{})
-        // },2000);
+        setTimeout(() => {
+          this.preview = ''
+          this.$router.push('/',()=>{})
+        },2000);
       }).catch((err) => {
         console.log(err)
       });
