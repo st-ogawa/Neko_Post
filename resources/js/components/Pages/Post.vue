@@ -79,7 +79,7 @@ export default {
         postData.append("file", this.file);
         postData.append("comment", this.comment);
         postData.append("user_id",this.$store.getters.getUserId)
-      axios.post('api/posts',postData).then((res) => {
+      axios.post('/api/posts',postData).then((res) => {
         this.modal = true
         this.loading = false
         setTimeout(() => {
