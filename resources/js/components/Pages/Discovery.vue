@@ -30,7 +30,7 @@ export default {
       loading: false,
       load:false,
       page:0,
-      perPage:30,
+      perPage:15,
       startScrollYOffset:0,
       detail:false,
     }
@@ -49,7 +49,7 @@ export default {
       let scrollBottom = scrollHeight - window.innerHeight
       if(window.pageYOffset  >= scrollBottom && !this.load){
         this.startScrollYOffset = window.innerHeight + window.pageYOffset;
-        this.perPage +=30
+        this.perPage +=15
         this.getPostList();
       }
     },
@@ -58,6 +58,7 @@ export default {
       if(this.load)return
       this.load = true
       this.loading = true
+      console.log('a')
       axios.get('/api/posts?page=' + this.page)
       .then(res=>{
         this.items = res.data.posts.slice(this.page, this.perPage)
