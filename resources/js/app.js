@@ -10,8 +10,8 @@ window.Vue = require('vue');
 
 Vue.component('app', require('./components/App').default);
 
-
-axios.defaults.baseURL = '';
+console.log(process.env.MIX_API_URL);
+axios.defaults.baseURL = process.env.MIX_API_URL;
 
 
 const app = new Vue({

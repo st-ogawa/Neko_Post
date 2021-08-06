@@ -59,15 +59,7 @@ export default {
       this.load = true
       this.loading = true
       
-      const $axios = axios.create({
-        baseURL: 'https://neko-post.com',
-        timeout: 5000,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-
-      $axios.get('/api/posts?page=' + this.page)
+      axios.get('/api/posts?page=' + this.page)
       .then(res=>{
         this.items = res.data.posts.slice(this.page, this.perPage)
         
