@@ -58,7 +58,6 @@ export default {
       if(this.load)return
       this.load = true
       this.loading = true
-      console.log('a')
       axios.get('/api/posts?page=' + this.page)
       .then(res=>{
         this.items = res.data.posts.slice(this.page, this.perPage)
