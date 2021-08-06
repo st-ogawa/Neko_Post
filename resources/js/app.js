@@ -12,7 +12,7 @@ Vue.component('app', require('./components/App').default);
 
 
 axios.defaults.baseURL=process.env.MIX_API_URL;
-console.log(process.env.MIX_API_URL)
+
 
 const app = new Vue({
     el: '#app',
