@@ -11,7 +11,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('register', 'Api\AuthController@register');
 Route::post('login', 'Api\AuthController@login');
 
-Route::apiResource('posts', 'Api\PostsController')->name('posts');
+Route::apiResource('posts', 'Api\PostsController');
 
 Route::apiResource('comments', 'Api\CommentsController',['only'=>['store']]);
 
