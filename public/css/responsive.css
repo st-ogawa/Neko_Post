@@ -48,11 +48,7 @@
     height: 30px;
     margin-right: -45px;
 }
-.cancel{
-    width: 25px;
-    height: 25px;
-    margin-top: 2.5px;
-}
+
 .TextArea{
     width: 74%;
     margin: 0 auto;
@@ -105,4 +101,9 @@
 .close-post{
     top: 28%;
     left: 5%;
+}
+.cancel {
+    width: 20px;
+    height: 20px;
+    margin-top: -0.5px;
 }
