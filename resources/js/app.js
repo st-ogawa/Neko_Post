@@ -10,8 +10,7 @@ window.Vue = require('vue');
 
 Vue.component('app', require('./components/App').default);
 
-// console.log(axios.defaults.baseURL);
-// axios.defaults.baseURL = 'https://neko-post.com';
+
 
 
 const app = new Vue({
