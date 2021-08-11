@@ -87,7 +87,7 @@ export default {
           this.$router.push('/',()=>{})
         },2000);
       }).catch((err) => {
-        console.log(err)
+        console.info(err)
       });
     },
     upload(event){

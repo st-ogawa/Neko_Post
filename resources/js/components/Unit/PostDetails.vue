@@ -70,7 +70,7 @@ export default {
 
       const res = await axios.get('/api/posts/' + postId)
       .catch(err=>{
-        console.log(err)
+        console.info(err)
       })
      
       this.postComment =  res.data.comment
