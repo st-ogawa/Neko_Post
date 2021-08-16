@@ -2,7 +2,7 @@
   <div class="Header">
     <div class="header-navi">
       <div class="header-logo">
-        <img src="/images/ねこぽすと.png" class="title-logo" alt="ねこぽすと">
+        <img src="images/ねこぽすと.png" class="title-logo" alt="ねこぽすと">
       </div>
       <nav>
         <ul class="nav-link">
