@@ -61,7 +61,7 @@ export default {
       axios.get('https://neko-post.com/api/posts?page=' + this.page)
       .then(res=>{
         this.items = res.data.posts.slice(this.page, this.perPage)
-        console.log(this.items)
+        console.log(this.items);
         this.loading = false
         this.load = false
       }).catch(err=>{
