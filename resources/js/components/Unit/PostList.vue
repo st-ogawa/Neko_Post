@@ -2,7 +2,7 @@
   <div class="PostList">
     
     <div class="show-image">
-      <img :src="item.image" @click="postsDetail(item.id)" >
+      <img :src="'../'+item.image" @click="postsDetail(item.id)" >
     </div>
   </div>
 </template>
