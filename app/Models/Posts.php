@@ -38,7 +38,7 @@ class Posts extends Model
                 $constraint->aspectRatio();
             })->save(storage_path('app/public/images/'.$file_name));
             
-            $this->image = 'storage/images/'. $file_name;
+            $this->image = 'storage/app/public/images/'. $file_name;
             $this->comment = $comment;
             if(!$user_id){
                 $this->user_id = 1;
