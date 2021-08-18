@@ -1,0 +1,23 @@
+name: deploy laravel mix
+
+on:
+  push:
+    branches: [ master ]
+jobs:
+  laravel-tests:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Copy .env
+      run: php -r "file_exists('.env') || copy('.env.production', '.env');"
+    - name: Install Dependencies
+      run: composer install 
+    - name: ssh key generate
+      run: echo "$SSH_KEY" > key-neko-post.pem
+      env:
+         SSH_KEY: ${{ secrets.SSH_KEY }}
+    - name: push scp
+      run: scp -o StrictHostKeyChecking=no -P 8022 -i ./key-neko-post.pem ./public/* c0910397@www227.conoha.ne.jp:~/public_html/neko-post.com  
+
