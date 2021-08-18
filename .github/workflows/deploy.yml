@@ -13,7 +13,7 @@ jobs:
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.production', '.env');"
     - name: ssh key generate
-      run: echo "$SSH_KEY" > key-neko-post.pem
+      run: echo "$SSH_KEY" > key-neko-post.pem && chmod 600  key-post.pem
       env:
          SSH_KEY: ${{ secrets.SSH_KEY }}
     - name: push scp
