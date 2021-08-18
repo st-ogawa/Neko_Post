@@ -17,5 +17,5 @@ jobs:
       env:
          SSH_KEY: ${{ secrets.SSH_KEY }}
     - name: push scp
-      run: scp -o StrictHostKeyChecking=no -P 8022 -i ./key-neko-post.pem.pub ./public/* c0910397@www227.conoha.ne.jp:~/public_html/neko-post.com  
+      run: scp -r -o StrictHostKeyChecking=no -P 8022 -i ./key-neko-post.pem.pub ./public/* c0910397@www227.conoha.ne.jp:~/public_html/neko-post.com  
 
