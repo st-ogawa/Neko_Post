@@ -83,20 +83,23 @@ input:focus{
 img{
     max-width: 100%;
 }
-
+button {
+    cursor: pointer !important;
+    border: none !important;
+    user-select: none !important;
+}
+.disabled{
+    pointer-events : none;
+}
 textarea{
     background: 0 0;
     border: 0;
     color: #262626;
-    display: flex;
     flex-grow: 1;
     font-size: inherit;
     height: 18px;
-    max-height: 80px;
     outline: 0;
     padding: 0;
-    resize: none;
-    width: 0;
 }
 
 

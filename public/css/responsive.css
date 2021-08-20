@@ -26,7 +26,7 @@
 }
 .image-input-field{
     margin: 0 auto;
-    width: 70%;
+    width: 80%;
     height: auto;
 }
 .post-image{
@@ -34,7 +34,7 @@
     height: auto;
 }
 .image-input-field > p{
-    padding: 35% 0;
+    padding: 40% 0;
     margin: 0 auto;
     width: auto;
 }
@@ -50,7 +50,7 @@
 }
 
 .TextArea{
-    width: 74%;
+    width: 80%;
     margin: 0 auto;
     border-bottom: 1px solid #20212465;
 }
@@ -58,6 +58,9 @@
     width: 55%;
     height: 60%;
     margin:auto;
+}
+.detail{
+    width: 100%;
 }
 .detail-body{
     display: block;
@@ -69,6 +72,9 @@
     width: 0px;
     height: 0px;
 }
+.detail-image-container{
+    width: 100%;
+}
 .detail-image{
     width: auto;
     text-align: center;
@@ -76,6 +82,12 @@
 .detail-image img{
     width: 100%;
     height: 100%;
+}
+.nextPaginationArrow{
+    right: 0.5%;
+}
+.prevPaginationArrow{
+    left: 0.5%;
 }
 .PostList{
     width: 47%;
@@ -99,8 +111,8 @@
     top: 37%;
 }
 .close-post{
-    top: 28%;
-    left: 5%;
+    top: 10%;
+    right: 13%;
 }
 .cancel {
     width: 20px;

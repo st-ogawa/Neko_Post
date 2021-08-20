@@ -16,7 +16,6 @@
                 <img :src="`/${detail.image}`" class="detail-image">
               </div>
               <div class="detail">
-                <div class="post-user-status"></div>
                 <ul class="detail-comment">
                   <div class="comment-list">
                     <li><span class="detail-comment">{{detailComment()}}</span></li> 
@@ -25,10 +24,12 @@
                     </li>
                   </div>
                 </ul>
-                <div class="input-field">
-                  <textarea v-model="inputComment"  placeholder="コメントを追加" @keydown.enter="submitComment"/>
-                  <button @click="submitComment">送信</button>
-                </div>
+                <section class="detail-comment-area">
+                  <div class="input-field">
+                    <textarea v-model="inputComment"  placeholder="コメントを追加" @keydown.enter="submitComment" class="input-comment"/>
+                    <button @click="submitComment">送信</button>
+                  </div>
+                </section>
               </div>
             </div>
           </div>

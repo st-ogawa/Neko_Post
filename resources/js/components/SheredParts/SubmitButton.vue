@@ -1,5 +1,5 @@
 <template>
-  <div class="SubmitButton" @click="submitData">{{value}}</div>
+  <button class="SubmitButton" @click="submitData">{{value}}</button>
 </template>
 
 <script>
@@ -7,6 +7,7 @@ export default {
   props:['value'],
   methods:{
     submitData:function(){
+
       this.$emit('sendData')
     }
   }

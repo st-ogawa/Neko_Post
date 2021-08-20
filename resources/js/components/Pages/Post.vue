@@ -10,9 +10,10 @@
           <div class="post-image-area">
             <div class="image-input-field">
               <input type="file" @change="upload"  accept="image/bmp,image/jpeg,image/png,image/tiff">
-              <p v-show="!preview">
+              <div v-show="!preview">
                 <i class="upload-icon"/><br/>
-              {{message}}</p>
+                <p>{{message}}</p>
+              </div>
               <div v-show="preview">
                 <div class="cancel-button" @click="imageCancel">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#373737" stroke-width="2" stroke-linecap="round" stroke-linejoin="bevel" class="cancel">
@@ -29,7 +30,7 @@
               <TextArea v-model="comment" placeholder="コメントを追加"/>
             </div>
             <div class="post-button">
-              <SubmitButton value="投稿する" @sendData="post"/>
+              <SubmitButton value="投稿する" @sendData="post" :class="{'disabled':!preview}" />
             </div>
           </div>
         </div>

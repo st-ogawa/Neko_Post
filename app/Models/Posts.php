@@ -34,9 +34,9 @@ class Posts extends Model
         $comment = $data['comment'];
         if($file){
             $file_name = time().'.'.$file->getClientOriginalName();
-            $resize_image = Image::make($file)->fit(500,null, function ($constraint) {$constraint->aspectRatio();})->encode('jpg');
+            $resize_image = Image::make($file)->fit(500,null, function ($constraint) {$constraint->aspectRatio();});
             $resize_image->orientate()->save(storage_path('app/public/images/'.$file_name));
-            $this->image = 'storage/app/public/images/'. $file_name;
+            $this->image = 'storage/images/'. $file_name;
             $this->comment = $comment;
             if(!$user_id){
                 $this->user_id = 1;
