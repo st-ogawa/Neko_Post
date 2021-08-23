@@ -23,6 +23,17 @@
     <link href="{{ asset('css/userRelated.css') }}" rel="stylesheet">
     <link href="{{ asset('css/image.css') }}" rel="stylesheet">
     <link href="{{ asset('css/responsive.css') }}" rel="stylesheet" media="screen and (max-width: 780px)">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4DPMDXK1RK"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-4DPMDXK1RK');
+    
+    </script>
 </head>
 <body>
     <div id="app">
