@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="画像投稿,猫,投稿,閲覧,シェア,ねこ,写真,ペット">
     <meta name="description" content="身近なねこの写真をシェアしよう。ねこぽすとは写真と画像の投稿閲覧ができるサイトです">
-    
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
@@ -24,6 +24,8 @@
     <link href="{{ asset('css/userRelated.css') }}" rel="stylesheet">
     <link href="{{ asset('css/image.css') }}" rel="stylesheet">
     <link href="{{ asset('css/responsive.css') }}" rel="stylesheet" media="screen and (max-width: 780px)">
+    <!-- GoogleConsole -->
+    <meta name="google-site-verification" content="ZjN7fTPYAsnRdhKFHVdx9GsdHkT3VyFMNkO97DZxotI" />
 </head>
 <body>
     <div id="app">
