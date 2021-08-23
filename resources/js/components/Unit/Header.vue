@@ -1,6 +1,6 @@
 <template>
   <div class="Header">
-    <div class="header-nav">
+    <div class="header-navi">
       <div class="header-logo">
         <img src="../../../../public/images/ねこぽすと.png" class="title-logo" alt="ねこぽすと">
       </div>
