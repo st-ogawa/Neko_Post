@@ -171,13 +171,6 @@
     opacity: 0;
     cursor: pointer;
 }
-.image-input-field > p {
-    color: rgb(46, 46, 46);
-    margin: 0 auto;
-    padding: 40% 0;
-     
-}
-
 .post-button{
     text-align: right;
     padding:16px 0  16px  0;
@@ -403,7 +396,11 @@
     font-size: 16px;
     border-top: 1px solid #c9c9c9;
 }
-
+.upload-image{
+    color: rgb(46, 46, 46);
+    margin: 0 auto;
+    padding: 40% 0;
+}
 .detail-comment::-webkit-scrollbar {
     width: 0px;
     height: 0px;

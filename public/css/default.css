@@ -99,6 +99,7 @@ textarea{
     font-size: inherit;
     height: 18px;
     outline: 0;
+    resize: none;
     padding: 0;
 }
 

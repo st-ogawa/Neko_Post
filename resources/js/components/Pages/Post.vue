@@ -10,8 +10,8 @@
           <div class="post-image-area">
             <div class="image-input-field">
               <input type="file" @change="upload"  accept="image/bmp,image/jpeg,image/png,image/tiff">
-              <div v-show="!preview">
-                <i class="upload-icon"/><br/>
+              <div  class="upload-image" v-show="!preview">
+                <i class="upload-icon"/>
                 <p>{{message}}</p>
               </div>
               <div v-show="preview">
