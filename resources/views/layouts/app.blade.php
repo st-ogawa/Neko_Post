@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="robots" content="index, follow">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="画像投稿,猫,投稿,閲覧,シェア,ねこ">
+    <meta name="keywords" content="画像投稿,猫,投稿,閲覧,シェア,ねこ,写真,ペット">
     <meta name="description" content="身近なねこの写真をシェアしよう。ねこぽすとは写真と画像の投稿閲覧ができるサイトです">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
