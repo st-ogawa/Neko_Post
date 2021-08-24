@@ -107,9 +107,7 @@
 .link{
     font-size: 17px;
 }
-.upload-icon{
-    top: 37%;
-}
+
 .close-post{
     top: 10%;
     right: 13%;
@@ -118,7 +116,4 @@
     width: 20px;
     height: 20px;
     margin-top: -0.5px;
-}
-.close-icon-b {
-    background: url(../icon/icon.png) 19px -136px;
 }
