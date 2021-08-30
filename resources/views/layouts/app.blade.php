@@ -11,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
 
-    <title>{{ config('app.name','ねこぽすと') }}</title>
+    <title>{{ config('app.name','ねこぽすと:　ねこの写真投稿サイト') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
